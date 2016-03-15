@@ -118,7 +118,7 @@ To get the current session score from the server without sending any data use `g
 It is possible to protect sensitive data. There are two ways of doing it.
 
 ### Limiting
-  TODO
+Sensitive view data capture limiting is achieved by calling the `addSensitiveViews:` method with an array of sensitive views. Events captured on these views do not contain absolute touch location and the view identifiers are salted using device specific random key. 
 
 ### Disabling
 Disabled capturing of a view means absolutely no data will be collected about user activity connected with the view. Disabling means creating a `PrivacyGuard` object. It is required to store a strong reference to this object. Garbage collection of the privacy guard means that capturing will be enabled again.
