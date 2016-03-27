@@ -27,6 +27,29 @@ In order to communicate with the server, the application must be configured with
 }
 ```
 
+# Sessions
+In order to submit data to AimBrain `AMBNManager` needs to be configured with a session. There are two ways of doing it.
+
+## Obtaining new session
+A new session can be obtained by passing `userId` to `createSession` method on `AMBNManager`.
+
+```objective_c
+[[AMBNManager sharedInstance] createSessionWithUserId:userId completion:^(NSString *session, NSError *error) {
+if(session){
+  //Do something after successful session creation
+}
+}];
+```
+
+The manager is automatically configured with the obtained session ID.
+
+### Configuring with existing session
+A session can be stored and later used to configure `AMBNManager`.
+
+```objective_c
+[AMBNManager sharedInstance].session = storedSession
+```
+
 # Behavioural module
 
 ## Registering views
@@ -43,37 +66,11 @@ The more views have identifiers assigned, the more accurate the analysis can be 
 }
 ```
 
-
-
 ## Starting collection
 In order to start collecting behavioural data `start` method needs to be called on `AMBNManager`
 
 ```objective_c
 [[AMBNManager sharedInstance] start];
-```
-
-
-## Session
-In order to submit behavioural data to AimBrain `AMBNManager` needs to be configured with a session. There are two ways of doing it.
-
-### Obtaining new session
-A new session can be obtained by passing `userId` to `createSession` method on `AMBNManager`.
-
-```objective_c
-[[AMBNManager sharedInstance] createSessionWithUserId:userId completion:^(NSString *session, NSError *error) {
-    if(session){
-        //Do something after successful session creation
-    }
-}];
-```
-
-The manager is automatically configured with the obtained session ID.
-
-### Configuring with existing session
-A session can be stored and later used to configure `AMBNManager`.
-
-```objective_c
-[AMBNManager sharedInstance].session = storedSession
 ```
 
 ## Submitting behavioural data
