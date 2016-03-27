@@ -50,7 +50,7 @@
  @param userId user identifier.
  @param completion Called when session obtainment completes. Session is successfuly obtained if session <b> session </b> is not nil and <b> error </b> is nil.
  */
-- (void) createSessionWithUserId: (NSString *) userId completion: (void (^)(NSString * session, NSError *error))completion;
+- (void) createSessionWithUserId: (NSString *) userId completion: (void (^)(NSString * session, NSNumber * face, NSNumber * behaviour, NSError *error))completion;
 
 /*!
  @description Submits collected behavioural data. @link session @/link property must be set before using this method.
@@ -105,5 +105,39 @@
  @description Generates secure 128 bit salt
  */
 - (NSData *)generateRandomSensitiveSalt;
+
+/*!
+ @description Enrolls face images. 
+ @param images array of face images to enroll
+ @param completion called when enrollement is completed. <b> Success </b> is true when enrollment was successful. <b> Images count </b> is number of images succesfully enrolled
+ */
+- (void) enrollFaceImages:(NSArray *) images completion:(void (^)(BOOL success, NSNumber * imagesCount, NSError * error)) completion;
+
+/*!
+ @description Authenticates face images.
+ @param images array of face images to authenticate
+ @param completion called when authentication is completed. <b> result </b> is floating point number from 0 to 1 where 1 is maximum similarity to enrolled face. <b> liveliness <\b> is floating point number from 0 to 1 indicating liveliness of the image batch where 1 is maximum liveliness.
+ */
+- (void) authenticateFaceImages:(NSArray *)images completion: (void (^)(NSNumber * result, NSNumber * liveliness, NSError * error))completion;
+
+/*!
+ @description Compares faces
+ @param firstFaceImages array of first face images to compare
+ @param secondFaceImages array of second face images to compare
+ @param completion called when comparing is completed. <b> result </b> is floating point number from 0 to 1 where 1 is maximum similarity. <b> firstLiveliness </b> is liveliness of the first photo array. <b> secondLiveliness </b> is liveliness of the second photo array
+ */
+- (void) compareFaceImages:(NSArray *) firstFaceImages toFaceImages:(NSArray *) secondFaceImages completion: (void (^)(NSNumber * result, NSNumber * firstLiveliness, NSNumber * secondLiveliness, NSError * error))completion;
+
+/*!
+ @description Opens view controller used to capture and crop face images
+ @param topHint top hint displayed on image capture view
+ @param bottomHint bottom hint displayed on image capture view
+ @param batchSize number of images to capture
+ @param viewController current view controller used to perform transition to image capture controller
+ @param completion called when capturing is completed and image capture view controller is dismissed. <b> success </b> is true when images are successfuly captured. <b> images </b> is array of taken UIImage objects.
+ */
+- (void) openFaceImagesCaptureWithTopHint: (NSString *) topHint bottomHint:(NSString *) bottomHint batchSize: (NSInteger) batchSize delay: (NSTimeInterval) delay fromViewController: (UIViewController *) viewController completion: (void (^)(BOOL success, NSArray * images))completion;
+
+
 
 @end

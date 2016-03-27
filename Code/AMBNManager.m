@@ -4,7 +4,8 @@
 #import "AMBNTextInputCollector.h"
 #import "AMBNCapturingApplication.h"
 #import "AMBNTouchCollector.h"
-
+#import "AMBNFaceCaptureManager.h"
+#import "AMBNImageAdapter.h"
 
 #define AMBNManagerSensitiveSaltLength 128
 @interface AMBNManager ()
@@ -19,8 +20,8 @@
 @property AMBNServer *server;
 @property NSMapTable *registeredViews;
 @property NSHashTable *sensitiveViews;
-
-
+@property AMBNFaceCaptureManager* faceCaptureManager;
+@property AMBNImageAdapter *imageAdapter;
 @end
 @implementation AMBNManager
 
@@ -35,6 +36,7 @@
 
 - (instancetype) init{
     self = [super init];
+    self.imageAdapter = [[AMBNImageAdapter alloc] initWithQuality:0.7 maxHeight:300];
     self.privacyGuards = [NSHashTable weakObjectsHashTable];
     self.sensitiveViews = [NSHashTable weakObjectsHashTable];
     self.touches = [NSMutableArray array];
@@ -54,6 +56,8 @@
     
     self.textInputCollector = [[AMBNTextInputCollector alloc] initWithBuffer:self.textEvents idExtractor:idExtractor];
     self.textInputCollector.delegate = self;
+    
+    self.faceCaptureManager = [[AMBNFaceCaptureManager alloc] init];
     return self;
 }
 
@@ -69,12 +73,12 @@
     self.server = [[AMBNServer alloc] initWithAppId:appId secret:appSecret];
 }
 
-- (void) createSessionWithUserId: (NSString *) userId completion: (void (^)(NSString * session, NSError *error))completion {
+- (void) createSessionWithUserId: (NSString *) userId completion: (void (^)(NSString * session, NSNumber * face, NSNumber * behaviour, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
-    [self.server createSessionWithUserId:userId completion:^(NSString *session, NSError *error) {
+    [self.server createSessionWithUserId:userId completion:^(NSString *session, NSNumber * face, NSNumber * behaviour, NSError *error) {
         self.session = session;
         dispatch_async(dispatch_get_main_queue(), ^{
-            completion(session, error);
+            completion(session,face, behaviour, error);
         });
 
     }];
@@ -170,7 +174,6 @@
     return guard;
 }
 
-
 - (BOOL) isViewIgnored: (UIView *) view{
     for(AMBNPrivacyGuard * guard in [self.privacyGuards setRepresentation]){
         if ( [guard isViewIgnored:view]){
@@ -212,6 +215,49 @@
 -(BOOL)touchCollector:(id)touchCollector shouldIgnoreTouchForView:(UIView *)view{
     return [self isViewIgnored:view];
 }
+- (void) enrollFaceImages:(NSArray *)images completion:(void (^)(BOOL, NSNumber *, NSError *))completion{
+    NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert(self.session != nil, @"Session is not obtained");
+    
+    [self.server enrollFaceImages:[self adaptImages:images] session:self.session completion:^(BOOL success, NSNumber *imagesCount, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(success, imagesCount, error);
+        });
+    }];
+}
+- (void) authenticateFaceImages:(NSArray *)images completion: (void (^)(NSNumber * result, NSNumber * liveliness, NSError * error))completion{
+    NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert(self.session != nil, @"Session is not obtained");
+
+    [self.server authFaceImages:[self adaptImages:images] session:self.session completion:^(NSNumber *result, NSNumber *liveliness, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(result, liveliness, error);
+        });
+    }];
+}
+
+- (void) compareFaceImages:(NSArray *) firstFaceImages toFaceImages:(NSArray *) secondFaceImages completion: (void (^)(NSNumber * result, NSNumber * firstLiveliness, NSNumber * secondLiveliness, NSError * error))completion{
+    NSAssert(self.server != nil, @"AMBNManager must be configured");
+    
+    [self.server compareFaceImages:[self adaptImages:firstFaceImages] withFaceImages:[self adaptImages:secondFaceImages] completion:^(NSNumber *similarity, NSNumber *firstLiveliness, NSNumber *secondLiveliness, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(similarity, firstLiveliness, secondLiveliness, error);
+        });
+    }];
+}
+
+- (void) openFaceImagesCaptureWithTopHint: (NSString *) topHint bottomHint:(NSString *) bottomHint batchSize: (NSInteger) batchSize delay: (NSTimeInterval) delay fromViewController: (UIViewController *) viewController completion: (void (^)(BOOL success, NSArray * images))completion{
+    [self.faceCaptureManager openCaptureViewFromViewController:viewController topHint:topHint bottomHint:bottomHint batchSize:batchSize delay:delay completion:completion];
+}
+
+- (NSArray *) adaptImages: (NSArray *) images{
+    NSMutableArray * adaptedImages = [NSMutableArray array];
+    for(UIImage * image in images){
+        [adaptedImages addObject:[self.imageAdapter encodedImage:image]];
+    }
+    return adaptedImages;
+}
+
 
 
 @end

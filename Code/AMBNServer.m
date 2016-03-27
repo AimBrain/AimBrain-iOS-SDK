@@ -13,6 +13,9 @@
     NSURL * sessionURL;
     NSURL * submitBehaviouralURL;
     NSURL * scoreURL;
+    NSURL * facialEnrollURL;
+    NSURL * facialAuthURL;
+    NSURL * facialCompareURL;
 }
 
 - (instancetype) initWithAppId: (NSString *) appId secret: (NSString *) secret{
@@ -27,15 +30,21 @@
     NSString * sessionPath = @"sessions";
     NSString * submitBehaviouralPath = @"behavioural";
     NSString * scorePath = @"score";
+    NSString * facialEnrollPath = @"face/enroll";
+    NSString * facialAuthPath = @"face/auth";
+    NSString * facialComparePath = @"face/compare";
+    
     
     sessionURL = [NSURL URLWithString:sessionPath relativeToURL:baseURL];
     submitBehaviouralURL = [NSURL URLWithString:submitBehaviouralPath relativeToURL:baseURL];
     scoreURL = [NSURL URLWithString:scorePath relativeToURL:baseURL];
-    
+    facialEnrollURL = [NSURL URLWithString:facialEnrollPath relativeToURL:baseURL];
+    facialAuthURL = [NSURL URLWithString:facialAuthPath relativeToURL:baseURL];
+    facialCompareURL = [NSURL URLWithString:facialComparePath relativeToURL:baseURL];
     return self;
 }
 
-- (void) createSessionWithUserId: (NSString *)userId completion: (void (^)(NSString * session, NSError * error))completion {
+- (void) createSessionWithUserId: (NSString *)userId completion: (void (^)(NSString * session, NSNumber * face, NSNumber * behaviour, NSError * error))completion {
     UIDevice * currentDevice = [UIDevice currentDevice];
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     
@@ -52,26 +61,28 @@
     [self sendRequest:req completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable error) {
         NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)response;
         if(error){
-            completion(nil, error);
+            completion(nil, 0, 0, error);
             return;
         }
         if([httpResponse statusCode] != 200){
-            completion(nil, [self composeErrorResponse:httpResponse data:data]);
+            completion(nil, 0, 0, [self composeErrorResponse:httpResponse data:data]);
             return;
         }
         
         NSError *jsonParseError;
         id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
         if(jsonParseError || ![jsonObject isKindOfClass:[NSDictionary class]]){
-            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
+            completion(nil, 0, 0, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
             return;
         }
         NSString * session = [(NSDictionary *)jsonObject objectForKey:@"session"];
-        if (session){
-            completion(session, nil);
+        NSNumber * face = [(NSDictionary *)jsonObject objectForKey:@"face"];
+        NSNumber * behaviour = [(NSDictionary *)jsonObject objectForKey:@"behaviour"];
+        if (session && face && behaviour){
+            completion(session, face, behaviour, nil);
             return;
         }else{
-            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
+            completion(nil, face, behaviour, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
             return;
         }
         
@@ -91,6 +102,126 @@
         }];
     }];
 }
+- (void) enrollFaceImages: (NSArray *) encodedImages session: (NSString*) session completion: (void (^)(BOOL success, NSNumber * imagesCount, NSError * error))completion {
+    [queue addOperationWithBlock:^{
+        NSDictionary *json = @{
+                               @"session" : session,
+                               @"faces" : encodedImages
+                               };
+        NSURLRequest * req = [self createJSONPostRequestWithJSON:json url:facialEnrollURL];
+        
+        [self sendRequest:req completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable error) {
+            NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)response;
+            if(error){
+                completion(false, nil, error);
+                return;
+            }
+            if([httpResponse statusCode] != 200){
+                completion(false, nil, [self composeErrorResponse:httpResponse data:data]);
+                return;
+            }else{
+                NSError * jsonParseError;
+                id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
+                if(jsonParseError || ![jsonObject isKindOfClass:[NSDictionary class]]){
+                    completion(true, nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
+                    return;
+                }
+                
+                NSNumber * imagesCount = [(NSDictionary *)jsonObject objectForKey:@"imagesCount"];
+                if(imagesCount){
+                    completion(true, imagesCount, nil);
+                    return;
+                }else{
+                    completion(true, nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
+                    return;
+                }
+            }
+
+        }];
+    }];
+}
+
+- (void) authFaceImages: (NSArray *) images session: (NSString*) session completion: (void (^)(NSNumber * result, NSNumber * liveliness, NSError * error))completion {
+    [queue addOperationWithBlock:^{
+        NSDictionary *json = @{
+                               @"session" : session,
+                               @"faces" : images
+                               };
+        NSURLRequest * req = [self createJSONPostRequestWithJSON:json url:facialAuthURL];
+        
+        [self sendRequest:req completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable error) {
+            NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)response;
+            if(error){
+                completion(nil,nil, error);
+                return;
+            }
+            if([httpResponse statusCode] != 200){
+                completion(nil,nil, [self composeErrorResponse:httpResponse data:data]);
+                return;
+            }else{
+                NSError * jsonParseError;
+                id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
+                if(jsonParseError || ![jsonObject isKindOfClass:[NSDictionary class]]){
+                    completion(nil,nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
+                    return;
+                }
+                
+                NSNumber * score = [(NSDictionary *)jsonObject objectForKey:@"score"];
+                NSNumber * liveliness = [(NSDictionary *)jsonObject objectForKey:@"liveliness"];
+                if(score && liveliness){
+                    completion(score,liveliness, nil);
+                    return;
+                }else{
+                    completion(nil,nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
+                    return;
+                }
+            }
+
+        }];
+    }];
+}
+
+- (void) compareFaceImages: (NSArray *) firstFaceImages withFaceImages: (NSArray *) secondFaceImages completion: (void (^)(NSNumber * smilarity, NSNumber * firstLiveliness, NSNumber * secondLiveliness, NSError * error))completion{
+    [queue addOperationWithBlock:^{
+        NSDictionary *json = @{
+                               @"faces1" : firstFaceImages,
+                               @"faces2" : secondFaceImages
+                               };
+        NSURLRequest * req = [self createJSONPostRequestWithJSON:json url:facialCompareURL];
+        
+        [self sendRequest:req completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable error) {
+            NSHTTPURLResponse * httpResponse = (NSHTTPURLResponse *)response;
+            if(error){
+                completion(nil,nil,nil, error);
+                return;
+            }
+            if([httpResponse statusCode] != 200){
+                completion(nil,nil,nil, [self composeErrorResponse:httpResponse data:data]);
+                return;
+            }else{
+                NSError * jsonParseError;
+                id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
+                if(jsonParseError || ![jsonObject isKindOfClass:[NSDictionary class]]){
+                    completion(nil,nil,nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
+                    return;
+                }
+                
+                NSNumber * similarity = [(NSDictionary *)jsonObject objectForKey:@"score"];
+                NSNumber * firstLiveliness = [(NSDictionary *)jsonObject objectForKey:@"liveliness1"];
+                NSNumber * secondLiveliness = [(NSDictionary *)jsonObject objectForKey:@"liveliness2"];
+                if(similarity && firstLiveliness && secondLiveliness){
+                    completion(similarity,firstLiveliness,secondLiveliness, nil);
+                    return;
+                }else{
+                    completion(nil,nil,nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
+                    return;
+                }
+            }
+            
+        }];
+    }];
+}
+
 
 - (void) getScoreForSession: (NSString *) session completion: (void (^)(AMBNResult * result, NSError * error))completion {
     
@@ -110,7 +241,7 @@
     NSString *errorMessage;
     NSError *jsonParseError;
     id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
-    if(jsonParseError){
+    if(!jsonParseError){
         if ([jsonObject isKindOfClass:[NSDictionary class]]){
             errorMessage = [(NSDictionary *)jsonObject objectForKey:@"error"];
         }

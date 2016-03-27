@@ -16,7 +16,7 @@ int main(int argc, char * argv[])
 }
 ```
 
-## API Authentication
+## API authentication
 In order to communicate with the server, the application must be configured with a valid API Key and secret. Relevant configuration parameters should be passed to the SDK using the `AMBNManager`’s `configureWithApplicationId:secret` method. Most often the best place for it is  `application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions` of app delegate.
 
 ```objective_c
@@ -26,6 +26,8 @@ In order to communicate with the server, the application must be configured with
     return YES;
 }
 ```
+
+# Behavioural module
 
 ## Registering views
 The more views have identifiers assigned, the more accurate the analysis can be made. Views can be registered using `registerView:withId` method of `AMBNManager`
@@ -118,7 +120,7 @@ To get the current session score from the server without sending any data use `g
 It is possible to protect sensitive data. There are two ways of doing it.
 
 ### Limiting
-Sensitive view data capture limiting is achieved by calling the `addSensitiveViews:` method with an array of sensitive views. Events captured on these views do not contain absolute touch location and the view identifiers are salted using device specific random key. 
+Sensitive view data capture limiting is achieved by calling the `addSensitiveViews:` method with an array of sensitive views. Events captured on these views do not contain absolute touch location and the view identifiers are salted using device specific random key.
 
 ### Disabling
 Disabled capturing of a view means absolutely no data will be collected about user activity connected with the view. Disabling means creating a `PrivacyGuard` object. It is required to store a strong reference to this object. Garbage collection of the privacy guard means that capturing will be enabled again.
@@ -152,4 +154,38 @@ Disabled capturing of a view means absolutely no data will be collected about us
     [super viewDidLoad];
     [self.pinPrivacyGuard invalidate];
 }
+```
+
+# Facial module
+
+## Taking pictures of the user's face
+In order to take a picture of the user's face the `openFaceImagesCaptureWithTopHint` method has to be called from the `AMBNManager`. The camera view controller is then opened and completion block is called after user takes the picture and the view is dismissed.
+```objective_c
+[[AMBNManager sharedInstance] openFaceImagesCaptureWithTopHint:@"To authenticate please face the camera directly and press 'camera' button" bottomHint:@"Position your face fully within the outline with eyes between the lines." batchSize:3 delay:0.3 fromViewController:self completion:^(BOOL success, NSArray *images) {
+...
+}];
+```
+
+## Authenticating with the facial module
+In order to authenticate with facial module, the `authenticateFaceImages` method has to be called from the `AMBNManager`. An array with the images of the face has to passed as a parameter. The completion block is called with the score returned by the server, the score being between 0.0 and 1.0 and a liveliness rating, indicating if the photos were taken of a live person.
+```objective_c
+[[AMBNManager sharedInstance] authenticateFaceImages:images completion:^(NSNumber *score, NSNumber *liveliness, NSError *error) {
+...
+}];
+```
+
+## Enrolling with the facial module
+Enrolling with the facial module is done by calling the `enrollFaceImages` method from the `AMBNManager`. An array with with the images of the face has to passed as a parameter. The completion block is called after the operation if finished. `success` indicates if operation was successful, `imagesCount` indicates how many images were received, processed successfully and had a face in them.
+```objective_c
+[[AMBNManager sharedInstance] enrollFaceImages:images completion:^(BOOL success, NSNumber *imagesCount, NSError *error) {
+...
+}];
+```
+
+## Comparing faces
+Two batches of images of faces can be compared using the `compareFaceImages` method of the `AMBNManager`. The method takes an array of images of the first face and an array of images of the second face (arrays contain one or more images). The completion block is called with the similarity score and the liveliness ratings of both faces.
+```objective_c
+[[AMBNManager sharedInstance] compareFaceImages:firstFaceImages toFaceImages:secondFaceImages completion:^(NSNumber *result, NSNumber *firstLiveliness, NSNumber *secondLiveliness, NSError *error) {
+...
+}];
 ```
