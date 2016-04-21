@@ -1,4 +1,4 @@
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #import "AMBNCapturingApplication.h"
 #import "AMBNResult.h"

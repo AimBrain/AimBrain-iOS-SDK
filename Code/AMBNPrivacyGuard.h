@@ -1,5 +1,5 @@
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
+@import Foundation;
+@import UIKit;
 
 /*!
  @discussion Class used to keep and free non-capturing guards on selected views. Instances of this class must be created using instance of @link AMBNManager @/link class. Typical usecase is to store reference to this object as long as there is need to exclude given views from capturing. Then call @link invalidate @/link method and remove the refernce. 
@@ -23,7 +23,7 @@
 
 /*!
  @discussion Initializes guard. Privacy guard will disable capturing only if obtained using AMBNManager.
- @params views Views excluded from capturing.
+ @param views Views excluded from capturing.
  */
 -(instancetype)initWithViews:(NSArray *) views;
 
@@ -39,7 +39,7 @@
 
 /*!
  @discussion method used to test wheter given view is protected and should be ignored.
- @params view View to test.
+ @param view View to test.
  */
 -(BOOL)isViewIgnored:(UIView *) view;
 

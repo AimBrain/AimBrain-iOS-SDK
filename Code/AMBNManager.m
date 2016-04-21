@@ -69,8 +69,8 @@
     NSAssert([application isKindOfClass:[AMBNCapturingApplication class]], @"sharedApplication must be of type: AMBNCapturingApplication");
 }
 
-- (void) configureWithApplicationId: (NSString *) appId secret: (NSString *) appSecret{
-    self.server = [[AMBNServer alloc] initWithAppId:appId secret:appSecret];
+- (void) configureWithApiKey: (NSString *) apiKey secret: (NSString *) appSecret{
+    self.server = [[AMBNServer alloc] initWithApiKey:apiKey secret:appSecret];
 }
 
 - (void) createSessionWithUserId: (NSString *) userId completion: (void (^)(NSString * session, NSNumber * face, NSNumber * behaviour, NSError *error))completion {
@@ -219,24 +219,24 @@
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
     
-    [self.server enrollFaceImages:[self adaptImages:images] session:self.session completion:^(BOOL success, NSNumber *imagesCount, NSError *error) {
+    [self.server enrollFace:[self adaptImages:images] session:self.session completion:^(BOOL success, NSNumber *imagesCount, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(success, imagesCount, error);
         });
     }];
 }
-- (void) authenticateFaceImages:(NSArray *)images completion: (void (^)(NSNumber * result, NSNumber * liveliness, NSError * error))completion{
+- (void) authenticateFaceImages:(NSArray *)images completion: (void (^)(NSNumber * score, NSNumber * liveliness, NSError * error))completion{
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
 
-    [self.server authFaceImages:[self adaptImages:images] session:self.session completion:^(NSNumber *result, NSNumber *liveliness, NSError *error) {
+    [self.server authFace:[self adaptImages:images] session:self.session completion:^(NSNumber *score, NSNumber *liveliness, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
-            completion(result, liveliness, error);
+            completion(score, liveliness, error);
         });
     }];
 }
 
-- (void) compareFaceImages:(NSArray *) firstFaceImages toFaceImages:(NSArray *) secondFaceImages completion: (void (^)(NSNumber * result, NSNumber * firstLiveliness, NSNumber * secondLiveliness, NSError * error))completion{
+- (void) compareFaceImages:(NSArray *) firstFaceImages toFaceImages:(NSArray *) secondFaceImages completion: (void (^)(NSNumber * score, NSNumber * firstLiveliness, NSNumber * secondLiveliness, NSError * error))completion{
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     
     [self.server compareFaceImages:[self adaptImages:firstFaceImages] withFaceImages:[self adaptImages:secondFaceImages] completion:^(NSNumber *similarity, NSNumber *firstLiveliness, NSNumber *secondLiveliness, NSError *error) {
@@ -246,8 +246,41 @@
     }];
 }
 
-- (void) openFaceImagesCaptureWithTopHint: (NSString *) topHint bottomHint:(NSString *) bottomHint batchSize: (NSInteger) batchSize delay: (NSTimeInterval) delay fromViewController: (UIViewController *) viewController completion: (void (^)(BOOL success, NSArray * images))completion{
+- (void) openFaceImagesCaptureWithTopHint: (NSString *) topHint bottomHint:(NSString *) bottomHint batchSize: (NSInteger) batchSize delay: (NSTimeInterval) delay fromViewController: (UIViewController *) viewController completion: (void (^)(NSArray * images, NSError * error))completion{
     [self.faceCaptureManager openCaptureViewFromViewController:viewController topHint:topHint bottomHint:bottomHint batchSize:batchSize delay:delay completion:completion];
+}
+
+- (AMBNFaceRecordingViewController *) instantiateFaceRecordingViewControllerWithVideoLength:(NSTimeInterval)videoLength {
+    return [self.faceCaptureManager instantiateFaceRecordingViewControllerWithVideoLength:videoLength];
+}
+
+- (AMBNFaceRecordingViewController *) instantiateFaceRecordingViewControllerWithTopHint:(NSString *)topHint
+                                                                             bottomHint:(NSString *)bottomHint
+                                                                          recordingHint:(NSString *)recordingHint
+                                                                            videoLength:(NSTimeInterval)videoLength {
+    return [self.faceCaptureManager instantiateFaceRecordingViewControllerWithTopHint:topHint bottomHint:bottomHint recordingHint:recordingHint videoLength:videoLength];
+}
+
+- (void)enrollFaceVideo:(NSURL *)video completion:(void (^)(BOOL success, NSError * error))completion {
+    NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert(self.session != nil, @"Session is not obtained");
+    
+    [self.server enrollFace:[self adaptVideo:video] session:self.session completion:^(BOOL success, NSNumber *imagesCount, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(success, error);
+        });
+    }];
+}
+
+- (void)authenticateFaceVideo:(NSURL *)video completion: (void (^)(NSNumber * score, NSNumber * liveliness, NSError * error))completion {
+    NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert(self.session != nil, @"Session is not obtained");
+    
+    [self.server authFace:[self adaptVideo:video] session:self.session completion:^(NSNumber *score, NSNumber *liveliness, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(score, liveliness, error);
+        });
+    }];
 }
 
 - (NSArray *) adaptImages: (NSArray *) images{
@@ -258,6 +291,16 @@
     return adaptedImages;
 }
 
-
+- (NSArray *)adaptVideo:(NSURL *)video {
+    NSMutableArray * adaptedVideos = [NSMutableArray array];
+    NSData *videoData = [NSData dataWithContentsOfURL:video];
+    if ([videoData respondsToSelector:@selector(base64Encoding)]) {
+        [adaptedVideos addObject:[videoData base64Encoding]];
+    } else {
+        [adaptedVideos addObject:[videoData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed]];
+    }
+    
+    return adaptedVideos;
+}
 
 @end

@@ -13,7 +13,10 @@
         CGSize newSize = CGSizeMake(image.size.width/image.size.height * self.maxHeight, self.maxHeight);
         image = [self resizeImage:image newSize:newSize];
     }
-    return [UIImageJPEGRepresentation(image, 0.7) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    if ([UIImageJPEGRepresentation(image, 0.7) respondsToSelector:@selector(base64EncodedStringWithOptions:)]) {
+        return [UIImageJPEGRepresentation(image, 0.7) base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    }
+    return [UIImageJPEGRepresentation(image, 0.7) base64Encoding];
 }
 
 - (UIImage *)resizeImage:(UIImage*)image newSize:(CGSize)newSize {

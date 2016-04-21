@@ -6,7 +6,7 @@
 
 @implementation AMBNServer
 {
-    NSString *applicationId;
+    NSString *_apiKey;
     NSData *applicationSecret;
     AMBNBehaviouralJSONComposer * behaviouralJSONcomposer;
     NSOperationQueue *queue;
@@ -18,13 +18,13 @@
     NSURL * facialCompareURL;
 }
 
-- (instancetype) initWithAppId: (NSString *) appId secret: (NSString *) secret{
+- (instancetype) initWithApiKey: (NSString *) apiKey secret: (NSString *) secret{
     self = [super init];
     queue = [[NSOperationQueue alloc] init];
     behaviouralJSONcomposer = [[AMBNBehaviouralJSONComposer alloc] init];
     
     applicationSecret = [secret dataUsingEncoding:NSUTF8StringEncoding];
-    applicationId = appId;
+    _apiKey = apiKey;
     
     NSURL * baseURL = [NSURL URLWithString:@"https://api.aimbrain.com:443/v1/"];
     NSString * sessionPath = @"sessions";
@@ -102,11 +102,11 @@
         }];
     }];
 }
-- (void) enrollFaceImages: (NSArray *) encodedImages session: (NSString*) session completion: (void (^)(BOOL success, NSNumber * imagesCount, NSError * error))completion {
+- (void) enrollFace: (NSArray *) dataToEnroll session: (NSString*) session completion: (void (^)(BOOL success, NSNumber * imagesCount, NSError * error))completion {
     [queue addOperationWithBlock:^{
         NSDictionary *json = @{
                                @"session" : session,
-                               @"faces" : encodedImages
+                               @"faces" : dataToEnroll
                                };
         NSURLRequest * req = [self createJSONPostRequestWithJSON:json url:facialEnrollURL];
         
@@ -141,11 +141,11 @@
     }];
 }
 
-- (void) authFaceImages: (NSArray *) images session: (NSString*) session completion: (void (^)(NSNumber * result, NSNumber * liveliness, NSError * error))completion {
+- (void) authFace: (NSArray *) dataToAuth session: (NSString*) session completion: (void (^)(NSNumber * score, NSNumber * liveliness, NSError * error))completion {
     [queue addOperationWithBlock:^{
         NSDictionary *json = @{
                                @"session" : session,
-                               @"faces" : images
+                               @"faces" : dataToAuth
                                };
         NSURLRequest * req = [self createJSONPostRequestWithJSON:json url:facialAuthURL];
         
@@ -318,10 +318,15 @@
     if(error == nil){
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
         request.HTTPMethod = @"POST";
-        [request setValue:applicationId forHTTPHeaderField:@"X-aimbrain-apikey"];
+        [request setValue:_apiKey forHTTPHeaderField:@"X-aimbrain-apikey"];
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         NSData *signatureData = [self calculateSignatureForHTTPMethod:request.HTTPMethod path:url.path httpBody:jsonData key: applicationSecret];
-        NSString *singature = [signatureData base64Encoding];
+        NSString *singature;
+        if([signatureData respondsToSelector:@selector(base64Encoding)]){
+            singature = [signatureData base64Encoding];
+        } else {
+            singature = [signatureData base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+        }
         [request setValue:singature forHTTPHeaderField:@"X-aimbrain-signature"];
         
         request.HTTPBody = jsonData;

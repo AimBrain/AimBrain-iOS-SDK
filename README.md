@@ -17,12 +17,12 @@ int main(int argc, char * argv[])
 ```
 
 ## API authentication
-In order to communicate with the server, the application must be configured with a valid API Key and secret. Relevant configuration parameters should be passed to the SDK using the `AMBNManager`’s `configureWithApplicationId:secret` method. Most often the best place for it is  `application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions` of app delegate.
+In order to communicate with the server, the application must be configured with a valid API Key and secret. Relevant configuration parameters should be passed to the SDK using the `AMBNManager`’s `configureWithApiKey:secret` method. Most often the best place for it is  `application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions` of app delegate.
 
 ```objective_c
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[AMBNManager sharedInstance] configureWithApplicationId:@"test" secret:@"secret"];
+    [[AMBNManager sharedInstance] configureWithApiKey:@"AIMBRAIN_API_KEY" secret:@"AIMBRAIN_API_SECRET"];
     return YES;
 }
 ```
@@ -31,10 +31,15 @@ In order to communicate with the server, the application must be configured with
 In order to submit data to AimBrain `AMBNManager` needs to be configured with a session. There are two ways of doing it.
 
 ## Obtaining new session
-A new session can be obtained by passing `userId` to `createSession` method on `AMBNManager`.
-
+A new session can be obtained by passing `userId` to `createSession` method on `AMBNManager`. Completion callback returns session token, status of Facial Module modalitiy and status of Behavioural Module modality. Status of Facial Module modality (`face`) can have following values:
+*0 - User not enrolled - facial authentication not available, enrollment required
+*1 - User enrolled - facial authentication available.
+*2 - Building template - enrollment done, AimBrain is building user template and no further action is required.
+Status of Behavioural Module modality (`behaviour`) can have following  values:
+*0 - User not enrolled - behavioural authentication not available, enrollment required.
+*1 - User enrolled - behavioural authentication available.
 ```objective_c
-[[AMBNManager sharedInstance] createSessionWithUserId:userId completion:^(NSString *session, NSError *error) {
+[self.server createSessionWithUserId:userId completion:^(NSString *session, NSNumber * face, NSNumber * behaviour, NSError *error) {
 if(session){
   //Do something after successful session creation
 }
@@ -163,18 +168,42 @@ In order to take a picture of the user's face the `openFaceImagesCaptureWithTopH
 }];
 ```
 
+## Recording video of the user's face for liveliness detection
+In order to record video of the user's face the `instantiateFaceRecordingViewControllerWithVideoLength` method has to be called from the `AMBNManager`. The face recording view controller is returned and needs to be presented. The face recording view controller has a property `delegate` of type `AMBNFaceRecordingViewControllerDelegate`. It has to be set in order to receive video recording. After recording is finished `faceRecordingViewController:recordingResult:error:` method is called on the delegate. Video file is removed after this method returns.
+```objective_c
+AMBNFaceRecordingViewController *controller = [[AMBNManager sharedInstance] instantiateFaceRecordingViewControllerWithTopHint:@"Position your face fully within the outline with eyes between the lines." bottomHint:@"Position your face fully within the outline with eyes between the linessss." videoLength:2];
+controller.delegate = self;
+[self presentViewController:controller animated:YES completion:nil];
+```
+```objective_c
+-(void)faceRecordingViewController:(AMBNFaceRecordingViewController *)faceRecordingViewController recordingResult:(NSURL *)video error:(NSError *)error {
+    [faceRecordingViewController dismissViewControllerAnimated:YES completion:nil];
+    // ... use video
+}
+```
+
 ## Authenticating with the facial module
-In order to authenticate with facial module, the `authenticateFaceImages` method has to be called from the `AMBNManager`. An array with the images of the face has to passed as a parameter. The completion block is called with the score returned by the server, the score being between 0.0 and 1.0 and a liveliness rating, indicating if the photos were taken of a live person.
+In order to authenticate with facial module, the `authenticateFaceImages` or `authenticateFaceVideo` method has to be called from the `AMBNManager`. When using `authenticateFaceImages` an array with the images of the face has to passed as a parameter. When using `authenticateFaceVideo` an url of a video of the face has to be passed as a parameter. The completion block is called with the score returned by the server, the score being between 0.0 and 1.0 and a liveliness rating, indicating if the photos or video taken were of a live person.
 ```objective_c
 [[AMBNManager sharedInstance] authenticateFaceImages:images completion:^(NSNumber *score, NSNumber *liveliness, NSError *error) {
 ...
 }];
 ```
+```objective_c
+[[AMBNManager sharedInstance] authenticateFaceVideo:video completion:^(NSNumber *score, NSNumber *liveliness, NSError *error) {
+...
+}];
+```
 
 ## Enrolling with the facial module
-Enrolling with the facial module is done by calling the `enrollFaceImages` method from the `AMBNManager`. An array with with the images of the face has to passed as a parameter. The completion block is called after the operation if finished. `success` indicates if operation was successful, `imagesCount` indicates how many images were received, processed successfully and had a face in them.
+Enrolling with the facial module is done by calling the `enrollFaceImages` or `enrollFaceVideo` method from the `AMBNManager`. When using `enrollFaceImages` an array with with the images of the face has to passed as a parameter. When using `enrollFaceVideo` a url of a video of the face has to be passed as a parameter. The completion block is called after the operation is finished. `success` indicates if operation was successful, `imagesCount` indicates how many images were received, processed successfully and had a face in them.
 ```objective_c
 [[AMBNManager sharedInstance] enrollFaceImages:images completion:^(BOOL success, NSNumber *imagesCount, NSError *error) {
+...
+}];
+```
+```objective_c
+[[AMBNManager sharedInstance] enrollFaceVideo:video completion:^(BOOL success, NSError *error) {
 ...
 }];
 ```
@@ -182,7 +211,7 @@ Enrolling with the facial module is done by calling the `enrollFaceImages` metho
 ## Comparing faces
 Two batches of images of faces can be compared using the `compareFaceImages` method of the `AMBNManager`. The method takes an array of images of the first face and an array of images of the second face (arrays contain one or more images). The completion block is called with the similarity score and the liveliness ratings of both faces.
 ```objective_c
-[[AMBNManager sharedInstance] compareFaceImages:firstFaceImages toFaceImages:secondFaceImages completion:^(NSNumber *result, NSNumber *firstLiveliness, NSNumber *secondLiveliness, NSError *error) {
+[[AMBNManager sharedInstance] compareFaceImages:firstFaceImages toFaceImages:secondFaceImages completion:^(NSNumber *score, NSNumber *firstLiveliness, NSNumber *secondLiveliness, NSError *error) {
 ...
 }];
 ```

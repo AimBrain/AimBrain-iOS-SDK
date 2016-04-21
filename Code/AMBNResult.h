@@ -1,4 +1,4 @@
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #define AMBNResultStatusEnrolling 0
 #define AMBNResultStatusAuthenticating 1

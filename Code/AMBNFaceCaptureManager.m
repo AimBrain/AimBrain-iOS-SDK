@@ -1,5 +1,6 @@
 #import "AMBNFaceCaptureManager.h"
 #import "AMBNCameraOverlay.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface AMBNFaceCaptureManager ()
 @property UIImagePickerController * imagePickerController;
@@ -7,7 +8,7 @@
 @property NSMutableArray *images;
 @property NSInteger batchSize;
 @property NSTimeInterval delay;
-@property (nonatomic, copy) void (^completion)(BOOL success, NSArray * images);
+@property (nonatomic, copy) void (^completion)(NSArray * images, NSError * error);
 @end
 
 @implementation AMBNFaceCaptureManager
@@ -18,7 +19,8 @@
     return self;
 }
 
-- (void) openCaptureViewFromViewController:(UIViewController *) viewController topHint:(NSString*)topHint bottomHint: (NSString *) bottomHint batchSize: (NSInteger) batchSize delay: (NSTimeInterval) delay completion:(void (^)(BOOL success, NSArray * images))completion{
+- (void) openCaptureViewFromViewController:(UIViewController *) viewController topHint:(NSString*)topHint bottomHint: (NSString *) bottomHint batchSize: (NSInteger) batchSize delay: (NSTimeInterval) delay completion:(void (^)(NSArray * images, NSError * error))completion{
+
     self.completion = completion;
     self.delay = delay;
     self.batchSize = batchSize;
@@ -32,21 +34,50 @@
     
     
     [self.imagePickerController setShowsCameraControls:false];
-    [UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront];
+
     if([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]){
         [self.imagePickerController setCameraDevice:UIImagePickerControllerCameraDeviceFront];
     }else{
         [self.imagePickerController setCameraDevice:UIImagePickerControllerCameraDeviceRear];
     }
 
-    
     self.imagePickerController.cameraOverlayView = self.overlay;
     self.imagePickerController.delegate = self;
-    
+
     [viewController presentViewController:self.imagePickerController animated:true completion:^{
         
     }];
+    if ([AVCaptureDevice respondsToSelector:@selector(requestAccessForMediaType: completionHandler:)]) {
+        [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+            if(granted == false){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSString * appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+                    self.completion(nil, [NSError errorWithDomain:AMBNFaceCaptureManagerErrorDomain code:AMBNFaceCaptureManagerMissingVideoPermissionError userInfo:@{NSLocalizedDescriptionKey: [NSString stringWithFormat:@"Camera permission is not granted for %@. You can grant permission in Settings", appName]}]);
+                    [self.imagePickerController dismissViewControllerAnimated:true completion:^{
+                        
+                    }];
+                });
+            }
+        }];
+    }
     
+}
+
+- (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithTopHint:(NSString*)topHint bottomHint:(NSString *)bottomHint recordingHint:(NSString *)recordingHint videoLength:(NSTimeInterval)videoLength {
+    NSString * faceBundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"face.bundle"];
+    AMBNFaceRecordingViewController *faceRecordingViewController = [[AMBNFaceRecordingViewController alloc] initWithNibName:@"AMBNFaceRecordingViewController" bundle:[NSBundle bundleWithPath:faceBundlePath]];
+    faceRecordingViewController.topHint = topHint;
+    faceRecordingViewController.bottomHint = bottomHint;
+    faceRecordingViewController.videoLength = videoLength;
+    faceRecordingViewController.recordingHint = recordingHint;
+    return faceRecordingViewController;
+}
+
+- (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithVideoLength:(NSTimeInterval)videoLength {
+    NSString * faceBundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"face.bundle"];
+    AMBNFaceRecordingViewController *faceRecordingViewController = [[AMBNFaceRecordingViewController alloc] initWithNibName:@"AMBNFaceRecordingViewController" bundle:[NSBundle bundleWithPath:faceBundlePath]];
+    faceRecordingViewController.videoLength = videoLength;
+    return faceRecordingViewController;
 }
 
 -(void) configureOverlayWithTopHint:(NSString *) topHint bottomHint: (NSString *) bottomHint{
@@ -57,9 +88,6 @@
     self.overlay.imagePicker = self.imagePickerController;
     [self.overlay.topHintLabel setText:topHint];
     [self.overlay.bottomHintLabel setText:bottomHint];
-}
-- (void) dismissCaptureView {
-    
 }
 
 -(void)takePicturePressedCameraOverlay:(id)overlay{
@@ -77,7 +105,7 @@
         [self.imagePickerController dismissViewControllerAnimated:true completion:^{
             
         }];
-        self.completion(true, [self cropImages:self.images]);
+        self.completion([self cropImages:self.images], nil);
     }else{
         [self.imagePickerController performSelector:@selector(takePicture) withObject:nil afterDelay:self.delay];
         
