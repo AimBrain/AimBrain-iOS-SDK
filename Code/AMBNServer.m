@@ -18,15 +18,18 @@
     NSURL * facialCompareURL;
 }
 
-- (instancetype) initWithApiKey: (NSString *) apiKey secret: (NSString *) secret{
+- (instancetype) initWithApiKey: (NSString *) apiKey secret: (NSString *) secret {
+    return [self initWithApiKey:apiKey secret:secret baseUrl:@"https://api.aimbrain.com:443/v1/"];
+}
+
+- (instancetype) initWithApiKey: (NSString *) apiKey secret: (NSString *) secret baseUrl:(NSString*)baseUrl {
     self = [super init];
     queue = [[NSOperationQueue alloc] init];
     behaviouralJSONcomposer = [[AMBNBehaviouralJSONComposer alloc] init];
     
     applicationSecret = [secret dataUsingEncoding:NSUTF8StringEncoding];
     _apiKey = apiKey;
-    
-    NSURL * baseURL = [NSURL URLWithString:@"https://api.aimbrain.com:443/v1/"];
+    NSURL * baseURL = [NSURL URLWithString:baseUrl];
     NSString * sessionPath = @"sessions";
     NSString * submitBehaviouralPath = @"behavioural";
     NSString * scorePath = @"score";

@@ -73,6 +73,10 @@
     self.server = [[AMBNServer alloc] initWithApiKey:apiKey secret:appSecret];
 }
 
+- (void) configureWithApiKey: (NSString *) apiKey secret: (NSString *) appSecret baseUrl:(NSString*)baseUrl {
+    self.server = [[AMBNServer alloc] initWithApiKey:apiKey secret:appSecret baseUrl:baseUrl];
+}
+
 - (void) createSessionWithUserId: (NSString *) userId completion: (void (^)(NSString * session, NSNumber * face, NSNumber * behaviour, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     [self.server createSessionWithUserId:userId completion:^(NSString *session, NSNumber * face, NSNumber * behaviour, NSError *error) {
@@ -128,6 +132,18 @@
     
     
     
+}
+
+- (void)clearBehaviouralData {
+    @synchronized(self.touches) {
+        [self.touches removeAllObjects];
+    }
+    @synchronized(self.accelerations) {
+        [self.accelerations removeAllObjects];
+    }
+    @synchronized(self.textEvents) {
+        [self.textEvents removeAllObjects];
+    }
 }
 
 - (void) getScoreWithCompletion:(void (^)(AMBNResult * result, NSError *error))completion{

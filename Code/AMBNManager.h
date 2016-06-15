@@ -47,6 +47,14 @@
 - (void) configureWithApiKey: (NSString *) apiKey secret: (NSString *) appSecret;
 
 /*!
+ @description Configures AMBNManager. This method must be called before creating user session or submitting behavioural data.
+ @param apiKey Provided application identifier.
+ @param appSecret Provided application secret.
+ @param baseUrl Provided server base URL string.
+ */
+- (void) configureWithApiKey: (NSString *) apiKey secret: (NSString *) appSecret baseUrl:(NSString*)baseUrl;
+
+/*!
  @description Creates session key and sets session property of this class.
  @param userId user identifier.
  @param completion Called when session obtainment completes. Session is successfuly obtained if session <b> session </b> is not nil and <b> error </b> is nil.
@@ -58,6 +66,11 @@
  @param completion Called when submitting completes. Submission was successful if <b> score </b> is not nil and <b> error </b> is nil.
  */
 - (void) submitBehaviouralDataWithCompletion:(void (^)(AMBNResult * result, NSError *error))completion;
+
+/*!
+ @description Clears collected behavioural data. Use this method to clear collected data for some specific cases e.g. before entering a pin code when no session available.
+ */
+- (void) clearBehaviouralData;
 
 /*!
  @description Gets current behavioural score.

@@ -50,12 +50,10 @@
 		0CC5BCC31C713582008EC7F6 /* AMBNTextEvent.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CD146CF1C21AB2F00F56797 /* AMBNTextEvent.h */; };
 		0CDB93211C98168A00BEE7B3 /* AMBNCameraOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB93201C98168A00BEE7B3 /* AMBNCameraOverlay.m */; };
 		0CDB93241C98184900BEE7B3 /* AMBNFaceCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB93231C98184900BEE7B3 /* AMBNFaceCaptureManager.m */; };
-		0CDB93281C981DE600BEE7B3 /* AMBNCameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB931D1C9812D200BEE7B3 /* AMBNCameraOverlay.xib */; };
 		0CDB93521C9828BA00BEE7B3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB93511C9828BA00BEE7B3 /* CoreFoundation.framework */; };
 		0CDB93531C982A0600BEE7B3 /* AMBNCameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB931D1C9812D200BEE7B3 /* AMBNCameraOverlay.xib */; };
 		0CDB935A1C98528100BEE7B3 /* AMBNFaceCaptureManager.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CDB93221C98184900BEE7B3 /* AMBNFaceCaptureManager.h */; };
 		0CDB935E1C98628200BEE7B3 /* AMBNCameraOverlayDelegate.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CDB935D1C9859C700BEE7B3 /* AMBNCameraOverlayDelegate.h */; };
-		0CDB93601C98C3E300BEE7B3 /* icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB935F1C98C3E300BEE7B3 /* icons.xcassets */; };
 		0CDB93611C98C6E400BEE7B3 /* icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB935F1C98C3E300BEE7B3 /* icons.xcassets */; };
 		0CFEF38D1CA36688001BC54A /* AMBNImageAdapter.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CFEF38A1CA363DF001BC54A /* AMBNImageAdapter.h */; };
 		0CFEF38E1CA36698001BC54A /* AMBNImageAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFEF38B1CA363DF001BC54A /* AMBNImageAdapter.m */; };
@@ -70,6 +68,30 @@
 		D5C3D29F1CB7F0EC00EDA479 /* AMBNCaptureSessionConfigurator.h in Copy Files */ = {isa = PBXBuildFile; fileRef = D5C3D29C1CB7E51A00EDA479 /* AMBNCaptureSessionConfigurator.h */; };
 		D5C3D2A01CB7F0F300EDA479 /* AMBNCaptureSessionConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C3D29D1CB7E53000EDA479 /* AMBNCaptureSessionConfigurator.m */; };
 		D5C3D2A21CBBC0F400EDA479 /* AMBNFaceRecordingViewControllerDelegate.h in Copy Files */ = {isa = PBXBuildFile; fileRef = D5C3D2A11CBBB56A00EDA479 /* AMBNFaceRecordingViewControllerDelegate.h */; };
+		F602FA9D1D01D0540057469C /* AMBNAudioRecorderConfigurator.h in Headers */ = {isa = PBXBuildFile; fileRef = F60E58821CFDA9860091CFC5 /* AMBNAudioRecorderConfigurator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FA9E1D01D0540057469C /* AMBNVoiceRecordingManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F6CE48E31CFC3659008D8DBE /* AMBNVoiceRecordingManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FA9F1D01D0540057469C /* AMBNVoiceRecordingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F6CE49B31CFC8152008D8DBE /* AMBNVoiceRecordingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAA01D01D0540057469C /* AMBNVoiceRecordingViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = F60E58851CFDBC500091CFC5 /* AMBNVoiceRecordingViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAA11D01D0540057469C /* AMBNCameraOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDB931F1C98168A00BEE7B3 /* AMBNCameraOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAA21D01D0540057469C /* AMBNCameraOverlayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDB935D1C9859C700BEE7B3 /* AMBNCameraOverlayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAA31D01D0540057469C /* AMBNFaceCaptureManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDB93221C98184900BEE7B3 /* AMBNFaceCaptureManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAA41D01D0540057469C /* AMBNImageAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CFEF38A1CA363DF001BC54A /* AMBNImageAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAA51D01D0540057469C /* AMBNFaceRecordingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D5D5A6EF1CB5356100B6CF1D /* AMBNFaceRecordingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAA61D01D0540057469C /* AMBNRecordingOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = D5802B561CB553CA00E95EFD /* AMBNRecordingOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAA71D01D0540057469C /* AMBNCameraPreview.h in Headers */ = {isa = PBXBuildFile; fileRef = D5C3D2941CB7DE3D00EDA479 /* AMBNCameraPreview.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAA81D01D0540057469C /* AMBNCaptureSessionConfigurator.h in Headers */ = {isa = PBXBuildFile; fileRef = D5C3D29C1CB7E51A00EDA479 /* AMBNCaptureSessionConfigurator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAA91D01D0540057469C /* AMBNFaceRecordingViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D5C3D2A11CBBB56A00EDA479 /* AMBNFaceRecordingViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAAA1D01D0540057469C /* AMBNResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1265D41C4D0BD000B86EF8 /* AMBNResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAAD1D01D0540057469C /* AMBNPrivacyGuard.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CD146D21C22F11900F56797 /* AMBNPrivacyGuard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAAF1D01D0540057469C /* AMBNServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C31D24B1C1EF4B70009F2D6 /* AMBNServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAB01D01D0540057469C /* AMBNCapturingApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C31D24A1C1EF4B70009F2D6 /* AMBNCapturingApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAB11D01D0540057469C /* AMBNTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C31D2461C1EF4B70009F2D6 /* AMBNTouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAB21D01D0540057469C /* AMBNCapturingApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CD146DE1C23070700F56797 /* AMBNCapturingApplicationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAB41D01D0540057469C /* AMBNTouchCollectorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0CAD311C241B8600A42D08 /* AMBNTouchCollectorDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAB81D01D0540057469C /* AMBNTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CD146CF1C21AB2F00F56797 /* AMBNTextEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FAB91D01D0540057469C /* AMBNTextInputCollectorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CD146DD1C2302C700F56797 /* AMBNTextInputCollectorDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FABA1D01D0540057469C /* AMBNManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C31D2481C1EF4B70009F2D6 /* AMBNManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F602FABB1D01D0540057469C /* AimBrainSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C776A581C5FDAF7009BFDFD /* AimBrainSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -432,6 +454,40 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		F602FA9C1D01CFCE0057469C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F602FAA11D01D0540057469C /* AMBNCameraOverlay.h in Headers */,
+				F602FAA01D01D0540057469C /* AMBNVoiceRecordingViewControllerDelegate.h in Headers */,
+				F602FA9D1D01D0540057469C /* AMBNAudioRecorderConfigurator.h in Headers */,
+				F602FA9E1D01D0540057469C /* AMBNVoiceRecordingManager.h in Headers */,
+				F602FA9F1D01D0540057469C /* AMBNVoiceRecordingViewController.h in Headers */,
+				F602FAA91D01D0540057469C /* AMBNFaceRecordingViewControllerDelegate.h in Headers */,
+				F602FAA81D01D0540057469C /* AMBNCaptureSessionConfigurator.h in Headers */,
+				F602FAA71D01D0540057469C /* AMBNCameraPreview.h in Headers */,
+				F602FAA61D01D0540057469C /* AMBNRecordingOverlayView.h in Headers */,
+				F602FAA51D01D0540057469C /* AMBNFaceRecordingViewController.h in Headers */,
+				F602FAA41D01D0540057469C /* AMBNImageAdapter.h in Headers */,
+				F602FAAF1D01D0540057469C /* AMBNServer.h in Headers */,
+				F602FAA21D01D0540057469C /* AMBNCameraOverlayDelegate.h in Headers */,
+				F602FAA31D01D0540057469C /* AMBNFaceCaptureManager.h in Headers */,
+				F602FAB81D01D0540057469C /* AMBNTextEvent.h in Headers */,
+				F602FAB11D01D0540057469C /* AMBNTouch.h in Headers */,
+				F602FAB41D01D0540057469C /* AMBNTouchCollectorDelegate.h in Headers */,
+				F602FAB91D01D0540057469C /* AMBNTextInputCollectorDelegate.h in Headers */,
+				F602FAB21D01D0540057469C /* AMBNCapturingApplicationDelegate.h in Headers */,
+				F602FAAA1D01D0540057469C /* AMBNResult.h in Headers */,
+				F602FAAD1D01D0540057469C /* AMBNPrivacyGuard.h in Headers */,
+				F602FAB01D01D0540057469C /* AMBNCapturingApplication.h in Headers */,
+				F602FABA1D01D0540057469C /* AMBNManager.h in Headers */,
+				F602FABB1D01D0540057469C /* AimBrainSDK.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		0C776A551C5FDAF6009BFDFD /* AimBrainSDK */ = {
 			isa = PBXNativeTarget;
@@ -440,6 +496,7 @@
 				0C776A521C5FDAF6009BFDFD /* Sources */,
 				0C776A531C5FDAF6009BFDFD /* Frameworks */,
 				0C776A541C5FDAF6009BFDFD /* Copy Files */,
+				F602FA9C1D01CFCE0057469C /* Headers */,
 				0CDB93271C981DE100BEE7B3 /* Resources */,
 				D589994B1CBD0EE80006108D /* ShellScript */,
 			);
@@ -517,8 +574,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0CDB93601C98C3E300BEE7B3 /* icons.xcassets in Resources */,
-				0CDB93281C981DE600BEE7B3 /* AMBNCameraOverlay.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,7 +615,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/AimBrainSDK\" \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/AimBrainSDK\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/include/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Versions/A/Headers\"";
+			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/AimBrainSDK\" \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/AimBrainSDK\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Versions/A/Headers\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -637,12 +692,14 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
 			};
 			name = Debug;
@@ -657,12 +714,14 @@
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
+				INSTALL_PATH = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = "-fembed-bitcode";
 				OTHER_LDFLAGS = "-ObjC";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(TARGET_NAME)";
 				SKIP_INSTALL = NO;
 			};
 			name = Release;
@@ -792,6 +851,7 @@
 		D58999451CBCFF680006108D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				INSTALL_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -799,6 +859,7 @@
 		D58999461CBCFF680006108D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				INSTALL_PATH = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

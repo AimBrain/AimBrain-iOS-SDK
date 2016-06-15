@@ -11,6 +11,7 @@
 @interface AMBNServer : NSObject
 
 - (instancetype) initWithApiKey: (NSString *) apiKey secret: (NSString *) secret;
+- (instancetype) initWithApiKey: (NSString *) apiKey secret: (NSString *) secret baseUrl:(NSString*)baseUrl;
 
 - (void) createSessionWithUserId: (NSString *)userId completion: (void (^)(NSString * session, NSNumber * face, NSNumber * behaviour, NSError * error))completion;
 
