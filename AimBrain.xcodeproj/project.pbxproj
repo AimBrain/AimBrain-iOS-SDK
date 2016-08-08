@@ -23,75 +23,67 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		0C776A591C5FDAF7009BFDFD /* AimBrainSDK.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0C776A581C5FDAF7009BFDFD /* AimBrainSDK.h */; };
-		0C776A5F1C5FDB3D009BFDFD /* AMBNResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C1265D51C4D0BD000B86EF8 /* AMBNResult.m */; };
-		0C776A601C5FDB3D009BFDFD /* AMBNViewIdChainExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C1265CB1C4C561F00B86EF8 /* AMBNViewIdChainExtractor.m */; };
-		0C776A611C5FDB3D009BFDFD /* AMBNHashGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C683F191C5911CD00514BC0 /* AMBNHashGenerator.m */; };
-		0C776A621C5FDB3D009BFDFD /* AMBNPrivacyGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD146D31C22F11900F56797 /* AMBNPrivacyGuard.m */; };
-		0C776A631C5FDB3D009BFDFD /* AMBNBehaviouralJSONComposer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31D2411C1EF4B70009F2D6 /* AMBNBehaviouralJSONComposer.m */; };
-		0C776A641C5FDB3D009BFDFD /* AMBNServer.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31D2431C1EF4B70009F2D6 /* AMBNServer.m */; };
-		0C776A651C5FDB3D009BFDFD /* AMBNCapturingApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31D2401C1EF4B70009F2D6 /* AMBNCapturingApplication.m */; };
-		0C776A661C5FDB3D009BFDFD /* AMBNTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31D2441C1EF4B70009F2D6 /* AMBNTouch.m */; };
-		0C776A671C5FDB3D009BFDFD /* AMBNTouchCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C0CAD2F1C24185500A42D08 /* AMBNTouchCollector.m */; };
-		0C776A681C5FDB3D009BFDFD /* AMBNAccelerometerCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31D2551C204C560009F2D6 /* AMBNAccelerometerCollector.m */; };
-		0C776A691C5FDB3D009BFDFD /* AMBNAcceleration.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31D2451C1EF4B70009F2D6 /* AMBNAcceleration.m */; };
-		0C776A6A1C5FDB3D009BFDFD /* AMBNTextInputCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD146C71C2193E700F56797 /* AMBNTextInputCollector.m */; };
-		0C776A6B1C5FDB3D009BFDFD /* AMBNTextEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CD146D01C21AB2F00F56797 /* AMBNTextEvent.m */; };
-		0C776A6C1C5FDB3D009BFDFD /* AMBNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0C31D2421C1EF4B70009F2D6 /* AMBNManager.m */; };
-		0C776A731C5FDD18009BFDFD /* AMBNResult.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0C1265D41C4D0BD000B86EF8 /* AMBNResult.h */; };
-		0C776A741C5FDD18009BFDFD /* AMBNPrivacyGuard.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CD146D21C22F11900F56797 /* AMBNPrivacyGuard.h */; };
-		0C776A751C5FDD18009BFDFD /* AMBNCapturingApplication.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0C31D24A1C1EF4B70009F2D6 /* AMBNCapturingApplication.h */; };
-		0C776A761C5FDD18009BFDFD /* AMBNManager.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0C31D2481C1EF4B70009F2D6 /* AMBNManager.h */; };
-		0C776A8A1C5FDF51009BFDFD /* AMBNCapturingApplicationDelegate.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CD146DE1C23070700F56797 /* AMBNCapturingApplicationDelegate.h */; };
-		0C776A8D1C5FDFCE009BFDFD /* AMBNTouchCollectorDelegate.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0C0CAD311C241B8600A42D08 /* AMBNTouchCollectorDelegate.h */; };
-		0C776A8E1C5FDFCE009BFDFD /* AMBNTextInputCollectorDelegate.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CD146DD1C2302C700F56797 /* AMBNTextInputCollectorDelegate.h */; };
-		0C776A901C5FE052009BFDFD /* AMBNTouch.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0C31D2461C1EF4B70009F2D6 /* AMBNTouch.h */; };
-		0C7991221C9B32D300E47512 /* AMBNServer.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0C31D24B1C1EF4B70009F2D6 /* AMBNServer.h */; };
-		0CC5BCC31C713582008EC7F6 /* AMBNTextEvent.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CD146CF1C21AB2F00F56797 /* AMBNTextEvent.h */; };
-		0CDB93211C98168A00BEE7B3 /* AMBNCameraOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB93201C98168A00BEE7B3 /* AMBNCameraOverlay.m */; };
-		0CDB93241C98184900BEE7B3 /* AMBNFaceCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CDB93231C98184900BEE7B3 /* AMBNFaceCaptureManager.m */; };
 		0CDB93521C9828BA00BEE7B3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB93511C9828BA00BEE7B3 /* CoreFoundation.framework */; };
-		0CDB93531C982A0600BEE7B3 /* AMBNCameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB931D1C9812D200BEE7B3 /* AMBNCameraOverlay.xib */; };
-		0CDB935A1C98528100BEE7B3 /* AMBNFaceCaptureManager.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CDB93221C98184900BEE7B3 /* AMBNFaceCaptureManager.h */; };
-		0CDB935E1C98628200BEE7B3 /* AMBNCameraOverlayDelegate.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CDB935D1C9859C700BEE7B3 /* AMBNCameraOverlayDelegate.h */; };
-		0CDB93611C98C6E400BEE7B3 /* icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0CDB935F1C98C3E300BEE7B3 /* icons.xcassets */; };
-		0CFEF38D1CA36688001BC54A /* AMBNImageAdapter.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0CFEF38A1CA363DF001BC54A /* AMBNImageAdapter.h */; };
-		0CFEF38E1CA36698001BC54A /* AMBNImageAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CFEF38B1CA363DF001BC54A /* AMBNImageAdapter.m */; };
-		4E1926861CC4F6DB006E86FF /* AMBNRecordingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E1926851CC4F6DB006E86FF /* AMBNRecordingOverlayView.m */; };
-		D57536F31CB5394700AB67C7 /* AMBNFaceRecordingViewController.h in Copy Files */ = {isa = PBXBuildFile; fileRef = D5D5A6EF1CB5356100B6CF1D /* AMBNFaceRecordingViewController.h */; };
-		D57536F41CB539BD00AB67C7 /* AMBNFaceRecordingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D5A6ED1CB5354800B6CF1D /* AMBNFaceRecordingViewController.m */; };
-		D57536F51CB53ABE00AB67C7 /* AMBNFaceRecordingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5D5A6EB1CB5327B00B6CF1D /* AMBNFaceRecordingViewController.xib */; };
-		D5802B5A1CB554B600E95EFD /* AMBNRecordingOverlayView.h in Copy Files */ = {isa = PBXBuildFile; fileRef = D5802B561CB553CA00E95EFD /* AMBNRecordingOverlayView.h */; };
-		D5802B5B1CB554C300E95EFD /* AMBNRecordingOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D5802B541CB5519A00E95EFD /* AMBNRecordingOverlayView.xib */; };
-		D5C3D2971CB7E3A800EDA479 /* AMBNCameraPreview.h in Copy Files */ = {isa = PBXBuildFile; fileRef = D5C3D2941CB7DE3D00EDA479 /* AMBNCameraPreview.h */; };
-		D5C3D2981CB7E3B100EDA479 /* AMBNCameraPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C3D2951CB7DE6700EDA479 /* AMBNCameraPreview.m */; };
-		D5C3D29F1CB7F0EC00EDA479 /* AMBNCaptureSessionConfigurator.h in Copy Files */ = {isa = PBXBuildFile; fileRef = D5C3D29C1CB7E51A00EDA479 /* AMBNCaptureSessionConfigurator.h */; };
-		D5C3D2A01CB7F0F300EDA479 /* AMBNCaptureSessionConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = D5C3D29D1CB7E53000EDA479 /* AMBNCaptureSessionConfigurator.m */; };
-		D5C3D2A21CBBC0F400EDA479 /* AMBNFaceRecordingViewControllerDelegate.h in Copy Files */ = {isa = PBXBuildFile; fileRef = D5C3D2A11CBBB56A00EDA479 /* AMBNFaceRecordingViewControllerDelegate.h */; };
-		F602FA9D1D01D0540057469C /* AMBNAudioRecorderConfigurator.h in Headers */ = {isa = PBXBuildFile; fileRef = F60E58821CFDA9860091CFC5 /* AMBNAudioRecorderConfigurator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FA9E1D01D0540057469C /* AMBNVoiceRecordingManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F6CE48E31CFC3659008D8DBE /* AMBNVoiceRecordingManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FA9F1D01D0540057469C /* AMBNVoiceRecordingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F6CE49B31CFC8152008D8DBE /* AMBNVoiceRecordingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAA01D01D0540057469C /* AMBNVoiceRecordingViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = F60E58851CFDBC500091CFC5 /* AMBNVoiceRecordingViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAA11D01D0540057469C /* AMBNCameraOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDB931F1C98168A00BEE7B3 /* AMBNCameraOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAA21D01D0540057469C /* AMBNCameraOverlayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDB935D1C9859C700BEE7B3 /* AMBNCameraOverlayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAA31D01D0540057469C /* AMBNFaceCaptureManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CDB93221C98184900BEE7B3 /* AMBNFaceCaptureManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAA41D01D0540057469C /* AMBNImageAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CFEF38A1CA363DF001BC54A /* AMBNImageAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAA51D01D0540057469C /* AMBNFaceRecordingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D5D5A6EF1CB5356100B6CF1D /* AMBNFaceRecordingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAA61D01D0540057469C /* AMBNRecordingOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = D5802B561CB553CA00E95EFD /* AMBNRecordingOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAA71D01D0540057469C /* AMBNCameraPreview.h in Headers */ = {isa = PBXBuildFile; fileRef = D5C3D2941CB7DE3D00EDA479 /* AMBNCameraPreview.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAA81D01D0540057469C /* AMBNCaptureSessionConfigurator.h in Headers */ = {isa = PBXBuildFile; fileRef = D5C3D29C1CB7E51A00EDA479 /* AMBNCaptureSessionConfigurator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAA91D01D0540057469C /* AMBNFaceRecordingViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D5C3D2A11CBBB56A00EDA479 /* AMBNFaceRecordingViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAAA1D01D0540057469C /* AMBNResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C1265D41C4D0BD000B86EF8 /* AMBNResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAAD1D01D0540057469C /* AMBNPrivacyGuard.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CD146D21C22F11900F56797 /* AMBNPrivacyGuard.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAAF1D01D0540057469C /* AMBNServer.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C31D24B1C1EF4B70009F2D6 /* AMBNServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAB01D01D0540057469C /* AMBNCapturingApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C31D24A1C1EF4B70009F2D6 /* AMBNCapturingApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAB11D01D0540057469C /* AMBNTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C31D2461C1EF4B70009F2D6 /* AMBNTouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAB21D01D0540057469C /* AMBNCapturingApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CD146DE1C23070700F56797 /* AMBNCapturingApplicationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAB41D01D0540057469C /* AMBNTouchCollectorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C0CAD311C241B8600A42D08 /* AMBNTouchCollectorDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAB81D01D0540057469C /* AMBNTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CD146CF1C21AB2F00F56797 /* AMBNTextEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FAB91D01D0540057469C /* AMBNTextInputCollectorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 0CD146DD1C2302C700F56797 /* AMBNTextInputCollectorDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FABA1D01D0540057469C /* AMBNManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C31D2481C1EF4B70009F2D6 /* AMBNManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F602FABB1D01D0540057469C /* AimBrainSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 0C776A581C5FDAF7009BFDFD /* AimBrainSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC03604BB4F52EDA9F08C713 /* AMBNFaceCaptureManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036515995D53DEE8571204 /* AMBNFaceCaptureManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC03607A112F3103A833CE0F /* AMBNTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036BE2E339A5034C16C311 /* AMBNTextEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036098F94F8D084484AFF0 /* AMBNAcceleration.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0366987C48F5E47F0BEEED /* AMBNAcceleration.m */; };
+		AC0360A27D35F2FA1D62CE28 /* AMBNSerializedRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0365571F50BFD4CF57E8D2 /* AMBNSerializedRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC0360B538D6562D125E0581 /* AMBNServer.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036069ACB9675CC9A763E0 /* AMBNServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC0360EB1869082E629796B4 /* AMBNTextInputCollectorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036AC04A55EC73900A5851 /* AMBNTextInputCollectorDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC0360F5F328421A03434FAB /* AMBNCameraOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0369C600A6BF0F9080AC72 /* AMBNCameraOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036124757DECFB73635799 /* AMBNCapturingApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036E110B827A9B52450B71 /* AMBNCapturingApplication.m */; };
+		AC036163145CA07821DB88B1 /* AMBNResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036EA20E7880FB81CF7FEF /* AMBNResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC0361685F2376E5D56BA467 /* AMBNEnrollFaceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036F11EAC3A5966C450E78 /* AMBNEnrollFaceResult.m */; };
+		AC03619709A9A0A1E5DE6F91 /* AMBNCameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC036A2E11557CFF2D6C3E53 /* AMBNCameraOverlay.xib */; };
+		AC0361B1C88A08234B0F277F /* AMBNAuthenticateFaceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0368F0AFDA1F16A294FB99 /* AMBNAuthenticateFaceResult.m */; };
+		AC0361C7EAFEA79BDCD54BF1 /* AMBNSerializedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036E21CAC635FB7C574951 /* AMBNSerializedRequest.m */; };
+		AC0361C82A6D2021CF8F97F3 /* AMBNBehaviouralResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03674ACCE6A60BACFAFB0B /* AMBNBehaviouralResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC0361DBC08A6B4CB5186939 /* AMBNResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036EBD0C91D1DD06476033 /* AMBNResult.m */; };
+		AC036255BD1615F3ADDDB826 /* AMBNCameraPreview.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0365D3279924F00C7E93D1 /* AMBNCameraPreview.m */; };
+		AC036292E33B5C9C2ADDEC45 /* AMBNPrivacyGuard.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036253E50499B0D20D8F51 /* AMBNPrivacyGuard.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC03630929AB8D65F0E2C01C /* AMBNFaceRecordingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC03628CC21B74CA6D42611C /* AMBNFaceRecordingViewController.xib */; };
+		AC0363E500C7FE44913A215B /* AMBNTouchCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0361B125C4873607B5C371 /* AMBNTouchCollector.m */; };
+		AC03641F8654314A78375019 /* AMBNFaceCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03679CEA37D2E4E8ABA04A /* AMBNFaceCaptureManager.m */; };
+		AC0365A36063842139581044 /* AMBNPrivacyGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03662DAD029B91FA5F6AFE /* AMBNPrivacyGuard.m */; };
+		AC03661E7FA4595C8FC179D2 /* AMBNCameraPreview.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036EDB7B25CDCAF1096FA6 /* AMBNCameraPreview.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC03662F6D92F9C2F6C4CA0B /* AimBrainSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03657A89EBDC1FB1825A78 /* AimBrainSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036656DA911DA637EF7657 /* AMBNManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0369B5A5B99ABB14B261BC /* AMBNManager.m */; };
+		AC03667096E638D17A192E4B /* AMBNCameraOverlayDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036AED556C3150B73931E4 /* AMBNCameraOverlayDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC0366A0D6D7F85C99DC9378 /* AMBNFaceRecordingViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0363F6441DFF3565703790 /* AMBNFaceRecordingViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC0366DD71D055AF3F4C88F7 /* AMBNTextInputCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036FFF2248796CE2293CFB /* AMBNTextInputCollector.m */; };
+		AC03676EFA4D0E5E87E99319 /* AMBNFaceRecordingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036A681E43CEFA2B8246A6 /* AMBNFaceRecordingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036791644C59B2192D8CC2 /* AMBNCompareFaceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036DC63C2760CB5ED4772B /* AMBNCompareFaceResult.m */; };
+		AC03681B6CA6B0287FFD93CA /* AMBNTextEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0363916DE51B8C8A4A0C37 /* AMBNTextEvent.m */; };
+		AC03683B97E4FEF9572F6CA3 /* AMBNCaptureSessionConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0365D446C8260F5BD4843A /* AMBNCaptureSessionConfigurator.m */; };
+		AC0368C2015C1724A53FB9EB /* AMBNCapturingApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0365F29747D3ABF90BF213 /* AMBNCapturingApplicationDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC0368D98E4475503EDA1AD4 /* AMBNRecordingOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036B6EA0793D270FC02361 /* AMBNRecordingOverlayView.m */; };
+		AC03691A50C726DAFE309EA4 /* AMBNSessionCreateResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036E89126F06A47F0342C2 /* AMBNSessionCreateResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036994E5F9C9968B1A1C1E /* AMBNServer.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036D6114FC0426C78ED620 /* AMBNServer.m */; };
+		AC036A636FB37814FE7B8E98 /* AMBNTouchCollectorDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036E816BDDBEF59B2665B4 /* AMBNTouchCollectorDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036AECDCD9CEACFC584A58 /* AMBNCompareFaceResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0364382C0D5492E58D5813 /* AMBNCompareFaceResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036AF046E8FBAA2636295F /* AMBNTouch.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0364440888C0911906F1DC /* AMBNTouch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036AF177AC00E1369C6323 /* AMBNEnrollFaceResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036FA2CEE832B3E31CAB7D /* AMBNEnrollFaceResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036B145258B27A4D50EE3F /* AMBNRecordingOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC0368DF2262F07123D2BD59 /* AMBNRecordingOverlayView.xib */; };
+		AC036B9AFC238EA72CE29AEB /* AMBNFaceRecordingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0362A0433948EC0CB3A816 /* AMBNFaceRecordingViewController.m */; };
+		AC036BA144080340A1E2AF5A /* AMBNCapturingApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0367D37E2B02BD53852582 /* AMBNCapturingApplication.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036BA20CC56199D5BEA882 /* icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC03636C02DEF3380B620A3C /* icons.xcassets */; };
+		AC036BFDB00EC8ACDE766EDA /* AMBNImageAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036C5AF3B33CE12DE95DA5 /* AMBNImageAdapter.m */; };
+		AC036C8D87661B2EB1A24C14 /* AMBNCameraOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03600885AA4FC44D548E15 /* AMBNCameraOverlay.m */; };
+		AC036CBE706939DBAFAA01DA /* AMBNNetworkClient.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03618548F6B9804E486679 /* AMBNNetworkClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036CD4961D820BBF83AB46 /* AMBNHashGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0361F9CE247F00B24001E9 /* AMBNHashGenerator.m */; };
+		AC036D0DF0EF0BE7B0ED7877 /* AMBNCallResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03640932831FB6764D0CC2 /* AMBNCallResult.m */; };
+		AC036D95E7C3C2540D1A287C /* AMBNSessionCreateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0361137699010E833B0E36 /* AMBNSessionCreateResult.m */; };
+		AC036DF9F19B8C2A644FBC88 /* AMBNAuthenticateFaceResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03606B5ABD79D9116AED75 /* AMBNAuthenticateFaceResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036DFB5DC6E4A85DC0AC6F /* AMBNCallResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0361E796D727CB038F381A /* AMBNCallResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036E10B2F39E202D91EDA0 /* AMBNBehaviouralResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036144AF2F57DCCC666109 /* AMBNBehaviouralResult.m */; };
+		AC036E427411F862B2D82038 /* AMBNCaptureSessionConfigurator.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0361C65B8E546BE7D5EA72 /* AMBNCaptureSessionConfigurator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036EF90222B26233C768FE /* AMBNAccelerometerCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03676A6C93999749F7AEF3 /* AMBNAccelerometerCollector.m */; };
+		AC036F228B04D5333A2A9E80 /* AMBNTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036AD8F62AA3767926CAB8 /* AMBNTouch.m */; };
+		AC036F850458FACD5E279F16 /* AMBNViewIdChainExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03629B2D46C9781F2E7520 /* AMBNViewIdChainExtractor.m */; };
+		AC036F88EA3D2B53B2F4F5FC /* AMBNNetworkClient.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036626D8BDA94918547719 /* AMBNNetworkClient.m */; };
+		AC036F8F7C638AFF9EF2FCA7 /* AMBNImageAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03624C7FE254A12B2A3E3A /* AMBNImageAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036F9A084F8AEA01FD98B0 /* AMBNManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0369870BB6F278E4D9F9D9 /* AMBNManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036FAA08ACEC8A54401216 /* AMBNRecordingOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0368F971862583A0650EEA /* AMBNRecordingOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,25 +110,6 @@
 			dstPath = "include/${PRODUCT_NAME}";
 			dstSubfolderSpec = 16;
 			files = (
-				D5C3D2A21CBBC0F400EDA479 /* AMBNFaceRecordingViewControllerDelegate.h in Copy Files */,
-				D5C3D29F1CB7F0EC00EDA479 /* AMBNCaptureSessionConfigurator.h in Copy Files */,
-				D5C3D2971CB7E3A800EDA479 /* AMBNCameraPreview.h in Copy Files */,
-				D5802B5A1CB554B600E95EFD /* AMBNRecordingOverlayView.h in Copy Files */,
-				D57536F31CB5394700AB67C7 /* AMBNFaceRecordingViewController.h in Copy Files */,
-				0CFEF38D1CA36688001BC54A /* AMBNImageAdapter.h in Copy Files */,
-				0C7991221C9B32D300E47512 /* AMBNServer.h in Copy Files */,
-				0CDB935E1C98628200BEE7B3 /* AMBNCameraOverlayDelegate.h in Copy Files */,
-				0CDB935A1C98528100BEE7B3 /* AMBNFaceCaptureManager.h in Copy Files */,
-				0CC5BCC31C713582008EC7F6 /* AMBNTextEvent.h in Copy Files */,
-				0C776A901C5FE052009BFDFD /* AMBNTouch.h in Copy Files */,
-				0C776A8D1C5FDFCE009BFDFD /* AMBNTouchCollectorDelegate.h in Copy Files */,
-				0C776A8E1C5FDFCE009BFDFD /* AMBNTextInputCollectorDelegate.h in Copy Files */,
-				0C776A8A1C5FDF51009BFDFD /* AMBNCapturingApplicationDelegate.h in Copy Files */,
-				0C776A731C5FDD18009BFDFD /* AMBNResult.h in Copy Files */,
-				0C776A741C5FDD18009BFDFD /* AMBNPrivacyGuard.h in Copy Files */,
-				0C776A751C5FDD18009BFDFD /* AMBNCapturingApplication.h in Copy Files */,
-				0C776A761C5FDD18009BFDFD /* AMBNManager.h in Copy Files */,
-				0C776A591C5FDAF7009BFDFD /* AimBrainSDK.h in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,54 +126,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0C0CAD2E1C24185500A42D08 /* AMBNTouchCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNTouchCollector.h; path = Code/AMBNTouchCollector.h; sourceTree = "<group>"; };
-		0C0CAD2F1C24185500A42D08 /* AMBNTouchCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNTouchCollector.m; path = Code/AMBNTouchCollector.m; sourceTree = "<group>"; };
-		0C0CAD311C241B8600A42D08 /* AMBNTouchCollectorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNTouchCollectorDelegate.h; path = Code/AMBNTouchCollectorDelegate.h; sourceTree = "<group>"; };
-		0C1265CA1C4C561F00B86EF8 /* AMBNViewIdChainExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNViewIdChainExtractor.h; path = Code/AMBNViewIdChainExtractor.h; sourceTree = "<group>"; };
-		0C1265CB1C4C561F00B86EF8 /* AMBNViewIdChainExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNViewIdChainExtractor.m; path = Code/AMBNViewIdChainExtractor.m; sourceTree = "<group>"; };
-		0C1265D41C4D0BD000B86EF8 /* AMBNResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNResult.h; path = Code/AMBNResult.h; sourceTree = "<group>"; };
-		0C1265D51C4D0BD000B86EF8 /* AMBNResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNResult.m; path = Code/AMBNResult.m; sourceTree = "<group>"; };
-		0C31D2401C1EF4B70009F2D6 /* AMBNCapturingApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNCapturingApplication.m; path = Code/AMBNCapturingApplication.m; sourceTree = "<group>"; };
-		0C31D2411C1EF4B70009F2D6 /* AMBNBehaviouralJSONComposer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNBehaviouralJSONComposer.m; path = Code/AMBNBehaviouralJSONComposer.m; sourceTree = "<group>"; };
-		0C31D2421C1EF4B70009F2D6 /* AMBNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNManager.m; path = Code/AMBNManager.m; sourceTree = "<group>"; };
-		0C31D2431C1EF4B70009F2D6 /* AMBNServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNServer.m; path = Code/AMBNServer.m; sourceTree = "<group>"; };
-		0C31D2441C1EF4B70009F2D6 /* AMBNTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNTouch.m; path = Code/AMBNTouch.m; sourceTree = "<group>"; };
-		0C31D2451C1EF4B70009F2D6 /* AMBNAcceleration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNAcceleration.m; path = Code/AMBNAcceleration.m; sourceTree = "<group>"; };
-		0C31D2461C1EF4B70009F2D6 /* AMBNTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNTouch.h; path = Code/AMBNTouch.h; sourceTree = "<group>"; };
-		0C31D2471C1EF4B70009F2D6 /* AMBNAcceleration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNAcceleration.h; path = Code/AMBNAcceleration.h; sourceTree = "<group>"; };
-		0C31D2481C1EF4B70009F2D6 /* AMBNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNManager.h; path = Code/AMBNManager.h; sourceTree = "<group>"; };
-		0C31D2491C1EF4B70009F2D6 /* AMBNBehaviouralJSONComposer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNBehaviouralJSONComposer.h; path = Code/AMBNBehaviouralJSONComposer.h; sourceTree = "<group>"; };
-		0C31D24A1C1EF4B70009F2D6 /* AMBNCapturingApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNCapturingApplication.h; path = Code/AMBNCapturingApplication.h; sourceTree = "<group>"; };
-		0C31D24B1C1EF4B70009F2D6 /* AMBNServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNServer.h; path = Code/AMBNServer.h; sourceTree = "<group>"; };
-		0C31D2541C204C560009F2D6 /* AMBNAccelerometerCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNAccelerometerCollector.h; path = Code/AMBNAccelerometerCollector.h; sourceTree = "<group>"; };
-		0C31D2551C204C560009F2D6 /* AMBNAccelerometerCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNAccelerometerCollector.m; path = Code/AMBNAccelerometerCollector.m; sourceTree = "<group>"; };
-		0C683F181C5911CD00514BC0 /* AMBNHashGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNHashGenerator.h; path = Code/AMBNHashGenerator.h; sourceTree = "<group>"; };
-		0C683F191C5911CD00514BC0 /* AMBNHashGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNHashGenerator.m; path = Code/AMBNHashGenerator.m; sourceTree = "<group>"; };
 		0C776A561C5FDAF6009BFDFD /* libAimBrainSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAimBrainSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		0C776A581C5FDAF7009BFDFD /* AimBrainSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AimBrainSDK.h; sourceTree = "<group>"; };
-		0CD146C61C2193E700F56797 /* AMBNTextInputCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNTextInputCollector.h; path = Code/AMBNTextInputCollector.h; sourceTree = "<group>"; };
-		0CD146C71C2193E700F56797 /* AMBNTextInputCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNTextInputCollector.m; path = Code/AMBNTextInputCollector.m; sourceTree = "<group>"; };
-		0CD146CF1C21AB2F00F56797 /* AMBNTextEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNTextEvent.h; path = Code/AMBNTextEvent.h; sourceTree = "<group>"; };
-		0CD146D01C21AB2F00F56797 /* AMBNTextEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNTextEvent.m; path = Code/AMBNTextEvent.m; sourceTree = "<group>"; };
-		0CD146D21C22F11900F56797 /* AMBNPrivacyGuard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNPrivacyGuard.h; path = Code/AMBNPrivacyGuard.h; sourceTree = "<group>"; };
-		0CD146D31C22F11900F56797 /* AMBNPrivacyGuard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNPrivacyGuard.m; path = Code/AMBNPrivacyGuard.m; sourceTree = "<group>"; };
-		0CD146DD1C2302C700F56797 /* AMBNTextInputCollectorDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AMBNTextInputCollectorDelegate.h; path = Code/AMBNTextInputCollectorDelegate.h; sourceTree = "<group>"; };
-		0CD146DE1C23070700F56797 /* AMBNCapturingApplicationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AMBNCapturingApplicationDelegate.h; path = Code/AMBNCapturingApplicationDelegate.h; sourceTree = "<group>"; };
-		0CDB931D1C9812D200BEE7B3 /* AMBNCameraOverlay.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMBNCameraOverlay.xib; sourceTree = "<group>"; };
-		0CDB931F1C98168A00BEE7B3 /* AMBNCameraOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNCameraOverlay.h; path = Code/AMBNCameraOverlay.h; sourceTree = "<group>"; };
-		0CDB93201C98168A00BEE7B3 /* AMBNCameraOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNCameraOverlay.m; path = Code/AMBNCameraOverlay.m; sourceTree = "<group>"; };
-		0CDB93221C98184900BEE7B3 /* AMBNFaceCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNFaceCaptureManager.h; path = Code/AMBNFaceCaptureManager.h; sourceTree = "<group>"; };
-		0CDB93231C98184900BEE7B3 /* AMBNFaceCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNFaceCaptureManager.m; path = Code/AMBNFaceCaptureManager.m; sourceTree = "<group>"; };
 		0CDB93431C9822A100BEE7B3 /* face.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = face.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
-		0CDB93451C9822A100BEE7B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0CDB93511C9828BA00BEE7B3 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		0CDB935D1C9859C700BEE7B3 /* AMBNCameraOverlayDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AMBNCameraOverlayDelegate.h; path = Code/AMBNCameraOverlayDelegate.h; sourceTree = "<group>"; };
-		0CDB935F1C98C3E300BEE7B3 /* icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = icons.xcassets; sourceTree = "<group>"; };
-		0CFEF38A1CA363DF001BC54A /* AMBNImageAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AMBNImageAdapter.h; path = Code/AMBNImageAdapter.h; sourceTree = "<group>"; };
-		0CFEF38B1CA363DF001BC54A /* AMBNImageAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNImageAdapter.m; path = Code/AMBNImageAdapter.m; sourceTree = "<group>"; };
 		165156867B5278AEC6AC9D7B /* Pods-AimBrain_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AimBrain_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AimBrain_Tests/Pods-AimBrain_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		458B9E0F699A65148838A65E /* Pods-AimBrain_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AimBrain_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AimBrain_Tests/Pods-AimBrain_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		4E1926851CC4F6DB006E86FF /* AMBNRecordingOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNRecordingOverlayView.m; path = Code/AMBNRecordingOverlayView.m; sourceTree = "<group>"; };
 		560D483973056D39BD964AB1 /* Pods-AimBrain_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AimBrain_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AimBrain_Example/Pods-AimBrain_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -210,20 +140,76 @@
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
 		708073B341E4EE09FF8D26C0 /* Pods-AimBrain_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AimBrain_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AimBrain_Example/Pods-AimBrain_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		73ABBCA5A3FAA2C18AA569AF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		B2CDA9FC9BF97B4A04DF18C7 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AC03600885AA4FC44D548E15 /* AMBNCameraOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNCameraOverlay.m; sourceTree = "<group>"; };
+		AC036069ACB9675CC9A763E0 /* AMBNServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNServer.h; sourceTree = "<group>"; };
+		AC03606B5ABD79D9116AED75 /* AMBNAuthenticateFaceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNAuthenticateFaceResult.h; sourceTree = "<group>"; };
+		AC0361137699010E833B0E36 /* AMBNSessionCreateResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNSessionCreateResult.m; sourceTree = "<group>"; };
+		AC036144AF2F57DCCC666109 /* AMBNBehaviouralResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNBehaviouralResult.m; sourceTree = "<group>"; };
+		AC03618548F6B9804E486679 /* AMBNNetworkClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNNetworkClient.h; sourceTree = "<group>"; };
+		AC0361B125C4873607B5C371 /* AMBNTouchCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNTouchCollector.m; sourceTree = "<group>"; };
+		AC0361C65B8E546BE7D5EA72 /* AMBNCaptureSessionConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCaptureSessionConfigurator.h; sourceTree = "<group>"; };
+		AC0361E796D727CB038F381A /* AMBNCallResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCallResult.h; sourceTree = "<group>"; };
+		AC0361F9CE247F00B24001E9 /* AMBNHashGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNHashGenerator.m; sourceTree = "<group>"; };
+		AC03624C7FE254A12B2A3E3A /* AMBNImageAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNImageAdapter.h; sourceTree = "<group>"; };
+		AC036253E50499B0D20D8F51 /* AMBNPrivacyGuard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNPrivacyGuard.h; sourceTree = "<group>"; };
+		AC03628CC21B74CA6D42611C /* AMBNFaceRecordingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AMBNFaceRecordingViewController.xib; sourceTree = "<group>"; };
+		AC03629B2D46C9781F2E7520 /* AMBNViewIdChainExtractor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNViewIdChainExtractor.m; sourceTree = "<group>"; };
+		AC0362A0433948EC0CB3A816 /* AMBNFaceRecordingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNFaceRecordingViewController.m; sourceTree = "<group>"; };
+		AC03636C02DEF3380B620A3C /* icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = icons.xcassets; sourceTree = "<group>"; };
+		AC0363916DE51B8C8A4A0C37 /* AMBNTextEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNTextEvent.m; sourceTree = "<group>"; };
+		AC0363F6441DFF3565703790 /* AMBNFaceRecordingViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNFaceRecordingViewControllerDelegate.h; sourceTree = "<group>"; };
+		AC03640932831FB6764D0CC2 /* AMBNCallResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNCallResult.m; sourceTree = "<group>"; };
+		AC0364382C0D5492E58D5813 /* AMBNCompareFaceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCompareFaceResult.h; sourceTree = "<group>"; };
+		AC0364440888C0911906F1DC /* AMBNTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNTouch.h; sourceTree = "<group>"; };
+		AC036515995D53DEE8571204 /* AMBNFaceCaptureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNFaceCaptureManager.h; sourceTree = "<group>"; };
+		AC0365571F50BFD4CF57E8D2 /* AMBNSerializedRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNSerializedRequest.h; sourceTree = "<group>"; };
+		AC03657A89EBDC1FB1825A78 /* AimBrainSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AimBrainSDK.h; sourceTree = "<group>"; };
+		AC0365D3279924F00C7E93D1 /* AMBNCameraPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNCameraPreview.m; sourceTree = "<group>"; };
+		AC0365D446C8260F5BD4843A /* AMBNCaptureSessionConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNCaptureSessionConfigurator.m; sourceTree = "<group>"; };
+		AC0365F29747D3ABF90BF213 /* AMBNCapturingApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCapturingApplicationDelegate.h; sourceTree = "<group>"; };
+		AC036626D8BDA94918547719 /* AMBNNetworkClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNNetworkClient.m; sourceTree = "<group>"; };
+		AC03662DAD029B91FA5F6AFE /* AMBNPrivacyGuard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNPrivacyGuard.m; sourceTree = "<group>"; };
+		AC0366987C48F5E47F0BEEED /* AMBNAcceleration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNAcceleration.m; sourceTree = "<group>"; };
+		AC03674ACCE6A60BACFAFB0B /* AMBNBehaviouralResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNBehaviouralResult.h; sourceTree = "<group>"; };
+		AC03676A6C93999749F7AEF3 /* AMBNAccelerometerCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNAccelerometerCollector.m; sourceTree = "<group>"; };
+		AC03679CEA37D2E4E8ABA04A /* AMBNFaceCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNFaceCaptureManager.m; sourceTree = "<group>"; };
+		AC0367BF065B781DAC77E22D /* AMBNAccelerometerCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNAccelerometerCollector.h; sourceTree = "<group>"; };
+		AC0367D37E2B02BD53852582 /* AMBNCapturingApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCapturingApplication.h; sourceTree = "<group>"; };
+		AC0368DF2262F07123D2BD59 /* AMBNRecordingOverlayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AMBNRecordingOverlayView.xib; sourceTree = "<group>"; };
+		AC0368F0AFDA1F16A294FB99 /* AMBNAuthenticateFaceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNAuthenticateFaceResult.m; sourceTree = "<group>"; };
+		AC0368F971862583A0650EEA /* AMBNRecordingOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNRecordingOverlayView.h; sourceTree = "<group>"; };
+		AC036914EB2CA405426EF3B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
+		AC0369870BB6F278E4D9F9D9 /* AMBNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNManager.h; sourceTree = "<group>"; };
+		AC0369B5A5B99ABB14B261BC /* AMBNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNManager.m; sourceTree = "<group>"; };
+		AC0369C600A6BF0F9080AC72 /* AMBNCameraOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCameraOverlay.h; sourceTree = "<group>"; };
+		AC036A2E11557CFF2D6C3E53 /* AMBNCameraOverlay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AMBNCameraOverlay.xib; sourceTree = "<group>"; };
+		AC036A681E43CEFA2B8246A6 /* AMBNFaceRecordingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNFaceRecordingViewController.h; sourceTree = "<group>"; };
+		AC036AC04A55EC73900A5851 /* AMBNTextInputCollectorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNTextInputCollectorDelegate.h; sourceTree = "<group>"; };
+		AC036AD8F62AA3767926CAB8 /* AMBNTouch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNTouch.m; sourceTree = "<group>"; };
+		AC036AED556C3150B73931E4 /* AMBNCameraOverlayDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCameraOverlayDelegate.h; sourceTree = "<group>"; };
+		AC036B20CA0B81BDB011F264 /* AMBNViewIdChainExtractor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNViewIdChainExtractor.h; sourceTree = "<group>"; };
+		AC036B6EA0793D270FC02361 /* AMBNRecordingOverlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNRecordingOverlayView.m; sourceTree = "<group>"; };
+		AC036B82199A123931927124 /* AMBNAcceleration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNAcceleration.h; sourceTree = "<group>"; };
+		AC036BE2E339A5034C16C311 /* AMBNTextEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNTextEvent.h; sourceTree = "<group>"; };
+		AC036C0C30065ACC4C39DC2F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		AC036C5AF3B33CE12DE95DA5 /* AMBNImageAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNImageAdapter.m; sourceTree = "<group>"; };
+		AC036CC80F153EEDD316464F /* AMBNTextInputCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNTextInputCollector.h; sourceTree = "<group>"; };
+		AC036CDFE7FBE2D0F774D8CC /* AMBNTouchCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNTouchCollector.h; sourceTree = "<group>"; };
+		AC036D6114FC0426C78ED620 /* AMBNServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNServer.m; sourceTree = "<group>"; };
+		AC036D87019704D2491784CA /* AMBNHashGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNHashGenerator.h; sourceTree = "<group>"; };
+		AC036DC63C2760CB5ED4772B /* AMBNCompareFaceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNCompareFaceResult.m; sourceTree = "<group>"; };
+		AC036E110B827A9B52450B71 /* AMBNCapturingApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNCapturingApplication.m; sourceTree = "<group>"; };
+		AC036E21CAC635FB7C574951 /* AMBNSerializedRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNSerializedRequest.m; sourceTree = "<group>"; };
+		AC036E816BDDBEF59B2665B4 /* AMBNTouchCollectorDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNTouchCollectorDelegate.h; sourceTree = "<group>"; };
+		AC036E89126F06A47F0342C2 /* AMBNSessionCreateResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNSessionCreateResult.h; sourceTree = "<group>"; };
+		AC036EA20E7880FB81CF7FEF /* AMBNResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNResult.h; sourceTree = "<group>"; };
+		AC036EBD0C91D1DD06476033 /* AMBNResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNResult.m; sourceTree = "<group>"; };
+		AC036EDB7B25CDCAF1096FA6 /* AMBNCameraPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCameraPreview.h; sourceTree = "<group>"; };
+		AC036F11EAC3A5966C450E78 /* AMBNEnrollFaceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNEnrollFaceResult.m; sourceTree = "<group>"; };
+		AC036FA2CEE832B3E31CAB7D /* AMBNEnrollFaceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNEnrollFaceResult.h; sourceTree = "<group>"; };
+		AC036FBBA7CD800925FB59E7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		AC036FFF2248796CE2293CFB /* AMBNTextInputCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNTextInputCollector.m; sourceTree = "<group>"; };
 		BBA3DCD95BBE150DB516F111 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		D5802B541CB5519A00E95EFD /* AMBNRecordingOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMBNRecordingOverlayView.xib; sourceTree = "<group>"; };
-		D5802B561CB553CA00E95EFD /* AMBNRecordingOverlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AMBNRecordingOverlayView.h; path = Code/AMBNRecordingOverlayView.h; sourceTree = "<group>"; };
-		D5C3D2941CB7DE3D00EDA479 /* AMBNCameraPreview.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AMBNCameraPreview.h; path = Code/AMBNCameraPreview.h; sourceTree = "<group>"; };
-		D5C3D2951CB7DE6700EDA479 /* AMBNCameraPreview.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNCameraPreview.m; path = Code/AMBNCameraPreview.m; sourceTree = "<group>"; };
-		D5C3D29C1CB7E51A00EDA479 /* AMBNCaptureSessionConfigurator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AMBNCaptureSessionConfigurator.h; path = Code/AMBNCaptureSessionConfigurator.h; sourceTree = "<group>"; };
-		D5C3D29D1CB7E53000EDA479 /* AMBNCaptureSessionConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNCaptureSessionConfigurator.m; path = Code/AMBNCaptureSessionConfigurator.m; sourceTree = "<group>"; };
-		D5C3D2A11CBBB56A00EDA479 /* AMBNFaceRecordingViewControllerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AMBNFaceRecordingViewControllerDelegate.h; path = Code/AMBNFaceRecordingViewControllerDelegate.h; sourceTree = "<group>"; };
-		D5D5A6EB1CB5327B00B6CF1D /* AMBNFaceRecordingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMBNFaceRecordingViewController.xib; sourceTree = "<group>"; };
-		D5D5A6ED1CB5354800B6CF1D /* AMBNFaceRecordingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNFaceRecordingViewController.m; path = Code/AMBNFaceRecordingViewController.m; sourceTree = "<group>"; };
-		D5D5A6EF1CB5356100B6CF1D /* AMBNFaceRecordingViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AMBNFaceRecordingViewController.h; path = Code/AMBNFaceRecordingViewController.h; sourceTree = "<group>"; };
-		D97494F9275F8A4CD4B4E95C /* AimBrain.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = AimBrain.podspec; sourceTree = "<group>"; };
 		F7935325B7E0E4195B3417E0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -246,147 +232,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0C1265C71C4C55A000B86EF8 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				0C1265CA1C4C561F00B86EF8 /* AMBNViewIdChainExtractor.h */,
-				0C1265CB1C4C561F00B86EF8 /* AMBNViewIdChainExtractor.m */,
-				0C683F181C5911CD00514BC0 /* AMBNHashGenerator.h */,
-				0C683F191C5911CD00514BC0 /* AMBNHashGenerator.m */,
-			);
-			name = Helpers;
-			sourceTree = "<group>";
-		};
-		0C1265D01C4D0B8D00B86EF8 /* Result */ = {
-			isa = PBXGroup;
-			children = (
-				0C1265D41C4D0BD000B86EF8 /* AMBNResult.h */,
-				0C1265D51C4D0BD000B86EF8 /* AMBNResult.m */,
-			);
-			name = Result;
-			sourceTree = "<group>";
-		};
-		0C57FA421C96F82E00489F95 /* Face */ = {
-			isa = PBXGroup;
-			children = (
-				0CDB931F1C98168A00BEE7B3 /* AMBNCameraOverlay.h */,
-				0CDB93201C98168A00BEE7B3 /* AMBNCameraOverlay.m */,
-				0CDB935D1C9859C700BEE7B3 /* AMBNCameraOverlayDelegate.h */,
-				0CDB93221C98184900BEE7B3 /* AMBNFaceCaptureManager.h */,
-				0CDB93231C98184900BEE7B3 /* AMBNFaceCaptureManager.m */,
-				0CFEF38A1CA363DF001BC54A /* AMBNImageAdapter.h */,
-				0CFEF38B1CA363DF001BC54A /* AMBNImageAdapter.m */,
-				D5D5A6ED1CB5354800B6CF1D /* AMBNFaceRecordingViewController.m */,
-				D5D5A6EF1CB5356100B6CF1D /* AMBNFaceRecordingViewController.h */,
-				D5802B561CB553CA00E95EFD /* AMBNRecordingOverlayView.h */,
-				4E1926851CC4F6DB006E86FF /* AMBNRecordingOverlayView.m */,
-				D5C3D2941CB7DE3D00EDA479 /* AMBNCameraPreview.h */,
-				D5C3D2951CB7DE6700EDA479 /* AMBNCameraPreview.m */,
-				D5C3D29C1CB7E51A00EDA479 /* AMBNCaptureSessionConfigurator.h */,
-				D5C3D29D1CB7E53000EDA479 /* AMBNCaptureSessionConfigurator.m */,
-				D5C3D2A11CBBB56A00EDA479 /* AMBNFaceRecordingViewControllerDelegate.h */,
-			);
-			name = Face;
-			sourceTree = "<group>";
-		};
-		0C776A571C5FDAF7009BFDFD /* AimBrainSDK */ = {
-			isa = PBXGroup;
-			children = (
-				0C776A581C5FDAF7009BFDFD /* AimBrainSDK.h */,
-			);
-			path = AimBrainSDK;
-			sourceTree = "<group>";
-		};
-		0CD146D51C23007500F56797 /* Text events */ = {
-			isa = PBXGroup;
-			children = (
-				0CD146C61C2193E700F56797 /* AMBNTextInputCollector.h */,
-				0CD146C71C2193E700F56797 /* AMBNTextInputCollector.m */,
-				0CD146CF1C21AB2F00F56797 /* AMBNTextEvent.h */,
-				0CD146D01C21AB2F00F56797 /* AMBNTextEvent.m */,
-				0CD146DD1C2302C700F56797 /* AMBNTextInputCollectorDelegate.h */,
-			);
-			name = "Text events";
-			sourceTree = "<group>";
-		};
-		0CD146D61C23009900F56797 /* Accelerometer events */ = {
-			isa = PBXGroup;
-			children = (
-				0C31D2541C204C560009F2D6 /* AMBNAccelerometerCollector.h */,
-				0C31D2551C204C560009F2D6 /* AMBNAccelerometerCollector.m */,
-				0C31D2471C1EF4B70009F2D6 /* AMBNAcceleration.h */,
-				0C31D2451C1EF4B70009F2D6 /* AMBNAcceleration.m */,
-			);
-			name = "Accelerometer events";
-			sourceTree = "<group>";
-		};
-		0CD146D71C2300C500F56797 /* Touch events */ = {
-			isa = PBXGroup;
-			children = (
-				0C31D2401C1EF4B70009F2D6 /* AMBNCapturingApplication.m */,
-				0C31D24A1C1EF4B70009F2D6 /* AMBNCapturingApplication.h */,
-				0C31D2441C1EF4B70009F2D6 /* AMBNTouch.m */,
-				0C31D2461C1EF4B70009F2D6 /* AMBNTouch.h */,
-				0CD146DE1C23070700F56797 /* AMBNCapturingApplicationDelegate.h */,
-				0C0CAD2E1C24185500A42D08 /* AMBNTouchCollector.h */,
-				0C0CAD2F1C24185500A42D08 /* AMBNTouchCollector.m */,
-				0C0CAD311C241B8600A42D08 /* AMBNTouchCollectorDelegate.h */,
-			);
-			name = "Touch events";
-			sourceTree = "<group>";
-		};
-		0CD146D81C2300EA00F56797 /* Remote API */ = {
-			isa = PBXGroup;
-			children = (
-				0C31D2411C1EF4B70009F2D6 /* AMBNBehaviouralJSONComposer.m */,
-				0C31D2491C1EF4B70009F2D6 /* AMBNBehaviouralJSONComposer.h */,
-				0C31D2431C1EF4B70009F2D6 /* AMBNServer.m */,
-				0C31D24B1C1EF4B70009F2D6 /* AMBNServer.h */,
-			);
-			name = "Remote API";
-			sourceTree = "<group>";
-		};
-		0CD146D91C23011500F56797 /* Privacy */ = {
-			isa = PBXGroup;
-			children = (
-				0CD146D21C22F11900F56797 /* AMBNPrivacyGuard.h */,
-				0CD146D31C22F11900F56797 /* AMBNPrivacyGuard.m */,
-			);
-			name = Privacy;
-			sourceTree = "<group>";
-		};
-		0CDB93441C9822A100BEE7B3 /* Face assets */ = {
-			isa = PBXGroup;
-			children = (
-				0CDB935F1C98C3E300BEE7B3 /* icons.xcassets */,
-				0CDB931D1C9812D200BEE7B3 /* AMBNCameraOverlay.xib */,
-				0CDB93451C9822A100BEE7B3 /* Info.plist */,
-				D5D5A6EB1CB5327B00B6CF1D /* AMBNFaceRecordingViewController.xib */,
-				D5802B541CB5519A00E95EFD /* AMBNRecordingOverlayView.xib */,
-			);
-			path = "Face assets";
-			sourceTree = "<group>";
-		};
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
-				0C57FA421C96F82E00489F95 /* Face */,
-				0C1265D01C4D0B8D00B86EF8 /* Result */,
-				0C1265C71C4C55A000B86EF8 /* Helpers */,
-				0CD146D91C23011500F56797 /* Privacy */,
-				0CD146D81C2300EA00F56797 /* Remote API */,
-				0CD146D71C2300C500F56797 /* Touch events */,
-				0CD146D61C23009900F56797 /* Accelerometer events */,
-				0CD146D51C23007500F56797 /* Text events */,
-				0C31D2421C1EF4B70009F2D6 /* AMBNManager.m */,
-				0C31D2481C1EF4B70009F2D6 /* AMBNManager.h */,
-				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
 				6003F5B5195388D20070C39A /* Tests */,
-				0C776A571C5FDAF7009BFDFD /* AimBrainSDK */,
-				0CDB93441C9822A100BEE7B3 /* Face assets */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				8C763581D06B55E42A89B49E /* Pods */,
+				AC03613BDCFEB0F78BA5A181 /* Source */,
+				AC036B14CF13129142F2F8BC /* Resources */,
+				AC036AFA4B3D699D6D0F4E02 /* Supporting Files */,
+				AC036C0C30065ACC4C39DC2F /* LICENSE */,
+				AC036FBBA7CD800925FB59E7 /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -429,16 +286,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
-			isa = PBXGroup;
-			children = (
-				D97494F9275F8A4CD4B4E95C /* AimBrain.podspec */,
-				B2CDA9FC9BF97B4A04DF18C7 /* README.md */,
-				73ABBCA5A3FAA2C18AA569AF /* LICENSE */,
-			);
-			name = "Podspec Metadata";
-			sourceTree = "<group>";
-		};
 		8C763581D06B55E42A89B49E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,6 +299,158 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		AC03613BDCFEB0F78BA5A181 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				AC0363F20E865DC08283CF2E /* Helpers */,
+				AC03635339B1511F1342C098 /* Face */,
+				AC036D77476C2F3D621931D6 /* Privacy */,
+				AC0365EB1DB2FD7B597FE728 /* Result */,
+				AC0361FF4A55953A4C069E43 /* Remote API */,
+				AC036868348A064E18DC28B2 /* Text events */,
+				AC036712903213461DF4708D /* Touch events */,
+				AC0369870BB6F278E4D9F9D9 /* AMBNManager.h */,
+				AC0369B5A5B99ABB14B261BC /* AMBNManager.m */,
+				AC036D908286D593607FC699 /* Accelerometer events */,
+				AC03657A89EBDC1FB1825A78 /* AimBrainSDK.h */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		AC0361FF4A55953A4C069E43 /* Remote API */ = {
+			isa = PBXGroup;
+			children = (
+				AC03618548F6B9804E486679 /* AMBNNetworkClient.h */,
+				AC036069ACB9675CC9A763E0 /* AMBNServer.h */,
+				AC036626D8BDA94918547719 /* AMBNNetworkClient.m */,
+				AC036D6114FC0426C78ED620 /* AMBNServer.m */,
+			);
+			path = "Remote API";
+			sourceTree = "<group>";
+		};
+		AC03635339B1511F1342C098 /* Face */ = {
+			isa = PBXGroup;
+			children = (
+				AC036515995D53DEE8571204 /* AMBNFaceCaptureManager.h */,
+				AC0365D3279924F00C7E93D1 /* AMBNCameraPreview.m */,
+				AC036EDB7B25CDCAF1096FA6 /* AMBNCameraPreview.h */,
+				AC0363F6441DFF3565703790 /* AMBNFaceRecordingViewControllerDelegate.h */,
+				AC0369C600A6BF0F9080AC72 /* AMBNCameraOverlay.h */,
+				AC03624C7FE254A12B2A3E3A /* AMBNImageAdapter.h */,
+				AC0368F971862583A0650EEA /* AMBNRecordingOverlayView.h */,
+				AC03600885AA4FC44D548E15 /* AMBNCameraOverlay.m */,
+				AC036AED556C3150B73931E4 /* AMBNCameraOverlayDelegate.h */,
+				AC036C5AF3B33CE12DE95DA5 /* AMBNImageAdapter.m */,
+				AC036B6EA0793D270FC02361 /* AMBNRecordingOverlayView.m */,
+				AC036A681E43CEFA2B8246A6 /* AMBNFaceRecordingViewController.h */,
+				AC0362A0433948EC0CB3A816 /* AMBNFaceRecordingViewController.m */,
+				AC0365D446C8260F5BD4843A /* AMBNCaptureSessionConfigurator.m */,
+				AC03679CEA37D2E4E8ABA04A /* AMBNFaceCaptureManager.m */,
+				AC0361C65B8E546BE7D5EA72 /* AMBNCaptureSessionConfigurator.h */,
+			);
+			path = Face;
+			sourceTree = "<group>";
+		};
+		AC0363F20E865DC08283CF2E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				AC0361F9CE247F00B24001E9 /* AMBNHashGenerator.m */,
+				AC03629B2D46C9781F2E7520 /* AMBNViewIdChainExtractor.m */,
+				AC036D87019704D2491784CA /* AMBNHashGenerator.h */,
+				AC036B20CA0B81BDB011F264 /* AMBNViewIdChainExtractor.h */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		AC0365EB1DB2FD7B597FE728 /* Result */ = {
+			isa = PBXGroup;
+			children = (
+				AC03606B5ABD79D9116AED75 /* AMBNAuthenticateFaceResult.h */,
+				AC036FA2CEE832B3E31CAB7D /* AMBNEnrollFaceResult.h */,
+				AC0368F0AFDA1F16A294FB99 /* AMBNAuthenticateFaceResult.m */,
+				AC0361137699010E833B0E36 /* AMBNSessionCreateResult.m */,
+				AC036F11EAC3A5966C450E78 /* AMBNEnrollFaceResult.m */,
+				AC03674ACCE6A60BACFAFB0B /* AMBNBehaviouralResult.h */,
+				AC036E21CAC635FB7C574951 /* AMBNSerializedRequest.m */,
+				AC036144AF2F57DCCC666109 /* AMBNBehaviouralResult.m */,
+				AC036DC63C2760CB5ED4772B /* AMBNCompareFaceResult.m */,
+				AC03640932831FB6764D0CC2 /* AMBNCallResult.m */,
+				AC0361E796D727CB038F381A /* AMBNCallResult.h */,
+				AC036E89126F06A47F0342C2 /* AMBNSessionCreateResult.h */,
+				AC036EBD0C91D1DD06476033 /* AMBNResult.m */,
+				AC0365571F50BFD4CF57E8D2 /* AMBNSerializedRequest.h */,
+				AC036EA20E7880FB81CF7FEF /* AMBNResult.h */,
+				AC0364382C0D5492E58D5813 /* AMBNCompareFaceResult.h */,
+			);
+			path = Result;
+			sourceTree = "<group>";
+		};
+		AC036712903213461DF4708D /* Touch events */ = {
+			isa = PBXGroup;
+			children = (
+				AC0361B125C4873607B5C371 /* AMBNTouchCollector.m */,
+				AC0365F29747D3ABF90BF213 /* AMBNCapturingApplicationDelegate.h */,
+				AC036E816BDDBEF59B2665B4 /* AMBNTouchCollectorDelegate.h */,
+				AC0367D37E2B02BD53852582 /* AMBNCapturingApplication.h */,
+				AC0364440888C0911906F1DC /* AMBNTouch.h */,
+				AC036AD8F62AA3767926CAB8 /* AMBNTouch.m */,
+				AC036E110B827A9B52450B71 /* AMBNCapturingApplication.m */,
+				AC036CDFE7FBE2D0F774D8CC /* AMBNTouchCollector.h */,
+			);
+			path = "Touch events";
+			sourceTree = "<group>";
+		};
+		AC036868348A064E18DC28B2 /* Text events */ = {
+			isa = PBXGroup;
+			children = (
+				AC036FFF2248796CE2293CFB /* AMBNTextInputCollector.m */,
+				AC036CC80F153EEDD316464F /* AMBNTextInputCollector.h */,
+				AC036BE2E339A5034C16C311 /* AMBNTextEvent.h */,
+				AC0363916DE51B8C8A4A0C37 /* AMBNTextEvent.m */,
+				AC036AC04A55EC73900A5851 /* AMBNTextInputCollectorDelegate.h */,
+			);
+			path = "Text events";
+			sourceTree = "<group>";
+		};
+		AC036AFA4B3D699D6D0F4E02 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				AC036914EB2CA405426EF3B1 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AC036B14CF13129142F2F8BC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AC03628CC21B74CA6D42611C /* AMBNFaceRecordingViewController.xib */,
+				AC036A2E11557CFF2D6C3E53 /* AMBNCameraOverlay.xib */,
+				AC0368DF2262F07123D2BD59 /* AMBNRecordingOverlayView.xib */,
+				AC03636C02DEF3380B620A3C /* icons.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AC036D77476C2F3D621931D6 /* Privacy */ = {
+			isa = PBXGroup;
+			children = (
+				AC036253E50499B0D20D8F51 /* AMBNPrivacyGuard.h */,
+				AC03662DAD029B91FA5F6AFE /* AMBNPrivacyGuard.m */,
+			);
+			path = Privacy;
+			sourceTree = "<group>";
+		};
+		AC036D908286D593607FC699 /* Accelerometer events */ = {
+			isa = PBXGroup;
+			children = (
+				AC036B82199A123931927124 /* AMBNAcceleration.h */,
+				AC0367BF065B781DAC77E22D /* AMBNAccelerometerCollector.h */,
+				AC03676A6C93999749F7AEF3 /* AMBNAccelerometerCollector.m */,
+				AC0366987C48F5E47F0BEEED /* AMBNAcceleration.m */,
+			);
+			path = "Accelerometer events";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -459,30 +458,34 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F602FAA11D01D0540057469C /* AMBNCameraOverlay.h in Headers */,
-				F602FAA01D01D0540057469C /* AMBNVoiceRecordingViewControllerDelegate.h in Headers */,
-				F602FA9D1D01D0540057469C /* AMBNAudioRecorderConfigurator.h in Headers */,
-				F602FA9E1D01D0540057469C /* AMBNVoiceRecordingManager.h in Headers */,
-				F602FA9F1D01D0540057469C /* AMBNVoiceRecordingViewController.h in Headers */,
-				F602FAA91D01D0540057469C /* AMBNFaceRecordingViewControllerDelegate.h in Headers */,
-				F602FAA81D01D0540057469C /* AMBNCaptureSessionConfigurator.h in Headers */,
-				F602FAA71D01D0540057469C /* AMBNCameraPreview.h in Headers */,
-				F602FAA61D01D0540057469C /* AMBNRecordingOverlayView.h in Headers */,
-				F602FAA51D01D0540057469C /* AMBNFaceRecordingViewController.h in Headers */,
-				F602FAA41D01D0540057469C /* AMBNImageAdapter.h in Headers */,
-				F602FAAF1D01D0540057469C /* AMBNServer.h in Headers */,
-				F602FAA21D01D0540057469C /* AMBNCameraOverlayDelegate.h in Headers */,
-				F602FAA31D01D0540057469C /* AMBNFaceCaptureManager.h in Headers */,
-				F602FAB81D01D0540057469C /* AMBNTextEvent.h in Headers */,
-				F602FAB11D01D0540057469C /* AMBNTouch.h in Headers */,
-				F602FAB41D01D0540057469C /* AMBNTouchCollectorDelegate.h in Headers */,
-				F602FAB91D01D0540057469C /* AMBNTextInputCollectorDelegate.h in Headers */,
-				F602FAB21D01D0540057469C /* AMBNCapturingApplicationDelegate.h in Headers */,
-				F602FAAA1D01D0540057469C /* AMBNResult.h in Headers */,
-				F602FAAD1D01D0540057469C /* AMBNPrivacyGuard.h in Headers */,
-				F602FAB01D01D0540057469C /* AMBNCapturingApplication.h in Headers */,
-				F602FABA1D01D0540057469C /* AMBNManager.h in Headers */,
-				F602FABB1D01D0540057469C /* AimBrainSDK.h in Headers */,
+				AC03604BB4F52EDA9F08C713 /* AMBNFaceCaptureManager.h in Headers */,
+				AC03661E7FA4595C8FC179D2 /* AMBNCameraPreview.h in Headers */,
+				AC0366A0D6D7F85C99DC9378 /* AMBNFaceRecordingViewControllerDelegate.h in Headers */,
+				AC0360F5F328421A03434FAB /* AMBNCameraOverlay.h in Headers */,
+				AC036F8F7C638AFF9EF2FCA7 /* AMBNImageAdapter.h in Headers */,
+				AC036FAA08ACEC8A54401216 /* AMBNRecordingOverlayView.h in Headers */,
+				AC03667096E638D17A192E4B /* AMBNCameraOverlayDelegate.h in Headers */,
+				AC03676EFA4D0E5E87E99319 /* AMBNFaceRecordingViewController.h in Headers */,
+				AC036E427411F862B2D82038 /* AMBNCaptureSessionConfigurator.h in Headers */,
+				AC036292E33B5C9C2ADDEC45 /* AMBNPrivacyGuard.h in Headers */,
+				AC036DF9F19B8C2A644FBC88 /* AMBNAuthenticateFaceResult.h in Headers */,
+				AC036AF177AC00E1369C6323 /* AMBNEnrollFaceResult.h in Headers */,
+				AC0361C82A6D2021CF8F97F3 /* AMBNBehaviouralResult.h in Headers */,
+				AC036DFB5DC6E4A85DC0AC6F /* AMBNCallResult.h in Headers */,
+				AC03691A50C726DAFE309EA4 /* AMBNSessionCreateResult.h in Headers */,
+				AC0360A27D35F2FA1D62CE28 /* AMBNSerializedRequest.h in Headers */,
+				AC036163145CA07821DB88B1 /* AMBNResult.h in Headers */,
+				AC036AECDCD9CEACFC584A58 /* AMBNCompareFaceResult.h in Headers */,
+				AC036CBE706939DBAFAA01DA /* AMBNNetworkClient.h in Headers */,
+				AC0360B538D6562D125E0581 /* AMBNServer.h in Headers */,
+				AC03607A112F3103A833CE0F /* AMBNTextEvent.h in Headers */,
+				AC0360EB1869082E629796B4 /* AMBNTextInputCollectorDelegate.h in Headers */,
+				AC0368C2015C1724A53FB9EB /* AMBNCapturingApplicationDelegate.h in Headers */,
+				AC036A636FB37814FE7B8E98 /* AMBNTouchCollectorDelegate.h in Headers */,
+				AC036BA144080340A1E2AF5A /* AMBNCapturingApplication.h in Headers */,
+				AC036AF046E8FBAA2636295F /* AMBNTouch.h in Headers */,
+				AC036F9A084F8AEA01FD98B0 /* AMBNManager.h in Headers */,
+				AC03662F6D92F9C2F6C4CA0B /* AimBrainSDK.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -581,10 +584,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5802B5B1CB554C300E95EFD /* AMBNRecordingOverlayView.xib in Resources */,
-				D57536F51CB53ABE00AB67C7 /* AMBNFaceRecordingViewController.xib in Resources */,
-				0CDB93611C98C6E400BEE7B3 /* icons.xcassets in Resources */,
-				0CDB93531C982A0600BEE7B3 /* AMBNCameraOverlay.xib in Resources */,
+				AC03630929AB8D65F0E2C01C /* AMBNFaceRecordingViewController.xib in Resources */,
+				AC03619709A9A0A1E5DE6F91 /* AMBNCameraOverlay.xib in Resources */,
+				AC036B145258B27A4D50EE3F /* AMBNRecordingOverlayView.xib in Resources */,
+				AC036BA20CC56199D5BEA882 /* icons.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,27 +627,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D5C3D2A01CB7F0F300EDA479 /* AMBNCaptureSessionConfigurator.m in Sources */,
-				D5C3D2981CB7E3B100EDA479 /* AMBNCameraPreview.m in Sources */,
-				D57536F41CB539BD00AB67C7 /* AMBNFaceRecordingViewController.m in Sources */,
-				0CFEF38E1CA36698001BC54A /* AMBNImageAdapter.m in Sources */,
-				0C776A5F1C5FDB3D009BFDFD /* AMBNResult.m in Sources */,
-				0C776A601C5FDB3D009BFDFD /* AMBNViewIdChainExtractor.m in Sources */,
-				0C776A611C5FDB3D009BFDFD /* AMBNHashGenerator.m in Sources */,
-				0C776A621C5FDB3D009BFDFD /* AMBNPrivacyGuard.m in Sources */,
-				0C776A631C5FDB3D009BFDFD /* AMBNBehaviouralJSONComposer.m in Sources */,
-				0C776A641C5FDB3D009BFDFD /* AMBNServer.m in Sources */,
-				0CDB93211C98168A00BEE7B3 /* AMBNCameraOverlay.m in Sources */,
-				0C776A651C5FDB3D009BFDFD /* AMBNCapturingApplication.m in Sources */,
-				0C776A661C5FDB3D009BFDFD /* AMBNTouch.m in Sources */,
-				0C776A671C5FDB3D009BFDFD /* AMBNTouchCollector.m in Sources */,
-				0C776A681C5FDB3D009BFDFD /* AMBNAccelerometerCollector.m in Sources */,
-				0C776A691C5FDB3D009BFDFD /* AMBNAcceleration.m in Sources */,
-				4E1926861CC4F6DB006E86FF /* AMBNRecordingOverlayView.m in Sources */,
-				0C776A6A1C5FDB3D009BFDFD /* AMBNTextInputCollector.m in Sources */,
-				0C776A6B1C5FDB3D009BFDFD /* AMBNTextEvent.m in Sources */,
-				0C776A6C1C5FDB3D009BFDFD /* AMBNManager.m in Sources */,
-				0CDB93241C98184900BEE7B3 /* AMBNFaceCaptureManager.m in Sources */,
+				AC036CD4961D820BBF83AB46 /* AMBNHashGenerator.m in Sources */,
+				AC036F850458FACD5E279F16 /* AMBNViewIdChainExtractor.m in Sources */,
+				AC036255BD1615F3ADDDB826 /* AMBNCameraPreview.m in Sources */,
+				AC036C8D87661B2EB1A24C14 /* AMBNCameraOverlay.m in Sources */,
+				AC036BFDB00EC8ACDE766EDA /* AMBNImageAdapter.m in Sources */,
+				AC0368D98E4475503EDA1AD4 /* AMBNRecordingOverlayView.m in Sources */,
+				AC036B9AFC238EA72CE29AEB /* AMBNFaceRecordingViewController.m in Sources */,
+				AC03683B97E4FEF9572F6CA3 /* AMBNCaptureSessionConfigurator.m in Sources */,
+				AC03641F8654314A78375019 /* AMBNFaceCaptureManager.m in Sources */,
+				AC0365A36063842139581044 /* AMBNPrivacyGuard.m in Sources */,
+				AC0361B1C88A08234B0F277F /* AMBNAuthenticateFaceResult.m in Sources */,
+				AC036D95E7C3C2540D1A287C /* AMBNSessionCreateResult.m in Sources */,
+				AC0361685F2376E5D56BA467 /* AMBNEnrollFaceResult.m in Sources */,
+				AC0361C7EAFEA79BDCD54BF1 /* AMBNSerializedRequest.m in Sources */,
+				AC036E10B2F39E202D91EDA0 /* AMBNBehaviouralResult.m in Sources */,
+				AC036791644C59B2192D8CC2 /* AMBNCompareFaceResult.m in Sources */,
+				AC036D0DF0EF0BE7B0ED7877 /* AMBNCallResult.m in Sources */,
+				AC0361DBC08A6B4CB5186939 /* AMBNResult.m in Sources */,
+				AC036F88EA3D2B53B2F4F5FC /* AMBNNetworkClient.m in Sources */,
+				AC036994E5F9C9968B1A1C1E /* AMBNServer.m in Sources */,
+				AC0366DD71D055AF3F4C88F7 /* AMBNTextInputCollector.m in Sources */,
+				AC03681B6CA6B0287FFD93CA /* AMBNTextEvent.m in Sources */,
+				AC0363E500C7FE44913A215B /* AMBNTouchCollector.m in Sources */,
+				AC036F228B04D5333A2A9E80 /* AMBNTouch.m in Sources */,
+				AC036124757DECFB73635799 /* AMBNCapturingApplication.m in Sources */,
+				AC036656DA911DA637EF7657 /* AMBNManager.m in Sources */,
+				AC036EF90222B26233C768FE /* AMBNAccelerometerCollector.m in Sources */,
+				AC036098F94F8D084484AFF0 /* AMBNAcceleration.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,7 +745,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Face assets/Info.plist";
+				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -756,7 +766,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Face assets/Info.plist";
+				INFOPLIST_FILE = "Supporting Files/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;

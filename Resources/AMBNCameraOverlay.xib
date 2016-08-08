@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -32,49 +32,10 @@
                         </view>
                         <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g3H-aJ-5am">
                             <rect key="frame" x="98" y="115" width="179" height="269"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dh4-7M-v9C" userLabel="topEyeLine">
-                                    <rect key="frame" x="-30" y="91" width="240" height="1"/>
-                                    <color key="backgroundColor" red="0.79607843140000001" green="0.78039215689999997" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="240" id="ZNi-Gh-vhg"/>
-                                        <constraint firstAttribute="height" constant="1" id="lat-r2-E8z"/>
-                                    </constraints>
-                                </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xdR-g4-Jjh" userLabel="bottomEyeLine">
-                                    <rect key="frame" x="-30" y="127" width="240" height="1"/>
-                                    <color key="backgroundColor" red="0.79607843140000001" green="0.78039215689999997" blue="0.13725490200000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="240" id="CXQ-iX-h8K"/>
-                                        <constraint firstAttribute="height" constant="2" id="u6K-CA-6P7"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="u6K-CA-6P7"/>
-                                        </mask>
-                                    </variation>
-                                </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sl3-rJ-a56" userLabel="topEyeLineSpacing">
-                                    <rect key="frame" x="90" y="0.0" width="0.0" height="91"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" id="4q5-xi-Mbk"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="170" id="3Vu-e6-M6o"/>
-                                <constraint firstItem="dh4-7M-v9C" firstAttribute="top" secondItem="Sl3-rJ-a56" secondAttribute="bottom" id="QSz-cE-efo"/>
-                                <constraint firstItem="Sl3-rJ-a56" firstAttribute="height" secondItem="g3H-aJ-5am" secondAttribute="height" multiplier="0.4" constant="-17" id="WIE-5P-nc0"/>
-                                <constraint firstItem="xdR-g4-Jjh" firstAttribute="centerX" secondItem="dh4-7M-v9C" secondAttribute="centerX" id="Ysc-r2-gwo"/>
-                                <constraint firstItem="Sl3-rJ-a56" firstAttribute="centerX" secondItem="g3H-aJ-5am" secondAttribute="centerX" id="eU7-DU-hEL"/>
-                                <constraint firstItem="xdR-g4-Jjh" firstAttribute="width" secondItem="dh4-7M-v9C" secondAttribute="width" id="f1b-yb-bMR"/>
-                                <constraint firstItem="dh4-7M-v9C" firstAttribute="centerX" secondItem="g3H-aJ-5am" secondAttribute="centerX" id="hwj-7U-eeO"/>
-                                <constraint firstItem="Sl3-rJ-a56" firstAttribute="top" secondItem="g3H-aJ-5am" secondAttribute="top" id="iZ8-wU-BMi"/>
-                                <constraint firstItem="xdR-g4-Jjh" firstAttribute="top" secondItem="dh4-7M-v9C" secondAttribute="bottom" constant="35" id="ifo-aQ-wqs"/>
                                 <constraint firstAttribute="width" secondItem="g3H-aJ-5am" secondAttribute="height" multiplier="1:1.5" id="qGj-RK-AH5"/>
-                                <constraint firstItem="xdR-g4-Jjh" firstAttribute="height" secondItem="dh4-7M-v9C" secondAttribute="height" id="uLJ-tv-eYJ"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
