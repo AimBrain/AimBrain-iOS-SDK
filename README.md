@@ -1,5 +1,10 @@
 #AimBrain SDK integration
 
+## Requirements
+
+* iOS 7.0+ target deployment
+* Built with Xcode 8 and iOS SDK 10
+
 ## Application class
 In order to integrate the AimBrain iOS SDK it is necessary to set up `AMBNCapturingApplication` (subclass of `UIApplication`) as main application. `main.m` file after modification should look like this:
 
@@ -41,14 +46,14 @@ Once session is set methods with prefix ```getSerialized...``` can be called to 
 All serialisation calls return ```AMBNSerializedRequest``` object. The request data can be accessed via ```AMBNSerializedRequest``` field ```data``` field as NSData or ```AMBNSerializedRequest``` field ```dataString``` as NSString.
 
 Please refer to server side integration documentation for serialised data processing details.  
- 
+
 #Request metadata
 
-For some integration scenarios additional data may be required to be sent to server. 
+For some integration scenarios additional data may be required to be sent to server.
 
 Such integration-defined information should be submitted by calling function overload with parameter ```metadata```.
 
-Integration-defined information is returned from server in response field ```metadata```. 
+Integration-defined information is returned from server in response field ```metadata```.
 
 # Sessions
 In order to submit data to AimBrain `AMBNManager` needs to be configured with a session. There are two ways of doing it.
@@ -56,7 +61,7 @@ In order to submit data to AimBrain `AMBNManager` needs to be configured with a 
 ## Obtaining new session
 A new session can be obtained by passing `userId` to `createSession` method on `AMBNManager`. Completion callback returns result object with session token, status of Facial Module modalitiy and status of Behavioural Module modality. Status of Facial Module modality (`result.face`) can have following values:
 
-*0 - User not enrolled - facial authentication not available, enrollment required 
+*0 - User not enrolled - facial authentication not available, enrollment required
 *1 - User enrolled - facial authentication available.
 *2 - Building template - enrollment done, AimBrain is building user template and no further action is required.
 
