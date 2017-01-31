@@ -7,7 +7,7 @@
 #import "AMBNCallResult.h"
 
 
-@interface AMBNAuthenticateFaceResult : AMBNCallResult
+@interface AMBNAuthenticateResult : AMBNCallResult
 
 @property(nonatomic, strong, readonly) NSNumber *score;
 

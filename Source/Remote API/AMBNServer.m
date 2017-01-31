@@ -2,13 +2,15 @@
 #import "AMBNSessionCreateResult.h"
 #import "AMBNBehaviouralResult.h"
 #import "AMBNEnrollFaceResult.h"
-#import "AMBNAuthenticateFaceResult.h"
+#import "AMBNAuthenticateResult.h"
 #import "AMBNCompareFaceResult.h"
 #import "AMBNTouch.h"
 #import "AMBNAcceleration.h"
 #import "AMBNTextEvent.h"
 #import "AMBNNetworkClient.h"
 #import "AMBNSerializedRequest.h"
+#import "AMBNEnrollVoiceResult.h"
+#import "AMBNVoiceTextResult.h"
 #import <sys/utsname.h>
 
 @interface AMBNServer ()
@@ -43,6 +45,7 @@
 
         NSDictionary *jsonDict = (NSDictionary *) responseJSON;
         NSNumber *face = jsonDict[@"face"];
+        NSNumber *voice = jsonDict[@"voice"];
         NSNumber *behaviour = jsonDict[@"behaviour"];
         NSString *session = jsonDict[@"session"];
         NSString *metadataString = jsonDict[@"metadata"];
@@ -51,7 +54,7 @@
             if (metadataString) {
                 responseMetadata = [[NSData alloc] initWithBase64EncodedString:metadataString options:0];
             }
-            AMBNSessionCreateResult *result = [[AMBNSessionCreateResult alloc] initWithFace:face behaviour:behaviour session:session metadata:responseMetadata];
+            AMBNSessionCreateResult *result = [[AMBNSessionCreateResult alloc] initWithFace:face voice:voice behaviour:behaviour session:session metadata:responseMetadata];
             completion(result, nil);
             return;
         } else {
@@ -67,16 +70,11 @@
 }
 
 - (id)JSONOfCreateSessionWithUserId:(NSString *)userId metadata:(NSData *)metadata {
-    UIDevice *currentDevice = [UIDevice currentDevice];
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-
     NSMutableDictionary *json = [NSMutableDictionary dictionaryWithDictionary:@{
             @"userId" : userId,
-            @"system" : [NSString stringWithFormat:@"iOS %@", currentDevice.systemVersion],
-            @"device" : [self machineName],
-            @"screenWidth" : @(screenRect.size.width),
-            @"screenHeight" : @(screenRect.size.height)
     }];
+
+    [self addSessionCreateParameters:json];
 
     if (metadata) {
         json[@"metadata"] = [metadata base64EncodedStringWithOptions:0];
@@ -205,37 +203,11 @@
     }
 }
 
-- (void)authFace:(NSArray *)dataToAuth session:(NSString *)session metadata:(NSData *)metadata completion:(void (^)(AMBNAuthenticateFaceResult *result, NSError *error))completion {
+- (void)authFace:(NSArray *)dataToAuth session:(NSString *)session metadata:(NSData *)metadata completion:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     [self.queue addOperationWithBlock:^{
         id data = [self JSONOfAuthFace:dataToAuth session:session metadata:metadata];
         NSMutableURLRequest *request = [self.client createJSONPOSTWithData:data endpoint:AMBNFacialAuthEndpoint];
-        [self.client sendRequest:request queue:self.queue completionHandler:^(id _Nullable responseJSON, NSError *_Nullable error) {
-            if (error) {
-                completion(nil, error);
-                return;
-            }
-
-            if (![responseJSON isKindOfClass:[NSDictionary class]]) {
-                completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
-                return;
-            }
-
-            NSDictionary *jsonDict = (NSDictionary *) responseJSON;
-            NSNumber *score = jsonDict[@"score"];
-            NSNumber *liveliness = jsonDict[@"liveliness"];
-            NSString *responseMetadataString = jsonDict[@"metadata"];
-            if (score && liveliness) {
-                NSData *responseMetadata = nil;
-                if (responseMetadataString) {
-                    responseMetadata = [[NSData alloc] initWithBase64EncodedString:responseMetadataString options:0];
-                }
-                completion([[AMBNAuthenticateFaceResult alloc] initWithScore:score liveliness:liveliness metadata:responseMetadata], nil);
-                return;
-            } else {
-                completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
-                return;
-            }
-        }];
+        [self sendAuthFaceRequest:completion request:request];
     }];
 }
 
@@ -257,36 +229,41 @@
     return json;
 }
 
+- (void)sendAuthFaceRequest:(void (^)(AMBNAuthenticateResult *, NSError *))completion request:(NSMutableURLRequest *)request {
+    [self.client sendRequest:request queue:self.queue completionHandler:^(id _Nullable responseJSON, NSError *_Nullable error) {
+        if (error) {
+            completion(nil, error);
+            return;
+        }
+
+        if (![responseJSON isKindOfClass:[NSDictionary class]]) {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
+            return;
+        }
+
+        NSDictionary *jsonDict = (NSDictionary *) responseJSON;
+        NSNumber *score = jsonDict[@"score"];
+        NSNumber *liveliness = jsonDict[@"liveliness"];
+        NSString *responseMetadataString = jsonDict[@"metadata"];
+        if (score && liveliness) {
+            NSData *responseMetadata = nil;
+            if (responseMetadataString) {
+                responseMetadata = [[NSData alloc] initWithBase64EncodedString:responseMetadataString options:0];
+            }
+            completion([[AMBNAuthenticateResult alloc] initWithScore:score liveliness:liveliness metadata:responseMetadata], nil);
+            return;
+        } else {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
+            return;
+        }
+    }];
+}
+
 - (void)enrollFace:(NSArray *)dataToEnroll session:(NSString *)session metadata:(NSData *)metadata completion:(void (^)(AMBNEnrollFaceResult *result, NSError *error))completion {
     [self.queue addOperationWithBlock:^{
         id data = [self JSONOfEnrollFace:dataToEnroll session:session metadata:metadata];
         NSMutableURLRequest *request = [self.client createJSONPOSTWithData:data endpoint:AMBNFacialEnrollEndpoint];
-        [self.client sendRequest:request queue:self.queue completionHandler:^(id _Nullable responseJSON, NSError *_Nullable error) {
-            if (error) {
-                completion(nil, error);
-                return;
-            }
-
-            if (![responseJSON isKindOfClass:[NSDictionary class]]) {
-                completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
-                return;
-            }
-
-            NSDictionary *jsonDict = (NSDictionary *) responseJSON;
-            NSNumber *imagesCount = jsonDict[@"imagesCount"];
-            NSString *responseMetadataString = jsonDict[@"metadata"];
-            if (imagesCount) {
-                NSData *responseMetadata = nil;
-                if (responseMetadataString) {
-                    responseMetadata = [[NSData alloc] initWithBase64EncodedString:responseMetadataString options:0];
-                }
-                completion([[AMBNEnrollFaceResult alloc] initWithSuccess:true imagesCount:imagesCount metadata:responseMetadata], nil);
-                return;
-            } else {
-                completion([[AMBNEnrollFaceResult alloc] initWithSuccess:true imagesCount:nil metadata:nil], [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
-                return;
-            }
-        }];
+        [self sendEnrollFaceRequest:completion request:request];
     }];
 }
 
@@ -306,6 +283,35 @@
     }
 
     return json;
+}
+
+- (void)sendEnrollFaceRequest:(void (^)(AMBNEnrollFaceResult *, NSError *))completion request:(NSMutableURLRequest *)request {
+    [self.client sendRequest:request queue:self.queue completionHandler:^(id _Nullable responseJSON, NSError *_Nullable error) {
+        if (error) {
+            completion(nil, error);
+            return;
+        }
+
+        if (![responseJSON isKindOfClass:[NSDictionary class]]) {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
+            return;
+        }
+
+        NSDictionary *jsonDict = (NSDictionary *) responseJSON;
+        NSNumber *imagesCount = jsonDict[@"imagesCount"];
+        NSString *responseMetadataString = jsonDict[@"metadata"];
+        if (imagesCount) {
+            NSData *responseMetadata = nil;
+            if (responseMetadataString) {
+                responseMetadata = [[NSData alloc] initWithBase64EncodedString:responseMetadataString options:0];
+            }
+            completion([[AMBNEnrollFaceResult alloc] initWithSuccess:true imagesCount:imagesCount metadata:responseMetadata], nil);
+            return;
+        } else {
+            completion([[AMBNEnrollFaceResult alloc] initWithSuccess:true imagesCount:nil metadata:nil], [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
+            return;
+        }
+    }];
 }
 
 - (void)compareFaceImages:(NSArray *)firstFaceImages withFaceImages:(NSArray *)secondFaceImages metadata:(NSData *)metadata completion:(void (^)(AMBNCompareFaceResult *result, NSError *error))completion {
@@ -361,6 +367,188 @@
     }
 
     return json;
+}
+
+- (void) enrollVoice: (NSString *)dataToEnroll session: (NSString*) session metadata:(NSData *)metadata completion: (void (^)(AMBNEnrollVoiceResult *result, NSError * error))completion {
+    NSAssert(dataToEnroll != nil, @"Voice record data for enroll is not provided");
+
+    [self.queue addOperationWithBlock:^{
+        id data = [self JSONOfEnrollVoice:dataToEnroll session:session metadata:metadata];
+        NSMutableURLRequest *request = [self.client createJSONPOSTWithData:data endpoint:AMBNVoiceEnrollEndpoint];
+        [self sendEnrollVoiceRequest:completion request:request];
+    }];
+}
+
+- (AMBNSerializedRequest *)serializeEnrollVoice: (NSString *)dataToEnroll session: (NSString*) session metadata:(NSData *)metadata {
+    id data = [self JSONOfEnrollVoice:dataToEnroll session:session metadata:metadata];
+    return [self.client serializeRequestData:data];
+}
+
+- (id)JSONOfEnrollVoice:(NSString *)voiceData session:(NSString *)sessionId metadata:(NSData *)metadata {
+    NSMutableDictionary *json = [NSMutableDictionary dictionaryWithDictionary:@{
+            @"session" : sessionId,
+            @"voices" : @[voiceData]
+    }];
+
+    if (metadata) {
+        json[@"metadata"] = [metadata base64EncodedStringWithOptions:0];
+    }
+
+    return json;
+}
+
+- (void)sendEnrollVoiceRequest:(void (^)(AMBNEnrollVoiceResult *, NSError *))completion request:(NSMutableURLRequest *)request {
+    [self.client sendRequest:request queue:self.queue completionHandler:^(id _Nullable responseJSON, NSError *_Nullable error) {
+        if (error) {
+            completion(nil, error);
+            return;
+        }
+
+        if (![responseJSON isKindOfClass:[NSDictionary class]]) {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
+            return;
+        }
+
+        NSDictionary *jsonDict = (NSDictionary *) responseJSON;
+        NSNumber *voiceSamples = jsonDict[@"voiceSamples"];
+        NSString *responseMetadataString = jsonDict[@"metadata"];
+        NSData *responseMetadata = nil;
+        if (responseMetadataString) {
+            responseMetadata = [[NSData alloc] initWithBase64EncodedString:responseMetadataString options:0];
+        }
+
+        if (voiceSamples) {
+            AMBNEnrollVoiceResult *result = [[AMBNEnrollVoiceResult alloc] initWithSuccess:true samplesCount:voiceSamples metadata:responseMetadata];
+            completion(result, nil);
+        } else {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
+            return;
+        }
+    }];
+}
+
+- (void) authVoice:(NSString*) dataToAuth session: (NSString*) session metadata:(NSData *)metadata completion: (void (^)(AMBNAuthenticateResult *result, NSError * error))completion {
+    NSAssert(dataToAuth != nil, @"Voice record data for auth is not provided");
+
+    [self.queue addOperationWithBlock:^{
+        id data = [self JSONOfAuthVoice:dataToAuth session:session metadata:metadata];
+        NSMutableURLRequest *request = [self.client createJSONPOSTWithData:data endpoint:AMBNVoiceAuthEndpoint];
+        [self sendAuthVoice:completion request:request];
+    }];
+}
+
+- (AMBNSerializedRequest *)serializeAuthVoice: (NSString *)dataToAuth session: (NSString*) session metadata:(NSData *)metadata {
+    id data = [self JSONOfAuthVoice:dataToAuth session:session metadata:metadata];
+    return [self.client serializeRequestData:data];
+}
+
+- (id)JSONOfAuthVoice:(NSString *)voiceData session:(NSString *)session metadata:(NSData *)metadata {
+    NSMutableDictionary *json = [NSMutableDictionary dictionaryWithDictionary:@{
+            @"session" : session,
+            @"voices" : @[voiceData]
+    }];
+
+    if (metadata) {
+        json[@"metadata"] = [metadata base64EncodedStringWithOptions:0];
+    }
+
+    return json;
+}
+
+- (void)sendAuthVoice:(void (^)(AMBNAuthenticateResult *, NSError *))completion request:(NSMutableURLRequest *)request {
+    [self.client sendRequest:request queue:self.queue completionHandler:^(id _Nullable responseJSON, NSError *_Nullable error) {
+        if (error) {
+            completion(nil, error);
+            return;
+        }
+
+        if (![responseJSON isKindOfClass:[NSDictionary class]]) {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
+            return;
+        }
+
+        NSDictionary *jsonDict = (NSDictionary *) responseJSON;
+        NSNumber *score = jsonDict[@"score"];
+        NSNumber *liveliness = jsonDict[@"liveliness"];
+        NSString *responseMetadataString = jsonDict[@"metadata"];
+        NSData *responseMetadata = nil;
+        if (responseMetadataString) {
+            responseMetadata = [[NSData alloc] initWithBase64EncodedString:responseMetadataString options:0];
+        }
+
+        if (score && liveliness) {
+            completion([[AMBNAuthenticateResult alloc] initWithScore:score liveliness:liveliness metadata:responseMetadata], nil);
+            return;
+        } else {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
+            return;
+        }
+    }];
+}
+
+- (void)getVoiceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata completion:(void (^)(AMBNVoiceTextResult *result, NSError * error))completion {
+    [self.queue addOperationWithBlock:^{
+        id data = [self JSONOfGetVoiceTokenForSession:session type:type metadata:metadata];
+        NSMutableURLRequest *request = [self.client createJSONPOSTWithData:data endpoint:AMBNVoiceTokenEndpoint];
+        [self sendVoiceTokenRequest:completion request:request];
+    }];
+}
+
+- (AMBNSerializedRequest *)serializeGetVoiceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata  {
+    id data = [self JSONOfGetVoiceTokenForSession:session type:type metadata:metadata];
+    return [self.client serializeRequestData:data];
+}
+
+- (id)JSONOfGetVoiceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata {
+    NSMutableDictionary *json = [NSMutableDictionary dictionaryWithDictionary:@{
+            @"session" : session,
+            @"tokentype": type
+    }];
+
+    if (metadata) {
+        json[@"metadata"] = [metadata base64EncodedStringWithOptions:0];
+    }
+
+    return json;
+}
+
+- (void)sendVoiceTokenRequest:(void (^)(AMBNVoiceTextResult *, NSError *))completion request:(NSMutableURLRequest *)request {
+    [self.client sendRequest:request queue:self.queue completionHandler:^(id _Nullable responseJSON, NSError *_Nullable error) {
+        if (error) {
+            completion(nil, error);
+            return;
+        }
+
+        if (![responseJSON isKindOfClass:[NSDictionary class]]) {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
+            return;
+        }
+
+        NSDictionary *jsonDict = (NSDictionary *) responseJSON;
+        NSString *token = jsonDict[@"token"];
+        NSString *responseMetadataString = jsonDict[@"metadata"];
+        NSData *responseMetadata = nil;
+        if (responseMetadataString) {
+            responseMetadata = [[NSData alloc] initWithBase64EncodedString:responseMetadataString options:0];
+        }
+
+        if (token) {
+            completion([[AMBNVoiceTextResult alloc] initWithTokenText:token metadata:responseMetadata], nil);
+            return;
+        } else {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
+            return;
+        }
+    }];
+}
+
+-(void)addSessionCreateParameters:(NSMutableDictionary *)params {
+    UIDevice *currentDevice = [UIDevice currentDevice];
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    params[@"system"] = [NSString stringWithFormat:@"iOS %@", currentDevice.systemVersion],
+    params[@"device"] = [self machineName],
+    params[@"screenWidth"] = @(screenRect.size.width);
+    params[@"screenHeight"] = @(screenRect.size.height);
 }
 
 - (NSString *)machineName {

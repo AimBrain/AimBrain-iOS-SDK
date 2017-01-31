@@ -9,15 +9,26 @@
 @class AMBNSessionCreateResult;
 @class AMBNBehaviouralResult;
 @class AMBNEnrollFaceResult;
-@class AMBNAuthenticateFaceResult;
+@class AMBNAuthenticateResult;
 @class AMBNCompareFaceResult;
 @class AMBNSerializedRequest;
+@class AMBNVoiceRecordingViewController;
+@class AMBNEnrollVoiceResult;
+@class AMBNVoiceTextResult;
 
 /*!
  @define AMBNManagerBehaviouralDataSubmittedNotification behavioural data subsmission notification
  */
 #define AMBNManagerBehaviouralDataSubmittedNotification @"behaviouralDataSubmitted"
 
+typedef NS_ENUM(NSInteger, AMBNVoiceTokenType) {
+    AMBNVoiceTokenTypeEnroll1 = 1,
+    AMBNVoiceTokenTypeEnroll2 = 2,
+    AMBNVoiceTokenTypeEnroll3 = 3,
+    AMBNVoiceTokenTypeEnroll4 = 4,
+    AMBNVoiceTokenTypeEnroll5 = 5,
+    AMBNVoiceTokenTypeAuth = 100
+};
 
 /*!
  @class AMBNManager
@@ -82,6 +93,14 @@
  @param completion Called when session obtainment completes. Session is successfuly obtained if <b> result.session </b> is not nil and <b> error </b> is nil.
  */
 - (void)createSessionWithUserId:(NSString *)userId metadata:(NSData *)metadata completionHandler:(void (^)(AMBNSessionCreateResult *result, NSError *error))completion;
+
+/*!
+ @description Serialized create session request.
+ @param userId user identifier.
+ @param metadata metadata to be included with request
+ @return serialized data.
+ */
+- (AMBNSerializedRequest *)getSerializedCreateSessionWithUserId:(NSString *)userId metadata:(NSData *)metadata;
 
 /*!
  @description Submits collected behavioural data. @link session @/link property must be set before using this method.
@@ -216,7 +235,7 @@
  @param images array of face images to authenticate
  @param completion called when authentication is completed. <b> result.score </b> is floating point number from 0 to 1 where 1 is maximum similarity to enrolled face. <b> result.liveliness </b> is floating point number from 0 to 1 indicating liveliness of the image batch where 1 is maximum liveliness.
  */
-- (void)authenticateFaceImages:(NSArray *)images completionHandler:(void (^)(AMBNAuthenticateFaceResult *result, NSError *error))completion;
+- (void)authenticateFaceImages:(NSArray *)images completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion;
 
 /*!
  @description Authenticates face images.
@@ -224,7 +243,7 @@
  @param metadata metadata to be sent with request
  @param completion called when authentication is completed. <b> result.score </b> is floating point number from 0 to 1 where 1 is maximum similarity to enrolled face. <b> result.liveliness </b> is floating point number from 0 to 1 indicating liveliness of the image batch where 1 is maximum liveliness.
  */
-- (void)authenticateFaceImages:(NSArray *)images metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateFaceResult *result, NSError *error))completion;
+- (void)authenticateFaceImages:(NSArray *)images metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion;
 
 /*!
  @description Serializes request to authenticates face images.
@@ -291,7 +310,10 @@
  @param recordingHint bottom hint displayed while recording
  @param videoLength length of recorded video
  */
-- (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithTopHint:(NSString *)topHint bottomHint:(NSString *)bottomHint recordingHint:(NSString *)recordingHint videoLength:(NSTimeInterval)videoLength;
+- (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithTopHint:(NSString *)topHint
+                                                                            bottomHint:(NSString *)bottomHint
+                                                                         recordingHint:(NSString *)recordingHint
+                                                                           videoLength:(NSTimeInterval)videoLength;
 
 /*!
  @description Enrolls face videos.
@@ -334,7 +356,7 @@
  @param video url of face video to authenticate
  @param completion called when authentication is completed. <b> result.score </b> is floating point number from 0 to 1 where 1 is maximum similarity to enrolled face. <b> result.liveliness </b> is floating point number from 0 to 1 indicating liveliness of the video where 1 is maximum liveliness.
  */
-- (void)authenticateFaceVideo:(NSURL *)video completionHandler:(void (^)(AMBNAuthenticateFaceResult *result, NSError *error))completion;
+- (void)authenticateFaceVideo:(NSURL *)video completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion;
 
 /*!
  @description Authenticates face video.
@@ -342,7 +364,7 @@
  @param metadata metadata to be sent with request
  @param completion called when authentication is completed. <b> result.score </b> is floating point number from 0 to 1 where 1 is maximum similarity to enrolled face. <b> result.liveliness </b> is floating point number from 0 to 1 indicating liveliness of the video where 1 is maximum liveliness.
  */
-- (void)authenticateFaceVideo:(NSURL *)video metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateFaceResult *result, NSError *error))completion;
+- (void)authenticateFaceVideo:(NSURL *)video metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion;
 
 /*!
  @description Serializes request to authenticates face video
@@ -351,4 +373,92 @@
  @return serialized data.
  */
 - (AMBNSerializedRequest *)getSerializedAuthenticateFaceVideo:(NSURL *)video metadata:(NSData *)metadata;
+
+/*!
+ @description Returns view controller used to capture voice audio
+ @param audioLength length of recorded audio
+ */
+- (AMBNVoiceRecordingViewController *) instantiateVoiceRecordingViewControllerWithAudioLength:(NSTimeInterval)audioLength;
+
+/*!
+ @description Returns view controller used to capture voice audio
+ @param topHint top hint displayed on audio capture view
+ @param bottomHint bottom hint displayed on audio capture view
+ @param recordingHint bottom hint displayed while recording
+ @param audioLength length of recorded audio
+ */
+- (AMBNVoiceRecordingViewController *) instantiateVoiceRecordingViewControllerWithTopHint:(NSString *)topHint
+                                                                               bottomHint:(NSString *)bottomHint
+                                                                            recordingHint:(NSString *)recordingHint
+                                                                              audioLength:(NSTimeInterval)audioLength;
+
+/*!
+ @description Enrolls voice record.
+ @param voiceFileUrl of voice record to authenticate
+ @param completion called when enrollement is completed. <b> result </b> is no nil when enrollment was successful.
+ */
+- (void)enrollVoice:(NSURL *)voiceFileUrl completionHandler:(void (^)(AMBNEnrollVoiceResult *result, NSError *))completion;
+
+/*!
+ @description Enrolls voice record.
+ @param voiceFileUrl URL of voice record to authenticate
+ @param metadata metadata to be sent with request
+ @param completion called when enrollement is completed. <b> result </b> is no nil when enrollment was successful.
+ */
+- (void)enrollVoice:(NSURL *)voiceFileUrl metadata:(NSData *)metadata completionHandler:(void (^)(AMBNEnrollVoiceResult *result, NSError *))completion;
+
+/*!
+ @description Serializes request to enroll voice record
+ @param voiceFileUrl URL of voice record to authenticate
+ @param metadata metadata to be sent with request
+ @return serialized data.
+ */
+- (AMBNSerializedRequest *)getSerializedEnrollVoice:(NSURL *)voiceFileUrl metadata:(NSData *)metadata;
+
+/*!
+ @description Authenticates voice record.
+ @param voiceUrl of voice record to authenticate
+ @param completion called when authentication is completed. <b> score </b> is floating point number from 0 to 1 where 1 is maximum similarity to enrolled voice. <b> liveliness </b> is floating point number from 0 to 1 indicating liveliness of the record where 1 is maximum liveliness.
+ */
+- (void)authenticateVoice:(NSURL *)voiceUrl completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion;
+
+/*!
+ @description Authenticates voice record.
+ @param voiceFileUrl url of voice record to authenticate
+ @param metadata metadata to be sent with request
+ @param completion called when authentication is completed. <b> score </b> is floating point number from 0 to 1 where 1 is maximum similarity to enrolled voice. <b> liveliness </b> is floating point number from 0 to 1 indicating liveliness of the record where 1 is maximum liveliness.
+ */
+- (void)authenticateVoice:(NSURL *)voiceFileUrl metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion;
+
+/*!
+ @description Serializes request to authenticate voice record
+ @param voiceFileUrl url of voice record to authenticate
+ @param metadata metadata to be sent with request
+ @return serialized data.
+ */
+- (AMBNSerializedRequest *)getSerializedAuthenticateVoice:(NSURL *)voiceFileUrl metadata:(NSData *)metadata;
+
+/*!
+ @description Retrieves text to read in case of voice auth/enroll.
+ @param type token type
+ @param completion called when request is completed. <b> result.text </b> is text to be displayed in recording UI
+ */
+- (void)getVoiceTokenWithType:(AMBNVoiceTokenType)type completionHandler:(void (^)(AMBNVoiceTextResult *, NSError *))completion;
+
+/*!
+ @description Retrieves text to read in case of voice auth/enroll.
+ @param type token type
+ @param metadata metadata to be sent with request
+ @param completion called when request is completed. <b> result.text </b> is text to be displayed in recording UI
+ */
+- (void)getVoiceTokenWithType:(AMBNVoiceTokenType)type metadata:(NSData *)metadata completionHandler:(void (^)(AMBNVoiceTextResult *result, NSError * error))completion;
+
+/*!
+ @description Serializes request to retrieve text to read in case of voice auth/enroll
+ @param type token type
+ @param metadata metadata to be sent with request
+ @return serialized data.
+ */
+- (AMBNSerializedRequest *)getSerializedGetVoiceTokenWithType:(AMBNVoiceTokenType)type metadata:(NSData *)metadata;
+
 @end

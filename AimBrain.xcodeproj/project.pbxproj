@@ -14,6 +14,7 @@
 				D589994A1CBCFFD60006108D /* ShellScript */,
 			);
 			dependencies = (
+				F60E58771CFD923A0091CFC5 /* PBXTargetDependency */,
 				D589994D1CBD17BA0006108D /* PBXTargetDependency */,
 				D58999491CBCFF840006108D /* PBXTargetDependency */,
 			);
@@ -24,7 +25,6 @@
 
 /* Begin PBXBuildFile section */
 		0CDB93521C9828BA00BEE7B3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB93511C9828BA00BEE7B3 /* CoreFoundation.framework */; };
-		AC03604BB4F52EDA9F08C713 /* AMBNFaceCaptureManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036515995D53DEE8571204 /* AMBNFaceCaptureManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC03607A112F3103A833CE0F /* AMBNTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036BE2E339A5034C16C311 /* AMBNTextEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC036098F94F8D084484AFF0 /* AMBNAcceleration.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0366987C48F5E47F0BEEED /* AMBNAcceleration.m */; };
 		AC0360A27D35F2FA1D62CE28 /* AMBNSerializedRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0365571F50BFD4CF57E8D2 /* AMBNSerializedRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -35,7 +35,7 @@
 		AC036163145CA07821DB88B1 /* AMBNResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036EA20E7880FB81CF7FEF /* AMBNResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC0361685F2376E5D56BA467 /* AMBNEnrollFaceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036F11EAC3A5966C450E78 /* AMBNEnrollFaceResult.m */; };
 		AC03619709A9A0A1E5DE6F91 /* AMBNCameraOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC036A2E11557CFF2D6C3E53 /* AMBNCameraOverlay.xib */; };
-		AC0361B1C88A08234B0F277F /* AMBNAuthenticateFaceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0368F0AFDA1F16A294FB99 /* AMBNAuthenticateFaceResult.m */; };
+		AC0361B1C88A08234B0F277F /* AMBNAuthenticateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0368F0AFDA1F16A294FB99 /* AMBNAuthenticateResult.m */; };
 		AC0361C7EAFEA79BDCD54BF1 /* AMBNSerializedRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036E21CAC635FB7C574951 /* AMBNSerializedRequest.m */; };
 		AC0361C82A6D2021CF8F97F3 /* AMBNBehaviouralResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03674ACCE6A60BACFAFB0B /* AMBNBehaviouralResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC0361DBC08A6B4CB5186939 /* AMBNResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036EBD0C91D1DD06476033 /* AMBNResult.m */; };
@@ -43,7 +43,9 @@
 		AC036292E33B5C9C2ADDEC45 /* AMBNPrivacyGuard.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036253E50499B0D20D8F51 /* AMBNPrivacyGuard.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC03630929AB8D65F0E2C01C /* AMBNFaceRecordingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC03628CC21B74CA6D42611C /* AMBNFaceRecordingViewController.xib */; };
 		AC0363E500C7FE44913A215B /* AMBNTouchCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0361B125C4873607B5C371 /* AMBNTouchCollector.m */; };
+		AC0363EE3316757291899CC6 /* AMBNVoiceTextResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03681FF8DD00841DB1EFC7 /* AMBNVoiceTextResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC03641F8654314A78375019 /* AMBNFaceCaptureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03679CEA37D2E4E8ABA04A /* AMBNFaceCaptureManager.m */; };
+		AC036497AD1E6EC2B54F40E0 /* AMBNEnrollVoiceResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036F9F4A4585716062CD27 /* AMBNEnrollVoiceResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC0365A36063842139581044 /* AMBNPrivacyGuard.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03662DAD029B91FA5F6AFE /* AMBNPrivacyGuard.m */; };
 		AC03661E7FA4595C8FC179D2 /* AMBNCameraPreview.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036EDB7B25CDCAF1096FA6 /* AMBNCameraPreview.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC03662F6D92F9C2F6C4CA0B /* AimBrainSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03657A89EBDC1FB1825A78 /* AimBrainSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -73,10 +75,12 @@
 		AC036CD4961D820BBF83AB46 /* AMBNHashGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0361F9CE247F00B24001E9 /* AMBNHashGenerator.m */; };
 		AC036D0DF0EF0BE7B0ED7877 /* AMBNCallResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03640932831FB6764D0CC2 /* AMBNCallResult.m */; };
 		AC036D95E7C3C2540D1A287C /* AMBNSessionCreateResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0361137699010E833B0E36 /* AMBNSessionCreateResult.m */; };
-		AC036DF9F19B8C2A644FBC88 /* AMBNAuthenticateFaceResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03606B5ABD79D9116AED75 /* AMBNAuthenticateFaceResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036DF9F19B8C2A644FBC88 /* AMBNAuthenticateResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03606B5ABD79D9116AED75 /* AMBNAuthenticateResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC036DFB5DC6E4A85DC0AC6F /* AMBNCallResult.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0361E796D727CB038F381A /* AMBNCallResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036E095D0A180BAC6806FF /* AMBNVoiceTextResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036C1DB5F81D1F1B898FB6 /* AMBNVoiceTextResult.m */; };
 		AC036E10B2F39E202D91EDA0 /* AMBNBehaviouralResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036144AF2F57DCCC666109 /* AMBNBehaviouralResult.m */; };
 		AC036E427411F862B2D82038 /* AMBNCaptureSessionConfigurator.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0361C65B8E546BE7D5EA72 /* AMBNCaptureSessionConfigurator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AC036EC920B058C1D8F89431 /* AMBNEnrollVoiceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03699CBABACDB9F82E839B /* AMBNEnrollVoiceResult.m */; };
 		AC036EF90222B26233C768FE /* AMBNAccelerometerCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03676A6C93999749F7AEF3 /* AMBNAccelerometerCollector.m */; };
 		AC036F228B04D5333A2A9E80 /* AMBNTouch.m in Sources */ = {isa = PBXBuildFile; fileRef = AC036AD8F62AA3767926CAB8 /* AMBNTouch.m */; };
 		AC036F850458FACD5E279F16 /* AMBNViewIdChainExtractor.m in Sources */ = {isa = PBXBuildFile; fileRef = AC03629B2D46C9781F2E7520 /* AMBNViewIdChainExtractor.m */; };
@@ -84,6 +88,26 @@
 		AC036F8F7C638AFF9EF2FCA7 /* AMBNImageAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03624C7FE254A12B2A3E3A /* AMBNImageAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC036F9A084F8AEA01FD98B0 /* AMBNManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0369870BB6F278E4D9F9D9 /* AMBNManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC036FAA08ACEC8A54401216 /* AMBNRecordingOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0368F971862583A0650EEA /* AMBNRecordingOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D03986C91D64D1F600B23FCF /* AMBNHashGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036D87019704D2491784CA /* AMBNHashGenerator.h */; };
+		D03986CA1D64D1F600B23FCF /* AMBNViewIdChainExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036B20CA0B81BDB011F264 /* AMBNViewIdChainExtractor.h */; };
+		D03986CB1D64D1F600B23FCF /* AMBNFaceCaptureManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036515995D53DEE8571204 /* AMBNFaceCaptureManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D03986CC1D64D1F600B23FCF /* AMBNTextInputCollector.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036CC80F153EEDD316464F /* AMBNTextInputCollector.h */; };
+		D03986CD1D64D1F600B23FCF /* AMBNTouchCollector.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036CDFE7FBE2D0F774D8CC /* AMBNTouchCollector.h */; };
+		D03986CE1D64D1F600B23FCF /* AMBNAcceleration.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036B82199A123931927124 /* AMBNAcceleration.h */; };
+		D03986CF1D64D1F600B23FCF /* AMBNAccelerometerCollector.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0367BF065B781DAC77E22D /* AMBNAccelerometerCollector.h */; };
+		D09292A51D64A2640069F21E /* AMBNAudioRecorderConfigurator.h in Headers */ = {isa = PBXBuildFile; fileRef = D092929E1D64A2640069F21E /* AMBNAudioRecorderConfigurator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D09292A61D64A2640069F21E /* AMBNAudioRecorderConfigurator.m in Sources */ = {isa = PBXBuildFile; fileRef = D092929F1D64A2640069F21E /* AMBNAudioRecorderConfigurator.m */; };
+		D09292A71D64A2640069F21E /* AMBNVoiceRecordingManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D09292A01D64A2640069F21E /* AMBNVoiceRecordingManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D09292A81D64A2640069F21E /* AMBNVoiceRecordingManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D09292A11D64A2640069F21E /* AMBNVoiceRecordingManager.m */; };
+		D09292A91D64A2640069F21E /* AMBNVoiceRecordingViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D09292A21D64A2640069F21E /* AMBNVoiceRecordingViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D09292AA1D64A2640069F21E /* AMBNVoiceRecordingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D09292A31D64A2640069F21E /* AMBNVoiceRecordingViewController.m */; };
+		D09292AB1D64A2640069F21E /* AMBNVoiceRecordingViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D09292A41D64A2640069F21E /* AMBNVoiceRecordingViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D09292AE1D64A29A0069F21E /* AMBNVoiceRecordingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D09292AC1D64A28A0069F21E /* AMBNVoiceRecordingViewController.xib */; };
+		D09292B51D64A4DC0069F21E /* DACircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = D09292B11D64A4DC0069F21E /* DACircularProgressView.h */; };
+		D09292B61D64A4DC0069F21E /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D09292B21D64A4DC0069F21E /* DACircularProgressView.m */; };
+		D09292B71D64A4DC0069F21E /* DALabeledCircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = D09292B31D64A4DC0069F21E /* DALabeledCircularProgressView.h */; };
+		D09292B81D64A4DC0069F21E /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D09292B41D64A4DC0069F21E /* DALabeledCircularProgressView.m */; };
+		D09292BE1D64BB180069F21E /* icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC03636C02DEF3380B620A3C /* icons.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +124,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 0CDB93421C9822A100BEE7B3;
 			remoteInfo = face;
+		};
+		F60E58761CFD923A0091CFC5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6003F582195388D10070C39A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F6CE49BE1CFC8506008D8DBE;
+			remoteInfo = voice;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -123,15 +154,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F6CE49C71CFC8506008D8DBE /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0C776A561C5FDAF6009BFDFD /* libAimBrainSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAimBrainSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDB93431C9822A100BEE7B3 /* face.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = face.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDB93511C9828BA00BEE7B3 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		165156867B5278AEC6AC9D7B /* Pods-AimBrain_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AimBrain_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AimBrain_Tests/Pods-AimBrain_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		458B9E0F699A65148838A65E /* Pods-AimBrain_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AimBrain_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AimBrain_Tests/Pods-AimBrain_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		560D483973056D39BD964AB1 /* Pods-AimBrain_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AimBrain_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-AimBrain_Example/Pods-AimBrain_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -139,10 +176,9 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		708073B341E4EE09FF8D26C0 /* Pods-AimBrain_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AimBrain_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AimBrain_Example/Pods-AimBrain_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AC03600885AA4FC44D548E15 /* AMBNCameraOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNCameraOverlay.m; sourceTree = "<group>"; };
 		AC036069ACB9675CC9A763E0 /* AMBNServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNServer.h; sourceTree = "<group>"; };
-		AC03606B5ABD79D9116AED75 /* AMBNAuthenticateFaceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNAuthenticateFaceResult.h; sourceTree = "<group>"; };
+		AC03606B5ABD79D9116AED75 /* AMBNAuthenticateResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNAuthenticateResult.h; sourceTree = "<group>"; };
 		AC0361137699010E833B0E36 /* AMBNSessionCreateResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNSessionCreateResult.m; sourceTree = "<group>"; };
 		AC036144AF2F57DCCC666109 /* AMBNBehaviouralResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNBehaviouralResult.m; sourceTree = "<group>"; };
 		AC03618548F6B9804E486679 /* AMBNNetworkClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNNetworkClient.h; sourceTree = "<group>"; };
@@ -175,11 +211,13 @@
 		AC03679CEA37D2E4E8ABA04A /* AMBNFaceCaptureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNFaceCaptureManager.m; sourceTree = "<group>"; };
 		AC0367BF065B781DAC77E22D /* AMBNAccelerometerCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNAccelerometerCollector.h; sourceTree = "<group>"; };
 		AC0367D37E2B02BD53852582 /* AMBNCapturingApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCapturingApplication.h; sourceTree = "<group>"; };
+		AC03681FF8DD00841DB1EFC7 /* AMBNVoiceTextResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNVoiceTextResult.h; sourceTree = "<group>"; };
 		AC0368DF2262F07123D2BD59 /* AMBNRecordingOverlayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AMBNRecordingOverlayView.xib; sourceTree = "<group>"; };
-		AC0368F0AFDA1F16A294FB99 /* AMBNAuthenticateFaceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNAuthenticateFaceResult.m; sourceTree = "<group>"; };
+		AC0368F0AFDA1F16A294FB99 /* AMBNAuthenticateResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNAuthenticateResult.m; sourceTree = "<group>"; };
 		AC0368F971862583A0650EEA /* AMBNRecordingOverlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNRecordingOverlayView.h; sourceTree = "<group>"; };
 		AC036914EB2CA405426EF3B1 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		AC0369870BB6F278E4D9F9D9 /* AMBNManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNManager.h; sourceTree = "<group>"; };
+		AC03699CBABACDB9F82E839B /* AMBNEnrollVoiceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNEnrollVoiceResult.m; sourceTree = "<group>"; };
 		AC0369B5A5B99ABB14B261BC /* AMBNManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNManager.m; sourceTree = "<group>"; };
 		AC0369C600A6BF0F9080AC72 /* AMBNCameraOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCameraOverlay.h; sourceTree = "<group>"; };
 		AC036A2E11557CFF2D6C3E53 /* AMBNCameraOverlay.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AMBNCameraOverlay.xib; sourceTree = "<group>"; };
@@ -192,6 +230,7 @@
 		AC036B82199A123931927124 /* AMBNAcceleration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNAcceleration.h; sourceTree = "<group>"; };
 		AC036BE2E339A5034C16C311 /* AMBNTextEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNTextEvent.h; sourceTree = "<group>"; };
 		AC036C0C30065ACC4C39DC2F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		AC036C1DB5F81D1F1B898FB6 /* AMBNVoiceTextResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNVoiceTextResult.m; sourceTree = "<group>"; };
 		AC036C5AF3B33CE12DE95DA5 /* AMBNImageAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNImageAdapter.m; sourceTree = "<group>"; };
 		AC036CC80F153EEDD316464F /* AMBNTextInputCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNTextInputCollector.h; sourceTree = "<group>"; };
 		AC036CDFE7FBE2D0F774D8CC /* AMBNTouchCollector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNTouchCollector.h; sourceTree = "<group>"; };
@@ -206,11 +245,23 @@
 		AC036EBD0C91D1DD06476033 /* AMBNResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNResult.m; sourceTree = "<group>"; };
 		AC036EDB7B25CDCAF1096FA6 /* AMBNCameraPreview.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCameraPreview.h; sourceTree = "<group>"; };
 		AC036F11EAC3A5966C450E78 /* AMBNEnrollFaceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNEnrollFaceResult.m; sourceTree = "<group>"; };
+		AC036F9F4A4585716062CD27 /* AMBNEnrollVoiceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNEnrollVoiceResult.h; sourceTree = "<group>"; };
 		AC036FA2CEE832B3E31CAB7D /* AMBNEnrollFaceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNEnrollFaceResult.h; sourceTree = "<group>"; };
 		AC036FBBA7CD800925FB59E7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AC036FFF2248796CE2293CFB /* AMBNTextInputCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNTextInputCollector.m; sourceTree = "<group>"; };
-		BBA3DCD95BBE150DB516F111 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		F7935325B7E0E4195B3417E0 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		D092929A1D64A14E0069F21E /* voice.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = voice.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		D092929E1D64A2640069F21E /* AMBNAudioRecorderConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNAudioRecorderConfigurator.h; sourceTree = "<group>"; };
+		D092929F1D64A2640069F21E /* AMBNAudioRecorderConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNAudioRecorderConfigurator.m; sourceTree = "<group>"; };
+		D09292A01D64A2640069F21E /* AMBNVoiceRecordingManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNVoiceRecordingManager.h; sourceTree = "<group>"; };
+		D09292A11D64A2640069F21E /* AMBNVoiceRecordingManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNVoiceRecordingManager.m; sourceTree = "<group>"; };
+		D09292A21D64A2640069F21E /* AMBNVoiceRecordingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNVoiceRecordingViewController.h; sourceTree = "<group>"; };
+		D09292A31D64A2640069F21E /* AMBNVoiceRecordingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNVoiceRecordingViewController.m; sourceTree = "<group>"; };
+		D09292A41D64A2640069F21E /* AMBNVoiceRecordingViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNVoiceRecordingViewControllerDelegate.h; sourceTree = "<group>"; };
+		D09292AC1D64A28A0069F21E /* AMBNVoiceRecordingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMBNVoiceRecordingViewController.xib; sourceTree = "<group>"; };
+		D09292B11D64A4DC0069F21E /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
+		D09292B21D64A4DC0069F21E /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
+		D09292B31D64A4DC0069F21E /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
+		D09292B41D64A4DC0069F21E /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,16 +280,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F6CE49C01CFC8506008D8DBE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
+				D09292AF1D64A2D10069F21E /* Library */,
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
-				8C763581D06B55E42A89B49E /* Pods */,
 				AC03613BDCFEB0F78BA5A181 /* Source */,
 				AC036B14CF13129142F2F8BC /* Resources */,
 				AC036AFA4B3D699D6D0F4E02 /* Supporting Files */,
@@ -252,6 +310,7 @@
 			children = (
 				0C776A561C5FDAF6009BFDFD /* libAimBrainSDK.a */,
 				0CDB93431C9822A100BEE7B3 /* face.bundle */,
+				D092929A1D64A14E0069F21E /* voice.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -286,22 +345,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8C763581D06B55E42A89B49E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				708073B341E4EE09FF8D26C0 /* Pods-AimBrain_Example.debug.xcconfig */,
-				560D483973056D39BD964AB1 /* Pods-AimBrain_Example.release.xcconfig */,
-				165156867B5278AEC6AC9D7B /* Pods-AimBrain_Tests.debug.xcconfig */,
-				458B9E0F699A65148838A65E /* Pods-AimBrain_Tests.release.xcconfig */,
-				BBA3DCD95BBE150DB516F111 /* Pods.debug.xcconfig */,
-				F7935325B7E0E4195B3417E0 /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		AC03613BDCFEB0F78BA5A181 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				D092929D1D64A2640069F21E /* Voice */,
 				AC0363F20E865DC08283CF2E /* Helpers */,
 				AC03635339B1511F1342C098 /* Face */,
 				AC036D77476C2F3D621931D6 /* Privacy */,
@@ -365,9 +412,9 @@
 		AC0365EB1DB2FD7B597FE728 /* Result */ = {
 			isa = PBXGroup;
 			children = (
-				AC03606B5ABD79D9116AED75 /* AMBNAuthenticateFaceResult.h */,
+				AC03606B5ABD79D9116AED75 /* AMBNAuthenticateResult.h */,
 				AC036FA2CEE832B3E31CAB7D /* AMBNEnrollFaceResult.h */,
-				AC0368F0AFDA1F16A294FB99 /* AMBNAuthenticateFaceResult.m */,
+				AC0368F0AFDA1F16A294FB99 /* AMBNAuthenticateResult.m */,
 				AC0361137699010E833B0E36 /* AMBNSessionCreateResult.m */,
 				AC036F11EAC3A5966C450E78 /* AMBNEnrollFaceResult.m */,
 				AC03674ACCE6A60BACFAFB0B /* AMBNBehaviouralResult.h */,
@@ -381,6 +428,10 @@
 				AC0365571F50BFD4CF57E8D2 /* AMBNSerializedRequest.h */,
 				AC036EA20E7880FB81CF7FEF /* AMBNResult.h */,
 				AC0364382C0D5492E58D5813 /* AMBNCompareFaceResult.h */,
+				AC03699CBABACDB9F82E839B /* AMBNEnrollVoiceResult.m */,
+				AC036F9F4A4585716062CD27 /* AMBNEnrollVoiceResult.h */,
+				AC03681FF8DD00841DB1EFC7 /* AMBNVoiceTextResult.h */,
+				AC036C1DB5F81D1F1B898FB6 /* AMBNVoiceTextResult.m */,
 			);
 			path = Result;
 			sourceTree = "<group>";
@@ -423,6 +474,7 @@
 		AC036B14CF13129142F2F8BC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D09292AC1D64A28A0069F21E /* AMBNVoiceRecordingViewController.xib */,
 				AC03628CC21B74CA6D42611C /* AMBNFaceRecordingViewController.xib */,
 				AC036A2E11557CFF2D6C3E53 /* AMBNCameraOverlay.xib */,
 				AC0368DF2262F07123D2BD59 /* AMBNRecordingOverlayView.xib */,
@@ -451,6 +503,39 @@
 			path = "Accelerometer events";
 			sourceTree = "<group>";
 		};
+		D092929D1D64A2640069F21E /* Voice */ = {
+			isa = PBXGroup;
+			children = (
+				D092929E1D64A2640069F21E /* AMBNAudioRecorderConfigurator.h */,
+				D092929F1D64A2640069F21E /* AMBNAudioRecorderConfigurator.m */,
+				D09292A01D64A2640069F21E /* AMBNVoiceRecordingManager.h */,
+				D09292A11D64A2640069F21E /* AMBNVoiceRecordingManager.m */,
+				D09292A21D64A2640069F21E /* AMBNVoiceRecordingViewController.h */,
+				D09292A31D64A2640069F21E /* AMBNVoiceRecordingViewController.m */,
+				D09292A41D64A2640069F21E /* AMBNVoiceRecordingViewControllerDelegate.h */,
+			);
+			path = Voice;
+			sourceTree = "<group>";
+		};
+		D09292AF1D64A2D10069F21E /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				D09292B01D64A2D10069F21E /* DACircularProgress */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		D09292B01D64A2D10069F21E /* DACircularProgress */ = {
+			isa = PBXGroup;
+			children = (
+				D09292B11D64A4DC0069F21E /* DACircularProgressView.h */,
+				D09292B21D64A4DC0069F21E /* DACircularProgressView.m */,
+				D09292B31D64A4DC0069F21E /* DALabeledCircularProgressView.h */,
+				D09292B41D64A4DC0069F21E /* DALabeledCircularProgressView.m */,
+			);
+			path = DACircularProgress;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -458,21 +543,26 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC03604BB4F52EDA9F08C713 /* AMBNFaceCaptureManager.h in Headers */,
 				AC03661E7FA4595C8FC179D2 /* AMBNCameraPreview.h in Headers */,
 				AC0366A0D6D7F85C99DC9378 /* AMBNFaceRecordingViewControllerDelegate.h in Headers */,
 				AC0360F5F328421A03434FAB /* AMBNCameraOverlay.h in Headers */,
+				D09292A51D64A2640069F21E /* AMBNAudioRecorderConfigurator.h in Headers */,
 				AC036F8F7C638AFF9EF2FCA7 /* AMBNImageAdapter.h in Headers */,
 				AC036FAA08ACEC8A54401216 /* AMBNRecordingOverlayView.h in Headers */,
 				AC03667096E638D17A192E4B /* AMBNCameraOverlayDelegate.h in Headers */,
+				D09292B51D64A4DC0069F21E /* DACircularProgressView.h in Headers */,
 				AC03676EFA4D0E5E87E99319 /* AMBNFaceRecordingViewController.h in Headers */,
 				AC036E427411F862B2D82038 /* AMBNCaptureSessionConfigurator.h in Headers */,
+				D09292A71D64A2640069F21E /* AMBNVoiceRecordingManager.h in Headers */,
 				AC036292E33B5C9C2ADDEC45 /* AMBNPrivacyGuard.h in Headers */,
-				AC036DF9F19B8C2A644FBC88 /* AMBNAuthenticateFaceResult.h in Headers */,
+				D09292A91D64A2640069F21E /* AMBNVoiceRecordingViewController.h in Headers */,
+				AC036DF9F19B8C2A644FBC88 /* AMBNAuthenticateResult.h in Headers */,
+				D09292AB1D64A2640069F21E /* AMBNVoiceRecordingViewControllerDelegate.h in Headers */,
 				AC036AF177AC00E1369C6323 /* AMBNEnrollFaceResult.h in Headers */,
 				AC0361C82A6D2021CF8F97F3 /* AMBNBehaviouralResult.h in Headers */,
 				AC036DFB5DC6E4A85DC0AC6F /* AMBNCallResult.h in Headers */,
 				AC03691A50C726DAFE309EA4 /* AMBNSessionCreateResult.h in Headers */,
+				D09292B71D64A4DC0069F21E /* DALabeledCircularProgressView.h in Headers */,
 				AC0360A27D35F2FA1D62CE28 /* AMBNSerializedRequest.h in Headers */,
 				AC036163145CA07821DB88B1 /* AMBNResult.h in Headers */,
 				AC036AECDCD9CEACFC584A58 /* AMBNCompareFaceResult.h in Headers */,
@@ -483,7 +573,16 @@
 				AC0368C2015C1724A53FB9EB /* AMBNCapturingApplicationDelegate.h in Headers */,
 				AC036A636FB37814FE7B8E98 /* AMBNTouchCollectorDelegate.h in Headers */,
 				AC036BA144080340A1E2AF5A /* AMBNCapturingApplication.h in Headers */,
+				AC0363EE3316757291899CC6 /* AMBNVoiceTextResult.h in Headers */,
+				AC036497AD1E6EC2B54F40E0 /* AMBNEnrollVoiceResult.h in Headers */,
 				AC036AF046E8FBAA2636295F /* AMBNTouch.h in Headers */,
+				D03986CB1D64D1F600B23FCF /* AMBNFaceCaptureManager.h in Headers */,
+				D03986C91D64D1F600B23FCF /* AMBNHashGenerator.h in Headers */,
+				D03986CA1D64D1F600B23FCF /* AMBNViewIdChainExtractor.h in Headers */,
+				D03986CC1D64D1F600B23FCF /* AMBNTextInputCollector.h in Headers */,
+				D03986CD1D64D1F600B23FCF /* AMBNTouchCollector.h in Headers */,
+				D03986CE1D64D1F600B23FCF /* AMBNAcceleration.h in Headers */,
+				D03986CF1D64D1F600B23FCF /* AMBNAccelerometerCollector.h in Headers */,
 				AC036F9A084F8AEA01FD98B0 /* AMBNManager.h in Headers */,
 				AC03662F6D92F9C2F6C4CA0B /* AimBrainSDK.h in Headers */,
 			);
@@ -530,6 +629,24 @@
 			productReference = 0CDB93431C9822A100BEE7B3 /* face.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		F6CE49BE1CFC8506008D8DBE /* voice */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F6CE49C81CFC8506008D8DBE /* Build configuration list for PBXNativeTarget "voice" */;
+			buildPhases = (
+				F6CE49BF1CFC8506008D8DBE /* Sources */,
+				F6CE49C01CFC8506008D8DBE /* Frameworks */,
+				F6CE49C21CFC8506008D8DBE /* Resources */,
+				F6CE49C71CFC8506008D8DBE /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = voice;
+			productName = face;
+			productReference = D092929A1D64A14E0069F21E /* voice.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -538,7 +655,7 @@
 			attributes = {
 				CLASSPREFIX = AMBN;
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = "Paweł Kupiec";
+				ORGANIZATIONNAME = "AimBrain";
 				TargetAttributes = {
 					0C776A551C5FDAF6009BFDFD = {
 						CreatedOnToolsVersion = 7.2;
@@ -568,6 +685,7 @@
 				0C776A551C5FDAF6009BFDFD /* AimBrainSDK */,
 				0CDB93421C9822A100BEE7B3 /* face */,
 				D58999441CBCFF680006108D /* AimbrainFullSDK */,
+				F6CE49BE1CFC8506008D8DBE /* voice */,
 			);
 		};
 /* End PBXProject section */
@@ -588,6 +706,15 @@
 				AC03619709A9A0A1E5DE6F91 /* AMBNCameraOverlay.xib in Resources */,
 				AC036B145258B27A4D50EE3F /* AMBNRecordingOverlayView.xib in Resources */,
 				AC036BA20CC56199D5BEA882 /* icons.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6CE49C21CFC8506008D8DBE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D09292BE1D64BB180069F21E /* icons.xcassets in Resources */,
+				D09292AE1D64A29A0069F21E /* AMBNVoiceRecordingViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,14 +764,16 @@
 				AC03683B97E4FEF9572F6CA3 /* AMBNCaptureSessionConfigurator.m in Sources */,
 				AC03641F8654314A78375019 /* AMBNFaceCaptureManager.m in Sources */,
 				AC0365A36063842139581044 /* AMBNPrivacyGuard.m in Sources */,
-				AC0361B1C88A08234B0F277F /* AMBNAuthenticateFaceResult.m in Sources */,
+				AC0361B1C88A08234B0F277F /* AMBNAuthenticateResult.m in Sources */,
 				AC036D95E7C3C2540D1A287C /* AMBNSessionCreateResult.m in Sources */,
 				AC0361685F2376E5D56BA467 /* AMBNEnrollFaceResult.m in Sources */,
 				AC0361C7EAFEA79BDCD54BF1 /* AMBNSerializedRequest.m in Sources */,
 				AC036E10B2F39E202D91EDA0 /* AMBNBehaviouralResult.m in Sources */,
 				AC036791644C59B2192D8CC2 /* AMBNCompareFaceResult.m in Sources */,
+				D09292B81D64A4DC0069F21E /* DALabeledCircularProgressView.m in Sources */,
 				AC036D0DF0EF0BE7B0ED7877 /* AMBNCallResult.m in Sources */,
 				AC0361DBC08A6B4CB5186939 /* AMBNResult.m in Sources */,
+				D09292A81D64A2640069F21E /* AMBNVoiceRecordingManager.m in Sources */,
 				AC036F88EA3D2B53B2F4F5FC /* AMBNNetworkClient.m in Sources */,
 				AC036994E5F9C9968B1A1C1E /* AMBNServer.m in Sources */,
 				AC0366DD71D055AF3F4C88F7 /* AMBNTextInputCollector.m in Sources */,
@@ -653,12 +782,24 @@
 				AC036F228B04D5333A2A9E80 /* AMBNTouch.m in Sources */,
 				AC036124757DECFB73635799 /* AMBNCapturingApplication.m in Sources */,
 				AC036656DA911DA637EF7657 /* AMBNManager.m in Sources */,
+				D09292AA1D64A2640069F21E /* AMBNVoiceRecordingViewController.m in Sources */,
+				D09292A61D64A2640069F21E /* AMBNAudioRecorderConfigurator.m in Sources */,
+				D09292B61D64A4DC0069F21E /* DACircularProgressView.m in Sources */,
 				AC036EF90222B26233C768FE /* AMBNAccelerometerCollector.m in Sources */,
 				AC036098F94F8D084484AFF0 /* AMBNAcceleration.m in Sources */,
+				AC036EC920B058C1D8F89431 /* AMBNEnrollVoiceResult.m in Sources */,
+				AC036E095D0A180BAC6806FF /* AMBNVoiceTextResult.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		0CDB933F1C9822A100BEE7B3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F6CE49BF1CFC8506008D8DBE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -677,6 +818,11 @@
 			isa = PBXTargetDependency;
 			target = 0CDB93421C9822A100BEE7B3 /* face */;
 			targetProxy = D589994C1CBD17BA0006108D /* PBXContainerItemProxy */;
+		};
+		F60E58771CFD923A0091CFC5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F6CE49BE1CFC8506008D8DBE /* voice */;
+			targetProxy = F60E58761CFD923A0091CFC5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -745,7 +891,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Supporting Files/Face-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -766,7 +912,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Supporting Files/Info.plist";
+				INFOPLIST_FILE = "Supporting Files/Face-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -874,6 +1020,50 @@
 			};
 			name = Release;
 		};
+		F6CE49C91CFC8506008D8DBE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Supporting Files/Voice-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aimbrain.voice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Debug;
+		};
+		F6CE49CA1CFC8506008D8DBE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Supporting Files/Voice-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aimbrain.voice;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				WRAPPER_EXTENSION = bundle;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -909,6 +1099,15 @@
 			buildConfigurations = (
 				D58999451CBCFF680006108D /* Debug */,
 				D58999461CBCFF680006108D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F6CE49C81CFC8506008D8DBE /* Build configuration list for PBXNativeTarget "voice" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F6CE49C91CFC8506008D8DBE /* Debug */,
+				F6CE49CA1CFC8506008D8DBE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

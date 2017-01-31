@@ -9,10 +9,14 @@
 #import "AMBNSessionCreateResult.h"
 #import "AMBNBehaviouralResult.h"
 #import "AMBNEnrollFaceResult.h"
-#import "AMBNAuthenticateFaceResult.h"
+#import "AMBNAuthenticateResult.h"
 #import "AMBNCompareFaceResult.h"
 #import "AMBNNetworkClient.h"
 #import "AMBNSerializedRequest.h"
+#import "Voice/AMBNVoiceRecordingViewController.h"
+#import "AMBNVoiceRecordingManager.h"
+#import "Result/AMBNEnrollVoiceResult.h"
+#import "Result/AMBNVoiceTextResult.h"
 
 #define AMBNManagerSensitiveSaltLength 128
 @interface AMBNManager ()
@@ -29,6 +33,7 @@
 @property NSHashTable *sensitiveViews;
 @property AMBNFaceCaptureManager* faceCaptureManager;
 @property AMBNImageAdapter *imageAdapter;
+@property AMBNVoiceRecordingManager *voiceRecordingManager;
 @end
 @implementation AMBNManager
 
@@ -41,7 +46,7 @@
     return sharedManager;
 }
 
-- (instancetype) init{
+- (instancetype) init {
     self = [super init];
     self.imageAdapter = [[AMBNImageAdapter alloc] initWithQuality:0.7 maxHeight:300];
     self.privacyGuards = [NSHashTable weakObjectsHashTable];
@@ -65,6 +70,7 @@
     self.textInputCollector.delegate = self;
     
     self.faceCaptureManager = [[AMBNFaceCaptureManager alloc] init];
+    self.voiceRecordingManager = [[AMBNVoiceRecordingManager alloc] init];
     return self;
 }
 
@@ -95,7 +101,7 @@
     }];
 }
 
-- (void) createSessionWithUserId: (NSString *) userId completionHandler: (void (^)(AMBNSessionCreateResult * result, NSError *error))completion {
+- (void) createSessionWithUserId: (NSString *) userId completionHandler: (void (^)(AMBNSessionCreateResult *result, NSError *error))completion {
     [self createSessionWithUserId:userId metadata:nil completionHandler:completion];
 }
 
@@ -109,6 +115,10 @@
             completion(result, error);
         });
     }];
+}
+
+- (AMBNSerializedRequest *)getSerializedCreateSessionWithUserId:(NSString *)userId metadata:(NSData *)metadata {
+    return [self.server serializeCreateSessionWithUserId:userId metadata:metadata];
 }
 
 - (void)submitBehaviouralDataWithCompletion:(void (^)(AMBNResult *result, NSError *error))completion {
@@ -338,7 +348,7 @@
 }
 
 - (void)authenticateFaceImages:(NSArray *)images completion:(void (^)(NSNumber *score, NSNumber *liveliness, NSError *error))completion {
-    [self authenticateFaceImages:images metadata:nil completionHandler:^(AMBNAuthenticateFaceResult *result, NSError *error) {
+    [self authenticateFaceImages:images metadata:nil completionHandler:^(AMBNAuthenticateResult *result, NSError *error) {
         if (result) {
             completion(result.score, result.liveliness, error);
         }
@@ -348,15 +358,15 @@
     }];
 }
 
-- (void)authenticateFaceImages:(NSArray *)images completionHandler:(void (^)(AMBNAuthenticateFaceResult *result, NSError *error))completion {
+- (void)authenticateFaceImages:(NSArray *)images completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     [self authenticateFaceImages:images metadata:nil completionHandler:completion];
 }
 
-- (void)authenticateFaceImages:(NSArray *)images metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateFaceResult *result, NSError *error))completion {
+- (void)authenticateFaceImages:(NSArray *)images metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
 
-    [self.server authFace:[self adaptImages:images] session:self.session metadata:metadata completion:^(AMBNAuthenticateFaceResult *result, NSError *error) {
+    [self.server authFace:[self adaptImages:images] session:self.session metadata:metadata completion:^(AMBNAuthenticateResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(result, error);
         });
@@ -443,7 +453,7 @@
 }
 
 - (void)authenticateFaceVideo:(NSURL *)video completion:(void (^)(NSNumber *score, NSNumber *liveliness, NSError *error))completion {
-    [self authenticateFaceVideo:video metadata:nil completionHandler:^(AMBNAuthenticateFaceResult *result, NSError *error) {
+    [self authenticateFaceVideo:video metadata:nil completionHandler:^(AMBNAuthenticateResult *result, NSError *error) {
         if (result) {
             completion(result.score, result.liveliness, error);
         }
@@ -453,15 +463,15 @@
     }];
 }
 
-- (void)authenticateFaceVideo:(NSURL *)video completionHandler:(void (^)(AMBNAuthenticateFaceResult *result, NSError *error))completion {
+- (void)authenticateFaceVideo:(NSURL *)video completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     [self authenticateFaceVideo:video metadata:nil completionHandler:completion];
 }
 
-- (void)authenticateFaceVideo:(NSURL *)video metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateFaceResult *result, NSError *error))completion {
+- (void)authenticateFaceVideo:(NSURL *)video metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
 
-    [self.server authFace:[self adaptVideo:video] session:self.session metadata:metadata completion:^(AMBNAuthenticateFaceResult *result, NSError *error) {
+    [self.server authFace:[self adaptVideo:video] session:self.session metadata:metadata completion:^(AMBNAuthenticateResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             completion(result, error);
         });
@@ -472,7 +482,6 @@
     NSAssert(self.session != nil, @"Session is not obtained");
     return [self.server serializeAuthFace:[self adaptVideo:video] session:self.session metadata:metadata];
 }
-
 
 - (NSArray *)adaptImages:(NSArray *)images {
     NSMutableArray *adaptedImages = [NSMutableArray array];
@@ -492,6 +501,112 @@
     }
 
     return adaptedVideos;
+}
+
+
+- (AMBNVoiceRecordingViewController *) instantiateVoiceRecordingViewControllerWithAudioLength:(NSTimeInterval)audioLength {
+    return [self.voiceRecordingManager instantiateVoiceRecordingViewControllerWithAudioLength:audioLength];
+}
+
+- (AMBNVoiceRecordingViewController *) instantiateVoiceRecordingViewControllerWithTopHint:(NSString *)topHint bottomHint:(NSString *)bottomHint recordingHint:(NSString *)recordingHint audioLength:(NSTimeInterval)audioLength {
+    return [self.voiceRecordingManager instantiateVoiceRecordingViewControllerWithTopHint:topHint bottomHint:bottomHint recordingHint:recordingHint audioLength:audioLength];
+}
+
+- (void)enrollVoice:(NSURL *)voiceFileUrl completionHandler:(void (^)(AMBNEnrollVoiceResult *result, NSError *))completion {
+    [self enrollVoice:voiceFileUrl metadata:nil completionHandler:completion];
+}
+
+- (void)enrollVoice:(NSURL *)voiceFileUrl metadata:(NSData *)metadata completionHandler:(void (^)(AMBNEnrollVoiceResult *result, NSError *))completion {
+    NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert(self.session != nil, @"Session is not obtained");
+    NSAssert(voiceFileUrl != nil, @"Voice record file url is not provided");
+
+    [self.server enrollVoice:[self voiceRecordToBase64:voiceFileUrl] session:self.session metadata:metadata completion:^(AMBNEnrollVoiceResult *result, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(result, error);
+        });
+    }];
+}
+
+- (AMBNSerializedRequest *)getSerializedEnrollVoice:(NSURL *)voiceFileUrl metadata:(NSData *)metadata {
+    NSAssert(self.session != nil, @"Session is not obtained");
+    NSAssert(voiceFileUrl != nil, @"Voice record file url is not provided");
+    return [self.server serializeEnrollVoice:[self voiceRecordToBase64:voiceFileUrl] session:self.session metadata:metadata];
+}
+
+- (void)authenticateVoice:(NSURL*)voiceUrl completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
+    [self authenticateVoice:voiceUrl metadata:nil completionHandler:completion];
+}
+
+- (void)authenticateVoice:(NSURL*)voiceUrl metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
+    NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert(self.session != nil, @"Session is not obtained");
+    NSAssert(voiceUrl != nil, @"Voice record file url is not provided");
+
+    [self.server authVoice:[self voiceRecordToBase64:voiceUrl] session:self.session metadata:metadata completion:^(AMBNAuthenticateResult *result, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(result, error);
+        });
+    }];
+}
+
+- (AMBNSerializedRequest *)getSerializedAuthenticateVoice:(NSURL *)voiceFileUrl metadata:(NSData *)metadata {
+    NSAssert(self.session != nil, @"Session is not obtained");
+    NSAssert(voiceFileUrl != nil, @"Voice record file url is not provided");
+    return [self.server serializeAuthVoice:[self voiceRecordToBase64:voiceFileUrl] session:self.session metadata:metadata];
+}
+
+- (void)getVoiceTokenWithType:(AMBNVoiceTokenType)type completionHandler:(void (^)(AMBNVoiceTextResult *, NSError *))completion {
+    [self getVoiceTokenWithType:type metadata:nil completionHandler:completion];
+}
+
+- (void)getVoiceTokenWithType:(AMBNVoiceTokenType)type metadata:(NSData *)metadata completionHandler:(void (^)(AMBNVoiceTextResult *result, NSError * error))completion {
+    NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert(self.session != nil, @"Session is not obtained");
+
+    NSString *tokenType = [self voiceTokenString:type];
+    NSAssert(tokenType != nil, @"Correct token type not supplied");
+
+    [self.server getVoiceTokenForSession:self.session type:tokenType metadata:metadata completion:^(AMBNVoiceTextResult *result, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(result, error);
+        });
+    }];
+}
+
+- (AMBNSerializedRequest *)getSerializedGetVoiceTokenWithType:(AMBNVoiceTokenType)type metadata:(NSData *)metadata {
+    NSAssert(self.session != nil, @"Session is not obtained");
+    NSString *tokenType = [self voiceTokenString:type];
+    NSAssert(tokenType != nil, @"Correct token type not supplied");
+    return [self.server serializeGetVoiceTokenForSession:self.session type:tokenType metadata:metadata];
+}
+
+-(NSString *)voiceTokenString:(AMBNVoiceTokenType)type {
+    switch (type) {
+        case AMBNVoiceTokenTypeEnroll1:
+            return @"enroll-1";
+        case AMBNVoiceTokenTypeEnroll2:
+            return @"enroll-2";
+        case AMBNVoiceTokenTypeEnroll3:
+            return @"enroll-3";
+        case AMBNVoiceTokenTypeEnroll4:
+            return @"enroll-4";
+        case AMBNVoiceTokenTypeEnroll5:
+            return @"enroll-5";
+        case AMBNVoiceTokenTypeAuth:
+            return @"auth";
+    }
+    return nil;
+}
+
+- (NSString *)voiceRecordToBase64:(NSURL *)voiceUrl {
+    NSData *data = [NSData dataWithContentsOfURL:voiceUrl];
+    if ([data respondsToSelector:@selector(base64Encoding)]) {
+        return [data base64Encoding];
+    }
+    else {
+        return [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    }
 }
 
 @end

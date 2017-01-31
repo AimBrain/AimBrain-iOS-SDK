@@ -12,8 +12,16 @@ NSString *const AMBNCreateSessionEndpoint = @"sessions";
 NSString *const AMBNSubmitBehaviouralEndpoint = @"behavioural";
 NSString *const AMBNGetScoreEndpoint = @"score";
 NSString *const AMBNFacialEnrollEndpoint = @"face/enroll";
+NSString *const AMBNFacialEnrollWithoutSessionEndpoint = @"face/enroll/nosession";
 NSString *const AMBNFacialAuthEndpoint = @"face/auth";
+NSString *const AMBNFacialAuthWithoutSessionEndpoint = @"face/auth/nosession";
 NSString *const AMBNFacialCompareEndpoint = @"face/compare";
+NSString *const AMBNVoiceEnrollEndpoint = @"voice/enroll";
+NSString *const AMBNVoiceEnrollWithoutSessionEndpoint = @"voice/enroll/nosession";
+NSString *const AMBNVoiceAuthEndpoint = @"voice/auth";
+NSString *const AMBNVoiceAuthWithoutSessionEndpoint = @"voice/auth/nosession";
+NSString *const AMBNVoiceTokenEndpoint = @"voice/token";
+NSString *const AMBNVoiceTokenWithoutSessionEndpoint = @"voice/token/nosession";
 
 @interface AMBNNetworkClient()
 @property(nonatomic, strong) NSURL *baseURL;

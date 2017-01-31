@@ -11,10 +11,12 @@
 @class AMBNSessionCreateResult;
 @class AMBNBehaviouralResult;
 @class AMBNEnrollFaceResult;
-@class AMBNAuthenticateFaceResult;
+@class AMBNAuthenticateResult;
 @class AMBNCompareFaceResult;
 @class AMBNNetworkClient;
 @class AMBNSerializedRequest;
+@class AMBNEnrollVoiceResult;
+@class AMBNVoiceTextResult;
 
 @interface AMBNServer : NSObject
 - (instancetype)initWithNetworkClient:(AMBNNetworkClient *)client;
@@ -31,7 +33,7 @@
 
 - (AMBNSerializedRequest *)serializeScoreForSession:(NSString *)session metadata:(NSData *)metadata;
 
-- (void)authFace:(NSArray *)dataToAuth session:(NSString *)session metadata:(NSData *)metadata completion:(void (^)(AMBNAuthenticateFaceResult *result, NSError *error))completion;
+- (void)authFace:(NSArray *)dataToAuth session:(NSString *)session metadata:(NSData *)metadata completion:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion;
 
 - (AMBNSerializedRequest *)serializeAuthFace:(NSArray *)dataToAuth session:(NSString *)session metadata:(NSData *)metadata;
 
@@ -42,4 +44,17 @@
 - (void)enrollFace:(NSArray *)dataToEnroll session:(NSString *)session metadata:(NSData *)metadata completion:(void (^)(AMBNEnrollFaceResult *result, NSError *error))completion;
 
 - (AMBNSerializedRequest *)serializeEnrollFace:(NSArray *)dataToEnroll session:(NSString *)session metadata:(NSData *)metadata;
+
+- (void)enrollVoice: (NSString*) dataToEnroll session: (NSString*) session metadata:(NSData *)metadata completion:(void (^)(AMBNEnrollVoiceResult *, NSError *))completion;
+
+- (AMBNSerializedRequest *)serializeEnrollVoice:(NSString *)dataToEnroll session:(NSString *)session metadata:(NSData *)metadata;
+
+- (void)authVoice:(NSString *)dataToAuth session:(NSString *)session metadata:(NSData *)metadata completion:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion;
+
+- (AMBNSerializedRequest *)serializeAuthVoice:(NSString *)dataToAuth session:(NSString *)session metadata:(NSData *)metadata;
+
+- (void)getVoiceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata completion:(void (^)(AMBNVoiceTextResult *result, NSError *error))completion;
+
+- (AMBNSerializedRequest *)serializeGetVoiceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata;
+
 @end

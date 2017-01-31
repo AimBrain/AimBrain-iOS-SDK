@@ -3,15 +3,15 @@
 // Copyright (c) 2016 Paweł Kupiec. All rights reserved.
 //
 
-#import "AMBNAuthenticateFaceResult.h"
+#import "AMBNAuthenticateResult.h"
 
 
-@interface AMBNAuthenticateFaceResult ()
+@interface AMBNAuthenticateResult ()
 @property(nonatomic, strong, readwrite) NSNumber *score;
 @property(nonatomic, strong, readwrite) NSNumber *liveliness;
 @end
 
-@implementation AMBNAuthenticateFaceResult
+@implementation AMBNAuthenticateResult
 
 - (instancetype)initWithScore:(NSNumber *)score liveliness:(NSNumber *)liveliness metadata:(NSData *)metadata {
     self = [super initWithMetadata:metadata];
