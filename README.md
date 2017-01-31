@@ -73,13 +73,18 @@ Status of Behavioural Module modality (`result.behaviour`) can have following  v
 
 The manager is automatically configured with the obtained session ID.
 
+## Serialising new session call
+To get serialised new session request use
+```objective_c
+AMBNSerializedRequest *request = [[AMBNManager sharedInstance] getSerializedCreateSessionWithUserId:userId metadata:metadata]
+```
+
 ## Configuring with existing session
 A session can be stored and later used to configure `AMBNManager`.
 
 ```objective_c
 [AMBNManager sharedInstance].session = storedSession
 ```
-
 # Behavioural module
 
 ## Registering views
