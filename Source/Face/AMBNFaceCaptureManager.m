@@ -1,9 +1,10 @@
 #import "AMBNFaceCaptureManager.h"
 #import "AMBNCameraOverlay.h"
 #import <AVFoundation/AVFoundation.h>
+#import "AMBNImagePickerController.h"
 
 @interface AMBNFaceCaptureManager ()
-@property UIImagePickerController * imagePickerController;
+@property AMBNImagePickerController * imagePickerController;
 @property AMBNCameraOverlay *overlay;
 @property NSMutableArray *images;
 @property NSInteger batchSize;
@@ -26,16 +27,16 @@
     self.batchSize = batchSize;
     self.images = [NSMutableArray array];
     
-    self.imagePickerController = [[UIImagePickerController alloc] init];
+    self.imagePickerController = [[AMBNImagePickerController alloc] init];
     
     [self.imagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
-    
+    [self.imagePickerController setCameraFlashMode:UIImagePickerControllerCameraFlashModeOff];
+
     [self configureOverlayWithTopHint:topHint bottomHint:bottomHint];
-    
     
     [self.imagePickerController setShowsCameraControls:false];
 
-    if([UIImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]){
+    if([AMBNImagePickerController isCameraDeviceAvailable:UIImagePickerControllerCameraDeviceFront]){
         [self.imagePickerController setCameraDevice:UIImagePickerControllerCameraDeviceFront];
     }else{
         [self.imagePickerController setCameraDevice:UIImagePickerControllerCameraDeviceRear];
@@ -81,10 +82,10 @@
 }
 
 -(void) configureOverlayWithTopHint:(NSString *) topHint bottomHint: (NSString *) bottomHint{
-    NSString * faceBundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"face.bundle"];
-    self.overlay = [[[NSBundle bundleWithPath:faceBundlePath] loadNibNamed:@"AMBNCameraOverlay" owner:self options:nil] objectAtIndex:0];
+    NSBundle *faceBundle = [NSBundle bundleForClass:[AMBNCameraOverlay class]];
+    self.overlay = [[faceBundle loadNibNamed:@"AMBNCameraOverlay" owner:self options:nil] objectAtIndex:0];
     self.overlay.delegate = self;
-    [self.overlay setFrame:self.imagePickerController.view.frame];
+    [self.overlay setFrame:self.imagePickerController.cameraOverlayView.frame];
     self.overlay.imagePicker = self.imagePickerController;
     [self.overlay.topHintLabel setText:topHint];
     [self.overlay.bottomHintLabel setText:bottomHint];
@@ -97,7 +98,7 @@
 
 }
 
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+-(void)imagePickerController:(AMBNImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
     
     UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
     [self.images addObject:image];
@@ -141,6 +142,7 @@
     // Create bitmap image from original image data,
     // using rectangle to specify desired crop area
     CGImageRef imageRef = CGImageCreateWithImageInRect(rotatedCGImage, rect);
+    CGImageRelease(rotatedCGImage);
     UIGraphicsBeginImageContextWithOptions(CGSizeMake(finalCropWidth, finalCropWidth*aspectRatio), NO, 0.0);
     
     CGContextDrawImage(UIGraphicsGetCurrentContext(), CGRectMake(0,0,finalCropWidth, finalCropWidth*aspectRatio), imageRef);

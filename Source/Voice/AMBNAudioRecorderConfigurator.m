@@ -1,5 +1,7 @@
 #import "AMBNAudioRecorderConfigurator.h"
 
+#import "AMBNGlobal.h"
+
 @interface AMBNAudioRecorderConfigurator()
 
 @property (nonatomic, strong) NSString *outputFilePath;
@@ -25,21 +27,21 @@
     NSError *error = nil;
     [self.audioSession setCategory :AVAudioSessionCategoryPlayAndRecord error:&error];
     if(error) {
-        NSLog(@"audioSession: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
+        AMBN_LERR(@"audioSession: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
         return nil;
     }
     
     error = nil;
     [self.audioSession setMode:AMBNVoiceRecordingMeasurementOn ? AVAudioSessionModeMeasurement : AVAudioSessionModeDefault error:&error];
     if(error) {
-        NSLog(@"audioSession: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
+        AMBN_LERR(@"audioSession: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
         return nil;
     }
     
     error = nil;
     [self.audioSession setActive:YES error:&error];
     if(error) {
-        NSLog(@"audioSession: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
+        AMBN_LERR(@"audioSession: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
         return nil;
     }
     return [self getRecorder];
@@ -67,7 +69,7 @@
     NSError *error = nil;
     self.recorder = [[AVAudioRecorder alloc] initWithURL:[NSURL fileURLWithPath:self.outputFilePath] settings:[self recorderSettings] error:&error];
     if(!self.recorder) {
-        NSLog(@"recorder: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
+        AMBN_LERR(@"recorder: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
         return nil;
     }
     return self.recorder;
@@ -82,6 +84,7 @@
     [self.recorder prepareToRecord];
     [self.recorder setDelegate:delegate];
     if (!self.audioSession.isInputAvailable) {
+        AMBN_LWARN(@"Audio input hardware not available");
         UIAlertView *cantRecordAlert = [[UIAlertView alloc] initWithTitle:@"Warning" message:@"Audio input hardware not available"
                                                                  delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [cantRecordAlert show];
@@ -103,7 +106,7 @@
     NSError *error;
     self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:[NSURL fileURLWithPath:self.outputFilePath] error:&error];
     if(error) {
-        NSLog(@"audioPlayer: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
+        AMBN_LERR(@"audioPlayer: %@ %ld %@", [error domain], (long)[error code], [[error userInfo] description]);
         return;
     }
     self.audioPlayer.numberOfLoops = 0;

@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -14,28 +13,28 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view opaque="NO" contentMode="scaleToFill" id="iN0-l3-epB" customClass="AMBNCameraOverlay">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="768"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4j-u5-dkF">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="500"/>
+                    <rect key="frame" x="169" y="0.0" width="686" height="914"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ukd-6N-vPt" userLabel="leftSpacing">
-                            <rect key="frame" x="0.0" y="249" width="90" height="0.0"/>
+                            <rect key="frame" x="0.0" y="457" width="168" height="0.0"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" id="BYj-vn-qtC"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OHq-yt-Wtn" userLabel="rightSpacing">
-                            <rect key="frame" x="285" y="249" width="90" height="0.0"/>
+                            <rect key="frame" x="518" y="457" width="168" height="0.0"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" id="ykp-u2-GXt"/>
                             </constraints>
                         </view>
                         <view opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="g3H-aJ-5am">
-                            <rect key="frame" x="98" y="115" width="179" height="269"/>
+                            <rect key="frame" x="176" y="206" width="334" height="502"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="170" id="3Vu-e6-M6o"/>
@@ -48,7 +47,7 @@
                             </variation>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="355" translatesAutoresizingMaskIntoConstraints="NO" id="mVd-zB-b66">
-                            <rect key="frame" x="10" y="20" width="355" height="85"/>
+                            <rect key="frame" x="-159" y="20" width="1004" height="176"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <string key="text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit sit amet non magna. Sed posuere consectetur est at lobortis. Curabitur blandit tempus porttitor.</string>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -56,7 +55,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BHu-Zh-ulD" userLabel="Bottom camera button spacing">
-                            <rect key="frame" x="163" y="628" width="50" height="39"/>
+                            <rect key="frame" x="318" y="766" width="50" height="2"/>
                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="50" id="gch-v7-oZ9"/>
@@ -69,10 +68,10 @@
                             </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KMv-nV-ZbJ" userLabel="Top camera button spacing">
-                            <rect key="frame" x="0.0" y="384" width="375" height="196"/>
+                            <rect key="frame" x="-169" y="708" width="1024" height="10"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="248" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" preferredMaxLayoutWidth="355" translatesAutoresizingMaskIntoConstraints="NO" id="EGh-mC-N2s">
-                                    <rect key="frame" x="10" y="5" width="355" height="105"/>
+                                    <rect key="frame" x="10" y="5" width="1004" height="0.0"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <string key="text">Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis consectetur purus sit amet fermentum. Donec ullamcorper nulla non metus auctor fringilla.</string>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -88,7 +87,7 @@
                             </constraints>
                         </view>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="752" verticalCompressionResistancePriority="752" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="bd8-lB-PKT">
-                            <rect key="frame" x="178" y="555" width="20" height="20"/>
+                            <rect key="frame" x="333" y="713" width="20" height="0.0"/>
                         </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -141,7 +140,7 @@
                     </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kUH-8e-AFm">
-                    <rect key="frame" x="164" y="580" width="48" height="48"/>
+                    <rect key="frame" x="488" y="718" width="48" height="48"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="48" id="GZf-of-8Or"/>

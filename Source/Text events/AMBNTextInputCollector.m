@@ -2,6 +2,8 @@
 #import "AMBNTextEvent.h"
 #import "AMBNHashGenerator.h"
 
+#import "AMBNGlobal.h"
+
 
 @interface AMBNTextInputCollector ()
 
@@ -43,7 +45,6 @@
         }
         [self.buffer addObject:event];
         [self.delegate textInputCollector:self didCollectTextInput:event];
-        NSLog(@"text logged");
     }
 }
 
@@ -63,7 +64,6 @@
         }
         [self.buffer addObject: event];
         [self.delegate textInputCollector:self didCollectTextInput:event];
-        NSLog(@"text logged");
     }
 }
 

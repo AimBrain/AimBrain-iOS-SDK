@@ -26,27 +26,37 @@
 -(void)capturingApplication:(id)application event:(UIEvent *)event{
     if(event.type == UIEventTypeTouches) {
         for (UITouch *touch in [event allTouches]) {
-            UIView *view = [touch view];
-            
-            if(touch.window != [application keyWindow]){
-                continue;
-            }
-            if(view != nil && [self.delegate touchCollector: self shouldIgnoreTouchForView: view]){
-                continue;
-            }
-            
-            AMBNTouch *createdTouch = [self createTouch: touch];
-            if(createdTouch != nil){
-                if([self.delegate touchCollector:self shouldTreatAsSenitive:view]){
-                    createdTouch.absoluteLocation = CGPointMake(0, 0);
-                    createdTouch.identifiers = [AMBNHashGenerator generateHashArrayFromStringArray:createdTouch.identifiers salt:self.sensitiveSalt];
+            if ([self canProcessTouch:touch inApplication:application]) {
+                AMBNTouch *createdTouch = [self createTouch: touch];
+                if(createdTouch != nil){
+                    if([self.delegate touchCollector:self shouldTreatAsSenitive:[touch view]]){
+                        createdTouch.absoluteLocation = CGPointMake(0, 0);
+                        createdTouch.identifiers = [self generateIdentifiersForTouch:createdTouch];
+                    }
+                    [self.buffer addObject:createdTouch];
+                    [self.delegate touchCollector:self didCollectedTouch:createdTouch];
                 }
-                [self.buffer addObject:createdTouch];
-                [self.delegate touchCollector:self didCollectedTouch:createdTouch];
             }
-            
         }
     }
+}
+
+- (BOOL)canProcessTouch:(UITouch *)touch inApplication:(id)application {
+    
+    UIView *view = [touch view];
+    
+    if(touch.window != [application keyWindow]){
+        return NO;
+    }
+    if(view != nil && [self.delegate touchCollector: self shouldIgnoreTouchForView: view]){
+        return NO;
+    }
+    return YES;
+}
+
+- (NSArray *)generateIdentifiersForTouch:(AMBNTouch *)touch {
+    
+    return [AMBNHashGenerator generateHashArrayFromStringArray:touch.identifiers salt:self.sensitiveSalt];
 }
 
 - ( AMBNTouch * _Nullable ) createTouch: (UITouch *) touch{

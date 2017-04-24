@@ -1,11 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,6 +16,7 @@
                 <outlet property="recordButton" destination="ijE-6h-kQf" id="JhG-oE-3dx"/>
                 <outlet property="recordingHintLabel" destination="kX3-tS-cew" id="VPc-fJ-KWu"/>
                 <outlet property="topHintLabel" destination="mRo-hF-UFw" id="Ec1-cb-8z8"/>
+                <outlet property="topHintLabelTopConstraint" destination="Ec7-ST-XN3" id="fBr-7Z-lPu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="lAl-7S-oZr"/>
             </connections>
         </placeholder>
@@ -25,8 +25,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujB-OH-Ndi">
-                    <rect key="frame" x="530" y="20" width="63" height="40"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ujB-OH-Ndi">
+                    <rect key="frame" x="305" y="20" width="63" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="63" id="PQR-Cz-VtT"/>
                         <constraint firstAttribute="height" constant="40" id="TuZ-bn-dVm"/>
@@ -38,23 +38,23 @@
                         <action selector="closeButtonPressed:" destination="-1" eventType="touchUpInside" id="QMu-0W-Ndx"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mRo-hF-UFw">
-                    <rect key="frame" x="25" y="115" width="550" height="48"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mRo-hF-UFw">
+                    <rect key="frame" x="25" y="115" width="325" height="48"/>
                     <string key="text">To authenticate please press
 ‘microphone’ button and read text below</string>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQt-As-SAV" userLabel="separator">
-                    <rect key="frame" x="25" y="178" width="550" height="1"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QQt-As-SAV" userLabel="separator">
+                    <rect key="frame" x="25" y="178" width="325" height="1"/>
                     <color key="backgroundColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="d10-Os-oaB"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="27" translatesAutoresizingMaskIntoConstraints="NO" id="kX3-tS-cew">
-                    <rect key="frame" x="25" y="189" width="550" height="135"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="27" translatesAutoresizingMaskIntoConstraints="NO" id="kX3-tS-cew">
+                    <rect key="frame" x="25" y="189" width="325" height="202"/>
                     <string key="text">This is a
 kind of sample
 text to read</string>
@@ -62,16 +62,16 @@ text to read</string>
                     <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V3n-BB-GnA" userLabel="separator">
-                    <rect key="frame" x="25" y="334" width="550" height="1"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V3n-BB-GnA" userLabel="separator">
+                    <rect key="frame" x="25" y="401" width="325" height="1"/>
                     <color key="backgroundColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="JWA-0u-cHp"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="1" id="ZYU-KP-IqS"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="You will have 5 seconds" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4t-Js-8cp">
-                    <rect key="frame" x="25" y="350" width="550" height="37"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You will have 5 seconds" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P4t-Js-8cp">
+                    <rect key="frame" x="25" y="417" width="325" height="37"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="dKS-fY-nqz"/>
                     </constraints>
@@ -79,16 +79,16 @@ text to read</string>
                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="y1g-rB-eq7">
-                    <rect key="frame" x="215" y="405" width="170" height="170"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="y1g-rB-eq7">
+                    <rect key="frame" x="102.5" y="472" width="170" height="170"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="UEw-HG-qGc"/>
                         <constraint firstAttribute="height" constant="170" id="mTI-RC-OE8"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijE-6h-kQf">
-                    <rect key="frame" x="215" y="405" width="170" height="170"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ijE-6h-kQf">
+                    <rect key="frame" x="102.5" y="472" width="170" height="170"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="170" id="DyI-hN-JYn"/>
                         <constraint firstAttribute="height" constant="170" id="MzH-8G-eIH"/>

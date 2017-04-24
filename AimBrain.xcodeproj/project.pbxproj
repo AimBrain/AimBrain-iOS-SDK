@@ -25,6 +25,10 @@
 
 /* Begin PBXBuildFile section */
 		0CDB93521C9828BA00BEE7B3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CDB93511C9828BA00BEE7B3 /* CoreFoundation.framework */; };
+		A27B81421E7FEDD5009972E9 /* libAimBrainSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C776A561C5FDAF6009BFDFD /* libAimBrainSDK.a */; };
+		A27B814A1E80086B009972E9 /* AMBNServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A27B81491E80086B009972E9 /* AMBNServerTests.m */; };
+		A29E541A1E7AD3940043D59F /* AMBNGlobal.h in Headers */ = {isa = PBXBuildFile; fileRef = A29E54191E7AD2C00043D59F /* AMBNGlobal.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A29E541B1E7AD3970043D59F /* AMBNLogConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = A29E54181E7AD0810043D59F /* AMBNLogConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC03607A112F3103A833CE0F /* AMBNTextEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036BE2E339A5034C16C311 /* AMBNTextEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC036098F94F8D084484AFF0 /* AMBNAcceleration.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0366987C48F5E47F0BEEED /* AMBNAcceleration.m */; };
 		AC0360A27D35F2FA1D62CE28 /* AMBNSerializedRequest.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0365571F50BFD4CF57E8D2 /* AMBNSerializedRequest.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -88,6 +92,11 @@
 		AC036F8F7C638AFF9EF2FCA7 /* AMBNImageAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = AC03624C7FE254A12B2A3E3A /* AMBNImageAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC036F9A084F8AEA01FD98B0 /* AMBNManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0369870BB6F278E4D9F9D9 /* AMBNManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AC036FAA08ACEC8A54401216 /* AMBNRecordingOverlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = AC0368F971862583A0650EEA /* AMBNRecordingOverlayView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C53BA2FB76F2F9D06DAB9512 /* libPods-AimBrainTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83021F47CBDDB458D740FA22 /* libPods-AimBrainTests.a */; };
+		D000ED6E1EAA4A36007C559A /* AMBNCircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = D000ED6C1EAA4A36007C559A /* AMBNCircularProgressView.h */; };
+		D000ED6F1EAA4A36007C559A /* AMBNCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D000ED6D1EAA4A36007C559A /* AMBNCircularProgressView.m */; };
+		D000ED721EAA5110007C559A /* AMBNImagePickerController.h in Headers */ = {isa = PBXBuildFile; fileRef = D000ED701EAA5110007C559A /* AMBNImagePickerController.h */; };
+		D000ED731EAA5110007C559A /* AMBNImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = D000ED711EAA5110007C559A /* AMBNImagePickerController.m */; };
 		D03986C91D64D1F600B23FCF /* AMBNHashGenerator.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036D87019704D2491784CA /* AMBNHashGenerator.h */; };
 		D03986CA1D64D1F600B23FCF /* AMBNViewIdChainExtractor.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036B20CA0B81BDB011F264 /* AMBNViewIdChainExtractor.h */; };
 		D03986CB1D64D1F600B23FCF /* AMBNFaceCaptureManager.h in Headers */ = {isa = PBXBuildFile; fileRef = AC036515995D53DEE8571204 /* AMBNFaceCaptureManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -103,14 +112,17 @@
 		D09292AA1D64A2640069F21E /* AMBNVoiceRecordingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D09292A31D64A2640069F21E /* AMBNVoiceRecordingViewController.m */; };
 		D09292AB1D64A2640069F21E /* AMBNVoiceRecordingViewControllerDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = D09292A41D64A2640069F21E /* AMBNVoiceRecordingViewControllerDelegate.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D09292AE1D64A29A0069F21E /* AMBNVoiceRecordingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D09292AC1D64A28A0069F21E /* AMBNVoiceRecordingViewController.xib */; };
-		D09292B51D64A4DC0069F21E /* DACircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = D09292B11D64A4DC0069F21E /* DACircularProgressView.h */; };
-		D09292B61D64A4DC0069F21E /* DACircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D09292B21D64A4DC0069F21E /* DACircularProgressView.m */; };
-		D09292B71D64A4DC0069F21E /* DALabeledCircularProgressView.h in Headers */ = {isa = PBXBuildFile; fileRef = D09292B31D64A4DC0069F21E /* DALabeledCircularProgressView.h */; };
-		D09292B81D64A4DC0069F21E /* DALabeledCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = D09292B41D64A4DC0069F21E /* DALabeledCircularProgressView.m */; };
 		D09292BE1D64BB180069F21E /* icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC03636C02DEF3380B620A3C /* icons.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		A27B81431E7FEDD5009972E9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6003F582195388D10070C39A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0C776A551C5FDAF6009BFDFD;
+			remoteInfo = AimBrainSDK;
+		};
 		D58999481CBCFF840006108D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 6003F582195388D10070C39A /* Project object */;
@@ -166,6 +178,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B1155BEB0B655419556FFC0 /* Pods-AimBrainTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AimBrainTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AimBrainTests/Pods-AimBrainTests.debug.xcconfig"; sourceTree = "<group>"; };
 		0C776A561C5FDAF6009BFDFD /* libAimBrainSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAimBrainSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDB93431C9822A100BEE7B3 /* face.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = face.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CDB93511C9828BA00BEE7B3 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -176,6 +189,13 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		83021F47CBDDB458D740FA22 /* libPods-AimBrainTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AimBrainTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9276902046A20391DC50D627 /* Pods-AimBrainTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AimBrainTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-AimBrainTests/Pods-AimBrainTests.release.xcconfig"; sourceTree = "<group>"; };
+		A27B813D1E7FEDD5009972E9 /* AimBrainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AimBrainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A27B81411E7FEDD5009972E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A27B81491E80086B009972E9 /* AMBNServerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNServerTests.m; path = "Remote API/AMBNServerTests.m"; sourceTree = "<group>"; };
+		A29E54181E7AD0810043D59F /* AMBNLogConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMBNLogConstants.h; sourceTree = "<group>"; };
+		A29E54191E7AD2C00043D59F /* AMBNGlobal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMBNGlobal.h; sourceTree = "<group>"; };
 		AC03600885AA4FC44D548E15 /* AMBNCameraOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNCameraOverlay.m; sourceTree = "<group>"; };
 		AC036069ACB9675CC9A763E0 /* AMBNServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNServer.h; sourceTree = "<group>"; };
 		AC03606B5ABD79D9116AED75 /* AMBNAuthenticateResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNAuthenticateResult.h; sourceTree = "<group>"; };
@@ -249,6 +269,10 @@
 		AC036FA2CEE832B3E31CAB7D /* AMBNEnrollFaceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNEnrollFaceResult.h; sourceTree = "<group>"; };
 		AC036FBBA7CD800925FB59E7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		AC036FFF2248796CE2293CFB /* AMBNTextInputCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNTextInputCollector.m; sourceTree = "<group>"; };
+		D000ED6C1EAA4A36007C559A /* AMBNCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNCircularProgressView.h; sourceTree = "<group>"; };
+		D000ED6D1EAA4A36007C559A /* AMBNCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNCircularProgressView.m; sourceTree = "<group>"; };
+		D000ED701EAA5110007C559A /* AMBNImagePickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNImagePickerController.h; sourceTree = "<group>"; };
+		D000ED711EAA5110007C559A /* AMBNImagePickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNImagePickerController.m; sourceTree = "<group>"; };
 		D092929A1D64A14E0069F21E /* voice.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = voice.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		D092929E1D64A2640069F21E /* AMBNAudioRecorderConfigurator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNAudioRecorderConfigurator.h; sourceTree = "<group>"; };
 		D092929F1D64A2640069F21E /* AMBNAudioRecorderConfigurator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNAudioRecorderConfigurator.m; sourceTree = "<group>"; };
@@ -258,10 +282,6 @@
 		D09292A31D64A2640069F21E /* AMBNVoiceRecordingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNVoiceRecordingViewController.m; sourceTree = "<group>"; };
 		D09292A41D64A2640069F21E /* AMBNVoiceRecordingViewControllerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNVoiceRecordingViewControllerDelegate.h; sourceTree = "<group>"; };
 		D09292AC1D64A28A0069F21E /* AMBNVoiceRecordingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMBNVoiceRecordingViewController.xib; sourceTree = "<group>"; };
-		D09292B11D64A4DC0069F21E /* DACircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DACircularProgressView.h; sourceTree = "<group>"; };
-		D09292B21D64A4DC0069F21E /* DACircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DACircularProgressView.m; sourceTree = "<group>"; };
-		D09292B31D64A4DC0069F21E /* DALabeledCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DALabeledCircularProgressView.h; sourceTree = "<group>"; };
-		D09292B41D64A4DC0069F21E /* DALabeledCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DALabeledCircularProgressView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,6 +300,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A27B813A1E7FEDD5009972E9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A27B81421E7FEDD5009972E9 /* libAimBrainSDK.a in Frameworks */,
+				C53BA2FB76F2F9D06DAB9512 /* libPods-AimBrainTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F6CE49C01CFC8506008D8DBE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -293,8 +322,8 @@
 		6003F581195388D10070C39A = {
 			isa = PBXGroup;
 			children = (
-				D09292AF1D64A2D10069F21E /* Library */,
 				6003F5B5195388D20070C39A /* Tests */,
+				A27B813E1E7FEDD5009972E9 /* AimBrainTests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
 				AC03613BDCFEB0F78BA5A181 /* Source */,
@@ -302,6 +331,7 @@
 				AC036AFA4B3D699D6D0F4E02 /* Supporting Files */,
 				AC036C0C30065ACC4C39DC2F /* LICENSE */,
 				AC036FBBA7CD800925FB59E7 /* README.md */,
+				61527504A9454388EBA4D026 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -311,6 +341,7 @@
 				0C776A561C5FDAF6009BFDFD /* libAimBrainSDK.a */,
 				0CDB93431C9822A100BEE7B3 /* face.bundle */,
 				D092929A1D64A14E0069F21E /* voice.bundle */,
+				A27B813D1E7FEDD5009972E9 /* AimBrainTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -322,6 +353,7 @@
 				6003F58D195388D20070C39A /* Foundation.framework */,
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
+				83021F47CBDDB458D740FA22 /* libPods-AimBrainTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -345,6 +377,32 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		61527504A9454388EBA4D026 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0B1155BEB0B655419556FFC0 /* Pods-AimBrainTests.debug.xcconfig */,
+				9276902046A20391DC50D627 /* Pods-AimBrainTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A27B813E1E7FEDD5009972E9 /* AimBrainTests */ = {
+			isa = PBXGroup;
+			children = (
+				A27B81481E8007F5009972E9 /* Remote API */,
+				A27B81411E7FEDD5009972E9 /* Info.plist */,
+			);
+			path = AimBrainTests;
+			sourceTree = "<group>";
+		};
+		A27B81481E8007F5009972E9 /* Remote API */ = {
+			isa = PBXGroup;
+			children = (
+				A27B81491E80086B009972E9 /* AMBNServerTests.m */,
+			);
+			name = "Remote API";
+			sourceTree = "<group>";
+		};
 		AC03613BDCFEB0F78BA5A181 /* Source */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +416,8 @@
 				AC036712903213461DF4708D /* Touch events */,
 				AC0369870BB6F278E4D9F9D9 /* AMBNManager.h */,
 				AC0369B5A5B99ABB14B261BC /* AMBNManager.m */,
+				A29E54181E7AD0810043D59F /* AMBNLogConstants.h */,
+				A29E54191E7AD2C00043D59F /* AMBNGlobal.h */,
 				AC036D908286D593607FC699 /* Accelerometer events */,
 				AC03657A89EBDC1FB1825A78 /* AimBrainSDK.h */,
 			);
@@ -378,6 +438,8 @@
 		AC03635339B1511F1342C098 /* Face */ = {
 			isa = PBXGroup;
 			children = (
+				D000ED701EAA5110007C559A /* AMBNImagePickerController.h */,
+				D000ED711EAA5110007C559A /* AMBNImagePickerController.m */,
 				AC036515995D53DEE8571204 /* AMBNFaceCaptureManager.h */,
 				AC0365D3279924F00C7E93D1 /* AMBNCameraPreview.m */,
 				AC036EDB7B25CDCAF1096FA6 /* AMBNCameraPreview.h */,
@@ -506,6 +568,8 @@
 		D092929D1D64A2640069F21E /* Voice */ = {
 			isa = PBXGroup;
 			children = (
+				D000ED6C1EAA4A36007C559A /* AMBNCircularProgressView.h */,
+				D000ED6D1EAA4A36007C559A /* AMBNCircularProgressView.m */,
 				D092929E1D64A2640069F21E /* AMBNAudioRecorderConfigurator.h */,
 				D092929F1D64A2640069F21E /* AMBNAudioRecorderConfigurator.m */,
 				D09292A01D64A2640069F21E /* AMBNVoiceRecordingManager.h */,
@@ -515,25 +579,6 @@
 				D09292A41D64A2640069F21E /* AMBNVoiceRecordingViewControllerDelegate.h */,
 			);
 			path = Voice;
-			sourceTree = "<group>";
-		};
-		D09292AF1D64A2D10069F21E /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				D09292B01D64A2D10069F21E /* DACircularProgress */,
-			);
-			path = Library;
-			sourceTree = "<group>";
-		};
-		D09292B01D64A2D10069F21E /* DACircularProgress */ = {
-			isa = PBXGroup;
-			children = (
-				D09292B11D64A4DC0069F21E /* DACircularProgressView.h */,
-				D09292B21D64A4DC0069F21E /* DACircularProgressView.m */,
-				D09292B31D64A4DC0069F21E /* DALabeledCircularProgressView.h */,
-				D09292B41D64A4DC0069F21E /* DALabeledCircularProgressView.m */,
-			);
-			path = DACircularProgress;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -549,8 +594,9 @@
 				D09292A51D64A2640069F21E /* AMBNAudioRecorderConfigurator.h in Headers */,
 				AC036F8F7C638AFF9EF2FCA7 /* AMBNImageAdapter.h in Headers */,
 				AC036FAA08ACEC8A54401216 /* AMBNRecordingOverlayView.h in Headers */,
+				D000ED6E1EAA4A36007C559A /* AMBNCircularProgressView.h in Headers */,
 				AC03667096E638D17A192E4B /* AMBNCameraOverlayDelegate.h in Headers */,
-				D09292B51D64A4DC0069F21E /* DACircularProgressView.h in Headers */,
+				D000ED721EAA5110007C559A /* AMBNImagePickerController.h in Headers */,
 				AC03676EFA4D0E5E87E99319 /* AMBNFaceRecordingViewController.h in Headers */,
 				AC036E427411F862B2D82038 /* AMBNCaptureSessionConfigurator.h in Headers */,
 				D09292A71D64A2640069F21E /* AMBNVoiceRecordingManager.h in Headers */,
@@ -562,7 +608,6 @@
 				AC0361C82A6D2021CF8F97F3 /* AMBNBehaviouralResult.h in Headers */,
 				AC036DFB5DC6E4A85DC0AC6F /* AMBNCallResult.h in Headers */,
 				AC03691A50C726DAFE309EA4 /* AMBNSessionCreateResult.h in Headers */,
-				D09292B71D64A4DC0069F21E /* DALabeledCircularProgressView.h in Headers */,
 				AC0360A27D35F2FA1D62CE28 /* AMBNSerializedRequest.h in Headers */,
 				AC036163145CA07821DB88B1 /* AMBNResult.h in Headers */,
 				AC036AECDCD9CEACFC584A58 /* AMBNCompareFaceResult.h in Headers */,
@@ -575,7 +620,9 @@
 				AC036BA144080340A1E2AF5A /* AMBNCapturingApplication.h in Headers */,
 				AC0363EE3316757291899CC6 /* AMBNVoiceTextResult.h in Headers */,
 				AC036497AD1E6EC2B54F40E0 /* AMBNEnrollVoiceResult.h in Headers */,
+				A29E541A1E7AD3940043D59F /* AMBNGlobal.h in Headers */,
 				AC036AF046E8FBAA2636295F /* AMBNTouch.h in Headers */,
+				A29E541B1E7AD3970043D59F /* AMBNLogConstants.h in Headers */,
 				D03986CB1D64D1F600B23FCF /* AMBNFaceCaptureManager.h in Headers */,
 				D03986C91D64D1F600B23FCF /* AMBNHashGenerator.h in Headers */,
 				D03986CA1D64D1F600B23FCF /* AMBNViewIdChainExtractor.h in Headers */,
@@ -629,6 +676,27 @@
 			productReference = 0CDB93431C9822A100BEE7B3 /* face.bundle */;
 			productType = "com.apple.product-type.bundle";
 		};
+		A27B813C1E7FEDD5009972E9 /* AimBrainTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A27B81471E7FEDD5009972E9 /* Build configuration list for PBXNativeTarget "AimBrainTests" */;
+			buildPhases = (
+				5B20332A4C2812E4E5C09FA6 /* [CP] Check Pods Manifest.lock */,
+				A27B81391E7FEDD5009972E9 /* Sources */,
+				A27B813A1E7FEDD5009972E9 /* Frameworks */,
+				A27B813B1E7FEDD5009972E9 /* Resources */,
+				EE68DB3ED47B7061B77F7F8A /* [CP] Embed Pods Frameworks */,
+				12C93F5113C167DF11DC83A8 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A27B81441E7FEDD5009972E9 /* PBXTargetDependency */,
+			);
+			name = AimBrainTests;
+			productName = AimBrainTests;
+			productReference = A27B813D1E7FEDD5009972E9 /* AimBrainTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		F6CE49BE1CFC8506008D8DBE /* voice */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = F6CE49C81CFC8506008D8DBE /* Build configuration list for PBXNativeTarget "voice" */;
@@ -655,13 +723,17 @@
 			attributes = {
 				CLASSPREFIX = AMBN;
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = "AimBrain";
+				ORGANIZATIONNAME = "Paweł Kupiec";
 				TargetAttributes = {
 					0C776A551C5FDAF6009BFDFD = {
 						CreatedOnToolsVersion = 7.2;
 					};
 					0CDB93421C9822A100BEE7B3 = {
 						CreatedOnToolsVersion = 7.2.1;
+					};
+					A27B813C1E7FEDD5009972E9 = {
+						CreatedOnToolsVersion = 8.2.1;
+						ProvisioningStyle = Automatic;
 					};
 					D58999441CBCFF680006108D = {
 						CreatedOnToolsVersion = 7.3;
@@ -686,6 +758,7 @@
 				0CDB93421C9822A100BEE7B3 /* face */,
 				D58999441CBCFF680006108D /* AimbrainFullSDK */,
 				F6CE49BE1CFC8506008D8DBE /* voice */,
+				A27B813C1E7FEDD5009972E9 /* AimBrainTests */,
 			);
 		};
 /* End PBXProject section */
@@ -709,6 +782,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A27B813B1E7FEDD5009972E9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F6CE49C21CFC8506008D8DBE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -721,6 +801,36 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		12C93F5113C167DF11DC83A8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AimBrainTests/Pods-AimBrainTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5B20332A4C2812E4E5C09FA6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		D589994A1CBCFFD60006108D /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -747,6 +857,21 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Versions/A/Headers\"\n\n# Link the \"Current\" version to \"A\"\n/bin/ln -sfh A \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Versions/Current\"\n/bin/ln -sfh Versions/Current/Headers \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Headers\"\n/bin/ln -sfh \"Versions/Current/AimBrainSDK\" \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/AimBrainSDK\"\n\n# The -a ensures that the headers maintain the source modification date so that we don't constantly\n# cause propagating rebuilds of files that import these headers.\n/bin/cp -a \"${TARGET_BUILD_DIR}/${PUBLIC_HEADERS_FOLDER_PATH}/\" \"${BUILT_PRODUCTS_DIR}/AimBrainSDK.framework/Versions/A/Headers\"";
 		};
+		EE68DB3ED47B7061B77F7F8A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AimBrainTests/Pods-AimBrainTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -757,7 +882,9 @@
 				AC036CD4961D820BBF83AB46 /* AMBNHashGenerator.m in Sources */,
 				AC036F850458FACD5E279F16 /* AMBNViewIdChainExtractor.m in Sources */,
 				AC036255BD1615F3ADDDB826 /* AMBNCameraPreview.m in Sources */,
+				D000ED731EAA5110007C559A /* AMBNImagePickerController.m in Sources */,
 				AC036C8D87661B2EB1A24C14 /* AMBNCameraOverlay.m in Sources */,
+				D000ED6F1EAA4A36007C559A /* AMBNCircularProgressView.m in Sources */,
 				AC036BFDB00EC8ACDE766EDA /* AMBNImageAdapter.m in Sources */,
 				AC0368D98E4475503EDA1AD4 /* AMBNRecordingOverlayView.m in Sources */,
 				AC036B9AFC238EA72CE29AEB /* AMBNFaceRecordingViewController.m in Sources */,
@@ -770,7 +897,6 @@
 				AC0361C7EAFEA79BDCD54BF1 /* AMBNSerializedRequest.m in Sources */,
 				AC036E10B2F39E202D91EDA0 /* AMBNBehaviouralResult.m in Sources */,
 				AC036791644C59B2192D8CC2 /* AMBNCompareFaceResult.m in Sources */,
-				D09292B81D64A4DC0069F21E /* DALabeledCircularProgressView.m in Sources */,
 				AC036D0DF0EF0BE7B0ED7877 /* AMBNCallResult.m in Sources */,
 				AC0361DBC08A6B4CB5186939 /* AMBNResult.m in Sources */,
 				D09292A81D64A2640069F21E /* AMBNVoiceRecordingManager.m in Sources */,
@@ -784,7 +910,6 @@
 				AC036656DA911DA637EF7657 /* AMBNManager.m in Sources */,
 				D09292AA1D64A2640069F21E /* AMBNVoiceRecordingViewController.m in Sources */,
 				D09292A61D64A2640069F21E /* AMBNAudioRecorderConfigurator.m in Sources */,
-				D09292B61D64A4DC0069F21E /* DACircularProgressView.m in Sources */,
 				AC036EF90222B26233C768FE /* AMBNAccelerometerCollector.m in Sources */,
 				AC036098F94F8D084484AFF0 /* AMBNAcceleration.m in Sources */,
 				AC036EC920B058C1D8F89431 /* AMBNEnrollVoiceResult.m in Sources */,
@@ -799,6 +924,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A27B81391E7FEDD5009972E9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A27B814A1E80086B009972E9 /* AMBNServerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		F6CE49BF1CFC8506008D8DBE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -809,6 +942,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		A27B81441E7FEDD5009972E9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0C776A551C5FDAF6009BFDFD /* AimBrainSDK */;
+			targetProxy = A27B81431E7FEDD5009972E9 /* PBXContainerItemProxy */;
+		};
 		D58999491CBCFF840006108D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 0C776A551C5FDAF6009BFDFD /* AimBrainSDK */;
@@ -1004,6 +1142,49 @@
 			};
 			name = Release;
 		};
+		A27B81451E7FEDD5009972E9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B1155BEB0B655419556FFC0 /* Pods-AimBrainTests.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = AimBrainTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aimbrain.AimBrainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A27B81461E7FEDD5009972E9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9276902046A20391DC50D627 /* Pods-AimBrainTests.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = AimBrainTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aimbrain.AimBrainTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		D58999451CBCFF680006108D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1090,6 +1271,15 @@
 			buildConfigurations = (
 				6003F5BD195388D20070C39A /* Debug */,
 				6003F5BE195388D20070C39A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A27B81471E7FEDD5009972E9 /* Build configuration list for PBXNativeTarget "AimBrainTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A27B81451E7FEDD5009972E9 /* Debug */,
+				A27B81461E7FEDD5009972E9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

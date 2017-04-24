@@ -2,6 +2,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import "AMBNVoiceRecordingViewController.h"
 
+#import "AMBNGlobal.h"
+
 @interface AMBNVoiceRecordingManager ()
 
 @end
@@ -20,6 +22,7 @@
     voiceRecordingViewController.bottomHint = bottomHint;
     voiceRecordingViewController.audioLength = audioLength;
     voiceRecordingViewController.recordingHint = recordingHint;
+    AMBN_LINFO(@"Voice recording controller instantiated");
     return voiceRecordingViewController;
 }
 
@@ -27,6 +30,7 @@
     NSString *voiceBundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"voice.bundle"];
     AMBNVoiceRecordingViewController *voiceRecordingViewController = [[AMBNVoiceRecordingViewController alloc] initWithNibName:@"AMBNVoiceRecordingViewController" bundle:[NSBundle bundleWithPath:voiceBundlePath]];
     voiceRecordingViewController.audioLength = audioLength;
+    AMBN_LINFO(@"Voice recording controller instantiated");
     return voiceRecordingViewController;
 }
 

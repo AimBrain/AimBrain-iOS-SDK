@@ -18,7 +18,15 @@
 #import "Result/AMBNEnrollVoiceResult.h"
 #import "Result/AMBNVoiceTextResult.h"
 
+#import "AMBNGlobal.h"
+
 #define AMBNManagerSensitiveSaltLength 128
+
+// Logging info
+// Default to ON and WARNINGS
+BOOL ambnLoggingEnabled = YES;
+AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
+
 @interface AMBNManager ()
 
 @property AMBNAccelerometerCollector * accelerometerCollector;
@@ -37,6 +45,8 @@
 @end
 @implementation AMBNManager
 
+#pragma mark - singleton
+
 + (instancetype) sharedInstance{
     static AMBNManager *sharedManager = nil;
     static dispatch_once_t onceToken;
@@ -45,6 +55,22 @@
     });
     return sharedManager;
 }
+
+#pragma mark - public methods - logging
+
++ (void)setLoggingEnabled:(BOOL)isEnabled {
+    ambnLoggingEnabled = isEnabled;
+}
+
++ (void)setLogLevel:(AMBNLogLevel)level {
+    ambnLogLevel = level;
+}
+
++ (AMBNLogLevel)logLevel {
+    return ambnLogLevel;
+}
+
+#pragma mark - live cycle
 
 - (instancetype) init {
     self = [super init];
@@ -57,7 +83,7 @@
 
     self.accelerometerCollector = [[AMBNAccelerometerCollector alloc] initWithBuffer:self.accelerations collectionPeriod:0.5f updateInterval:0.01f];
     
-    NSAssert([[UIApplication sharedApplication] isKindOfClass:[AMBNCapturingApplication class]], @"application must be of class AMBNCapturingApplication");
+    NSAssert([self isApplicationKindOfAMBNCapturingApplicationClass:[UIApplication sharedApplication]], @"application must be of class AMBNCapturingApplication");
     AMBNCapturingApplication * application = (AMBNCapturingApplication *)[UIApplication sharedApplication];
     
     self.registeredViews = [NSMapTable weakToStrongObjectsMapTable];
@@ -74,20 +100,28 @@
     return self;
 }
 
+- (BOOL)isApplicationKindOfAMBNCapturingApplicationClass:(UIApplication *)application {
+    
+    return [application isKindOfClass:[AMBNCapturingApplication class]];
+}
+
 - (void) start{
     _started = true;
     [self.textInputCollector start];
     
     id application = [UIApplication sharedApplication];
-    NSAssert([application isKindOfClass:[AMBNCapturingApplication class]], @"sharedApplication must be of type: AMBNCapturingApplication");
+    NSAssert([self isApplicationKindOfAMBNCapturingApplicationClass:application], @"sharedApplication must be of type: AMBNCapturingApplication");
+    AMBN_LVERBOSE(@"Behavioural data collection did start");
 }
 
 - (void) configureWithApiKey: (NSString *) apiKey secret: (NSString *) appSecret {
     self.server = [[AMBNServer alloc] initWithNetworkClient:[[AMBNNetworkClient alloc] initWithApiKey:apiKey secret:appSecret]];
+    AMBN_LVERBOSE(@"AMBNManager configured with api key: %@, app secret: %@", apiKey, appSecret);
 }
 
 - (void) configureWithApiKey: (NSString *) apiKey secret: (NSString *) appSecret baseUrl:(NSString*)baseUrl {
     self.server = [[AMBNServer alloc] initWithNetworkClient:[[AMBNNetworkClient alloc] initWithApiKey:apiKey secret:appSecret baseUrl:baseUrl]];
+    AMBN_LVERBOSE(@"AMBNManager configured with api key: %@, app secret: %@, base url: %@", apiKey, appSecret, baseUrl);
 }
 
 - (void) createSessionWithUserId: (NSString *) userId completion: (void (^)(NSString * session, NSNumber * face, NSNumber * behaviour, NSError *error))completion {
@@ -107,11 +141,14 @@
 
 - (void) createSessionWithUserId: (NSString *) userId metadata:(NSData *) metadata completionHandler: (void (^)(AMBNSessionCreateResult * result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    AMBN_LVERBOSE(@"Creating session with user id: %@, metadata: %@", userId, metadata);
     [self.server createSessionWithUserId:userId metadata:metadata completion:^(AMBNSessionCreateResult * result, NSError *error) {
         if (result != nil) {
             self.session = result.session;
+            AMBN_LVERBOSE(@"Session did created (session: %@)", result.session);
         }
         dispatch_async(dispatch_get_main_queue(), ^{
+            AMBN_LERR(@"Session creating error: %@", error.localizedDescription);
             completion(result, error);
         });
     }];
@@ -140,6 +177,7 @@
 - (void)submitBehaviouralDataWithMetadata:(NSData *)metadata completionHandler:(void (^)(AMBNBehaviouralResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
+    AMBN_LVERBOSE(@"Submitting behavioural data");
     NSArray *touchesToSubmit;
     @synchronized (self.touches) {
         touchesToSubmit = [NSArray arrayWithArray:self.touches];
@@ -218,6 +256,7 @@
 - (void) getScoreWithMetadata:(NSData *)metadata completionHandler:(void (^)(AMBNBehaviouralResult * result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
+    AMBN_LVERBOSE(@"Getting score");
     [self.server getScoreForSession:self.session metadata:metadata completion:completion];
 }
 
@@ -236,16 +275,20 @@
     @synchronized (self.textEvents) {
         [self.textEvents removeAllObjects];
     }
+    
+    AMBN_LVERBOSE(@"Behavioural data cleared");
 }
 
 - (void)registerView:(UIView *)view withId:(NSString *)identifier {
     [self.registeredViews setObject:identifier forKey:view];
+    AMBN_LVERBOSE(@"Registered view with id: %@", identifier);
 }
 
 - (void)addSensitiveViews:(NSArray *)views {
     for (UIView *view in views) {
         [self.sensitiveViews addObject:view];
     }
+    AMBN_LVERBOSE(@"Sensitive views added (count: %li)", views.count);
 }
 
 - (void)setSensitiveSalt:(NSData *)salt {
@@ -253,23 +296,27 @@
     NSAssert(salt.length == AMBNManagerSensitiveSaltLength, error);
     self.textInputCollector.sensitiveSalt = salt;
     self.touchCollector.sensitiveSalt = salt;
+    AMBN_LVERBOSE(@"Sensitive salt did set");
 }
 
 - (NSData *)generateRandomSensitiveSalt {
     NSMutableData *data = [NSMutableData dataWithLength:128];
     SecRandomCopyBytes(kSecRandomDefault, AMBNManagerSensitiveSaltLength, data.mutableBytes);
+    AMBN_LVERBOSE(@"Random sensitive salt did generate");
     return data;
 }
 
 - (AMBNPrivacyGuard *)disableCapturingForAllViews {
     AMBNPrivacyGuard *guard = [[AMBNPrivacyGuard alloc] initWithAllViews];
     [self.privacyGuards addObject:guard];
+    AMBN_LVERBOSE(@"Capturing disabled for all views");
     return guard;
 }
 
 - (AMBNPrivacyGuard *)disableCapturingForViews:(NSArray *)views {
     AMBNPrivacyGuard *guard = [[AMBNPrivacyGuard alloc] initWithViews:views];
     [self.privacyGuards addObject:guard];
+    AMBN_LVERBOSE(@"Capturing disabled for %li views", views.count);
     return guard;
 }
 
@@ -297,6 +344,7 @@
 
 - (void)textInputCollector:(id)textInputCollector didCollectTextInput:(AMBNTextEvent *)textEvent {
     [self.accelerometerCollector trigger];
+    AMBN_LVERBOSE(@"Text logged");
 }
 
 - (BOOL)textInputCollector:(id)textInputCollector shouldTreatAsSenitive:(UIView *)view {
@@ -333,6 +381,7 @@
 - (void)enrollFaceImages:(NSArray *)images metadata:(NSData *)metadata completionHandler:(void (^)(AMBNEnrollFaceResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
+    AMBN_LVERBOSE(@"Face images enroll started (count: %li)", images.count);
 
     [self.server enrollFace:[self adaptImages:images] session:self.session metadata:metadata completion:^(AMBNEnrollFaceResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -365,6 +414,7 @@
 - (void)authenticateFaceImages:(NSArray *)images metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
+    AMBN_LVERBOSE(@"Face images authenticate started (count: %li)", images.count);
 
     [self.server authFace:[self adaptImages:images] session:self.session metadata:metadata completion:^(AMBNAuthenticateResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -396,6 +446,7 @@
 
 - (void)compareFaceImages:(NSArray *)firstFaceImages toFaceImages:(NSArray *)secondFaceImages metadata:(NSData *)metadata completionHandler:(void (^)(AMBNCompareFaceResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    AMBN_LVERBOSE(@"Face images compare started (first count: %li, second count: %li)", firstFaceImages.count, secondFaceImages.count);
 
     [self.server compareFaceImages:[self adaptImages:firstFaceImages] withFaceImages:[self adaptImages:secondFaceImages] metadata:metadata completion:^(AMBNCompareFaceResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -411,6 +462,7 @@
 
 - (void)openFaceImagesCaptureWithTopHint:(NSString *)topHint bottomHint:(NSString *)bottomHint batchSize:(NSInteger)batchSize delay:(NSTimeInterval)delay fromViewController:(UIViewController *)viewController completion:(void (^)(NSArray *images, NSError *error))completion {
     [self.faceCaptureManager openCaptureViewFromViewController:viewController topHint:topHint bottomHint:bottomHint batchSize:batchSize delay:delay completion:completion];
+    AMBN_LVERBOSE(@"Face image capture did open");
 }
 
 - (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithVideoLength:(NSTimeInterval)videoLength {
@@ -439,6 +491,7 @@
 - (void)enrollFaceVideo:(NSURL *)video metadata:(NSData *)metadata completionHandler:(void (^)(AMBNEnrollFaceResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
+    AMBN_LVERBOSE(@"Face video enroll started (URL: %@", video.absoluteString);
 
     [self.server enrollFace:[self adaptVideo:video] session:self.session metadata:metadata completion:^(AMBNEnrollFaceResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -470,6 +523,7 @@
 - (void)authenticateFaceVideo:(NSURL *)video metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
+    AMBN_LVERBOSE(@"Face video authenticate started (URL: %@)", video.absoluteString);
 
     [self.server authFace:[self adaptVideo:video] session:self.session metadata:metadata completion:^(AMBNAuthenticateResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -520,6 +574,7 @@
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
     NSAssert(voiceFileUrl != nil, @"Voice record file url is not provided");
+    AMBN_LVERBOSE(@"Voice enroll started (URL: %@)", voiceFileUrl.absoluteString);
 
     [self.server enrollVoice:[self voiceRecordToBase64:voiceFileUrl] session:self.session metadata:metadata completion:^(AMBNEnrollVoiceResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -542,6 +597,7 @@
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
     NSAssert(voiceUrl != nil, @"Voice record file url is not provided");
+    AMBN_LVERBOSE(@"Voice authenticate started (URL: %@)", voiceUrl.absoluteString);
 
     [self.server authVoice:[self voiceRecordToBase64:voiceUrl] session:self.session metadata:metadata completion:^(AMBNAuthenticateResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -566,6 +622,8 @@
 
     NSString *tokenType = [self voiceTokenString:type];
     NSAssert(tokenType != nil, @"Correct token type not supplied");
+    
+    AMBN_LVERBOSE(@"Voice token getting started (type: %@)", [self voiceTokenString:type]);
 
     [self.server getVoiceTokenForSession:self.session type:tokenType metadata:metadata completion:^(AMBNVoiceTextResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{

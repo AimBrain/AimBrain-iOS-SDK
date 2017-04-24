@@ -1,17 +1,20 @@
 #import "AMBNVoiceRecordingViewController.h"
 #import "AMBNAudioRecorderConfigurator.h"
-#import "DACircularProgressView.h"
+
+#import "AMBNCircularProgressView.h"
+#import "AMBNGlobal.h"
 
 @interface AMBNVoiceRecordingViewController ()
 
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UILabel *topHintLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet NSLayoutConstraint *topHintLabelTopConstraint;
 @property (weak, nonatomic) IBOutlet UILabel *bottomHintLabel;
 @property (weak, nonatomic) IBOutlet UILabel *recordingHintLabel;
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
 @property (weak, nonatomic) IBOutlet UIProgressView *progressView;
 @property (weak, nonatomic) IBOutlet UIView *circularProgressViewContainer;
-@property (strong, nonatomic) DACircularProgressView *circularProgressView;
+@property (strong, nonatomic) AMBNCircularProgressView *circularProgressView;
 @property (strong, nonatomic) AMBNAudioRecorderConfigurator *recorderConfigurator;
 @property (strong, nonatomic) AVAudioRecorder *audioRecorder;
 @property (strong, nonatomic) NSTimer *timer;
@@ -22,6 +25,11 @@
 #define kGrayColor [UIColor colorWithRed:142./255. green:142./255. blue:147./255. alpha:1.0]
 #define kBlueColor [UIColor colorWithRed:0./255. green:118./255. blue:255./255. alpha:1.0]
 #define kBlueTranspColor [UIColor colorWithRed:0./255. green:118./255. blue:255./255. alpha:0.12]
+
+static CGFloat kScreen35Inch_Height = 480.0;
+static CGFloat kScreen35Inch_HintFontSize = 15.0;
+static CGFloat kScreen35Inch_TopHintTopInset = 16;
+static CGFloat kScreen35Inch_RecHintMinScale = 0.4;
 
 @implementation AMBNVoiceRecordingViewController
 
@@ -37,14 +45,22 @@
     self.secondsDisplayCount = self.audioLength;
     self.progressView.progress = 0;
     
-    self.circularProgressView = [[DACircularProgressView alloc] initWithFrame:self.circularProgressViewContainer.bounds];
+    self.circularProgressView = [[AMBNCircularProgressView alloc] initWithFrame:self.circularProgressViewContainer.bounds];
     self.circularProgressView.backgroundColor = [UIColor clearColor];
     self.circularProgressView.trackTintColor = kBlueTranspColor;
+    self.circularProgressView.trackStrokeWidth = 0.5f;
     self.circularProgressView.progressTintColor = kGrayColor;
-    self.circularProgressView.clockwiseProgress = YES;
-    self.circularProgressView.thicknessRatio = 0.01f;
+    self.circularProgressView.progressStrokeWidth = 1.0f;
     [self.circularProgressViewContainer addSubview:self.circularProgressView];
     [self.circularProgressView setProgress:1.0f];
+    
+    // Setup layout for iPhone 4s to fit all hints
+    if ([UIScreen mainScreen].bounds.size.height == kScreen35Inch_Height) {
+        _topHintLabelTopConstraint.constant = kScreen35Inch_TopHintTopInset;
+        _topHintLabel.font = [_topHintLabel.font fontWithSize:kScreen35Inch_HintFontSize];
+        _bottomHintLabel.font = [_bottomHintLabel.font fontWithSize:kScreen35Inch_HintFontSize];
+        [_recordingHintLabel setMinimumScaleFactor:kScreen35Inch_RecHintMinScale];
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -121,10 +137,12 @@
         self.recordButton.selected = YES;
         [self startTimer];
         [self startAnimatingProgressBar];
+        AMBN_LVERBOSE(@"Recording did start");
     }
 }
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)aRecorder successfully:(BOOL)flag {
+    AMBN_LVERBOSE(@"Recording did finish");
     if ([self.delegate respondsToSelector:@selector(voiceRecordingViewController: recordingResult: error:)]) {
         if (flag) {
             [self.delegate voiceRecordingViewController:self recordingResult:aRecorder.url error:nil];
@@ -181,16 +199,16 @@
 }
 
 - (void)startAnimatingProgressBar {
+    
+    // Prepare to start animating
     self.bottomHintLabel.textColor = kBlueColor;
     self.circularProgressView.progressTintColor = kBlueColor;
     [self.circularProgressView setProgress:0.0f];
-    [self.circularProgressView setProgress:1.0f animated:YES initialDelay:0.1f withDuration:self.audioLength];
     
-    //self.progressView.progress = 1.0;
-    //[UIView animateWithDuration:self.audioLength delay:0 options:UIViewAnimationOptionCurveLinear animations:^{
-    //    [self.progressView layoutIfNeeded];
-    //} completion:^(BOOL finished) {
-    //}];
+    // Start animating after delay
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.circularProgressView setProgress:1.0f animated:YES withDuration:5.0];
+    });
 }
 
 - (IBAction)closeButtonPressed:(id)sender {

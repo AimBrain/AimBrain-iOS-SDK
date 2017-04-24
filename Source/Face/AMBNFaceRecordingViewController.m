@@ -108,7 +108,13 @@
 - (void)addOverlay {
     NSString * faceBundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"face.bundle"];
     self.overlayView = [[AMBNRecordingOverlayView alloc] init];
-    self.overlayView = [[[NSBundle bundleWithPath:faceBundlePath] loadNibNamed:@"AMBNRecordingOverlayView" owner:self.overlayView options:nil] firstObject];
+    
+    NSBundle *bundle = [NSBundle bundleWithPath:faceBundlePath];
+    if (bundle) {
+        self.overlayView = [[[NSBundle bundleWithPath:faceBundlePath] loadNibNamed:@"AMBNRecordingOverlayView" owner:self.overlayView options:nil] firstObject];
+    } else {
+        self.overlayView = [[[NSBundle mainBundle] loadNibNamed:@"AMBNRecordingOverlayView" owner:self.overlayView options:nil] firstObject];
+    }
     self.overlayView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.overlayView.topHintLabel setText:self.topHint];
     [self.overlayView.bottomHintLabel setText:self.bottomHint];

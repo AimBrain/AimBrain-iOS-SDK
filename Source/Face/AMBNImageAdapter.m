@@ -13,17 +13,17 @@
         CGSize newSize = CGSizeMake(image.size.width/image.size.height * self.maxHeight, self.maxHeight);
         image = [self resizeImage:image newSize:newSize];
     }
-    if ([UIImageJPEGRepresentation(image, 0.7) respondsToSelector:@selector(base64EncodedStringWithOptions:)]) {
-        return [UIImageJPEGRepresentation(image, 0.7) base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    if ([UIImageJPEGRepresentation(image, _jpegQuality) respondsToSelector:@selector(base64EncodedStringWithOptions:)]) {
+        return [UIImageJPEGRepresentation(image, _jpegQuality) base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     }
-    return [UIImageJPEGRepresentation(image, 0.7) base64Encoding];
+    return [UIImageJPEGRepresentation(image, _jpegQuality) base64Encoding];
 }
 
 - (UIImage *)resizeImage:(UIImage*)image newSize:(CGSize)newSize {
     CGRect newRect = CGRectIntegral(CGRectMake(0, 0, newSize.width, newSize.height));
     CGImageRef imageRef = image.CGImage;
     
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0);
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, image.scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     // Set the quality level to use when rescaling

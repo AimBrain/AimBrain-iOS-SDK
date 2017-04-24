@@ -8,6 +8,8 @@
 #import "AMBNSerializedRequest.h"
 #import <CommonCrypto/CommonCrypto.h>
 
+#import "AMBNGlobal.h"
+
 NSString *const AMBNCreateSessionEndpoint = @"sessions";
 NSString *const AMBNSubmitBehaviouralEndpoint = @"behavioural";
 NSString *const AMBNGetScoreEndpoint = @"score";
@@ -53,6 +55,7 @@ NSString *const AMBNVoiceTokenWithoutSessionEndpoint = @"voice/token/nosession";
         }
 
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+        AMBN_LVERBOSE(@"RESPONSE_CODE: %@", @(httpResponse.statusCode));
         if ([httpResponse statusCode] != 200) {
             completion(nil, [self composeErrorResponse:httpResponse data:data]);
             return;
@@ -61,8 +64,14 @@ NSString *const AMBNVoiceTokenWithoutSessionEndpoint = @"voice/token/nosession";
         NSError *jsonParseError;
         id jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonParseError];
         if (jsonParseError) {
+            AMBN_LERR(@"JSON parser error: %@", jsonParseError.localizedDescription);
             completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
             return;
+        }
+        
+        AMBN_LVERBOSE(@"RESPONSE_BODY: %@", (NSDictionary *)jsonObject);
+        if ([httpResponse respondsToSelector:@selector(allHeaderFields)]) {
+            AMBN_LVERBOSE(@"RESPONSE_HEADERS: %@", httpResponse.allHeaderFields);
         }
 
         completion(jsonObject, nil);
@@ -87,6 +96,10 @@ NSString *const AMBNVoiceTokenWithoutSessionEndpoint = @"voice/token/nosession";
     }
     [request setValue:singature forHTTPHeaderField:@"X-aimbrain-signature"];
     request.HTTPBody = serialized.data;
+    
+    AMBN_LVERBOSE(@"URL_USED: %@", url.absoluteString);
+    AMBN_LVERBOSE(@"REQUEST_BODY: %@", serialized.dataString);
+    
     return request;
 }
 
@@ -94,6 +107,7 @@ NSString *const AMBNVoiceTokenWithoutSessionEndpoint = @"voice/token/nosession";
     NSError *error;
     NSData * jsonData = [NSJSONSerialization dataWithJSONObject:data options:0 error:&error];
     if(error != nil) {
+        AMBN_LERR(@"Serialized request error: %@", error.localizedDescription);
         return nil;
     }
     return [[AMBNSerializedRequest alloc] initWithData:jsonData];
@@ -107,6 +121,7 @@ NSString *const AMBNVoiceTokenWithoutSessionEndpoint = @"voice/token/nosession";
         if ([jsonObject isKindOfClass:[NSDictionary class]]) {
             NSDictionary *jsonDict = (NSDictionary *) jsonObject;
             errorMessage = jsonDict[@"error"];
+            AMBN_LERR(@"%@", errorMessage);
         }
     }
     NSDictionary *userInfo;

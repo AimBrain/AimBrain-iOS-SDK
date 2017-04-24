@@ -5,6 +5,7 @@
 #import "AMBNTouchCollectorDelegate.h"
 #import "AMBNFaceRecordingViewController.h"
 #import "AMBNResult.h"
+#import "AMBNLogConstants.h"
 
 @class AMBNSessionCreateResult;
 @class AMBNBehaviouralResult;
@@ -51,6 +52,33 @@ typedef NS_ENUM(NSInteger, AMBNVoiceTokenType) {
  @return AMBNManager singleton.
  */
 + (instancetype)sharedInstance;
+
+#pragma mark - logging
+
+/**
+ Enables or disabled logging.
+ Default is enabled. Console messages depend on set LogLevel.
+ 
+ @param isEnabled If "YES", console logging is enabled.
+ */
++ (void)setLoggingEnabled:(BOOL)isEnabled;
+
+/**
+ Sets log level.
+ Default is "AMBNLogLevelWarn".
+ If Logging is disabled, will ignore level setting.
+ 
+ @param level The desired "AMBNLogLevel" log level.
+ */
++ (void)setLogLevel:(AMBNLogLevel)level;
+
+/**
+ Returns the desired "AMBNLogLevel".
+ If Logging is disabled, will ignore level setting.
+ 
+ @return log level.
+ */
++ (AMBNLogLevel)logLevel;
 
 /*!
  @description Starts behavioural data collection.
