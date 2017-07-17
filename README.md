@@ -1,4 +1,4 @@
-#AimBrain SDK integration
+# AimBrain SDK integration
 
 ## Application class
 In order to integrate the AimBrain iOS SDK it is necessary to set up `AMBNCapturingApplication` (subclass of `UIApplication`) as main application. `main.m` file after modification should look like this:
