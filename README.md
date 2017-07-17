@@ -1,7 +1,5 @@
 #AimBrain SDK integration
 
-For full documentation and references please see: [https://docs.aimbrain.com](https://docs.aimbrain.com)
-
 ## Application class
 In order to integrate the AimBrain iOS SDK it is necessary to set up `AMBNCapturingApplication` (subclass of `UIApplication`) as main application. `main.m` file after modification should look like this:
 
@@ -42,14 +40,14 @@ Once session is set methods with prefix ```getSerialized...``` can be called to 
 All serialisation calls return ```AMBNSerializedRequest``` object. The request data can be accessed via ```AMBNSerializedRequest``` field ```data``` field as NSData or ```AMBNSerializedRequest``` field ```dataString``` as NSString.
 
 Please refer to server side integration documentation for serialised data processing details.  
-
+ 
 #Request metadata
 
-For some integration scenarios additional data may be required to be sent to server.
+For some integration scenarios additional data may be required to be sent to server. 
 
 Such integration-defined information should be submitted by calling function overload with parameter ```metadata```.
 
-Integration-defined information is returned from server in response field ```metadata```.
+Integration-defined information is returned from server in response field ```metadata```. 
 
 # Sessions
 In order to submit data to AimBrain `AMBNManager` needs to be configured with a session. There are two ways of doing it.
@@ -57,7 +55,7 @@ In order to submit data to AimBrain `AMBNManager` needs to be configured with a 
 ## Obtaining new session
 A new session can be obtained by passing `userId` to `createSession` method on `AMBNManager`. Completion callback returns result object with session token, status of Facial Module modalitiy and status of Behavioural Module modality. Status of Facial Module modality (`result.face`) can have following values:
 
-*0 - User not enrolled - facial authentication not available, enrollment required
+*0 - User not enrolled - facial authentication not available, enrollment required 
 *1 - User enrolled - facial authentication available.
 *2 - Building template - enrollment done, AimBrain is building user template and no further action is required.
 
@@ -75,18 +73,13 @@ Status of Behavioural Module modality (`result.behaviour`) can have following  v
 
 The manager is automatically configured with the obtained session ID.
 
-## Serialising new session call
-To get serialised new session request use
-```objective_c
-AMBNSerializedRequest *request = [[AMBNManager sharedInstance] getSerializedCreateSessionWithUserId:userId metadata:metadata]
-```
-
 ## Configuring with existing session
 A session can be stored and later used to configure `AMBNManager`.
 
 ```objective_c
 [AMBNManager sharedInstance].session = storedSession
 ```
+
 # Behavioural module
 
 ## Registering views
@@ -108,6 +101,15 @@ In order to start collecting behavioural data `start` method needs to be called 
 
 ```objective_c
 [[AMBNManager sharedInstance] start];
+```
+
+## Set data collection memory limit
+ 
+Data collection can be limited, using `memoryUsageLimit` property of the
+`AMBNManager` class instance. Setting kAMBNMemoryUsageUnlimited allows unlimited meory usage. Memory usage is unlimited by default.
+ 
+```objective_c
+[[AMBNManager sharedInstance] setMemoryUsageLimit:200];
 ```
 
 ## Submitting behavioural data
@@ -151,7 +153,7 @@ To get the current session score from the server without sending any data use `g
 
 ```objective_c
 [[AMBNManager sharedInstance] getScoreWithCompletion:^(AMBNBehaviouralResult *result, NSError *error) {
-  // Do something with the obtained score
+    // Do something with the obtained score
 }]
 ```
 
@@ -256,13 +258,13 @@ Enrolling with the facial module is done by calling the `enrollFaceImages` or `e
 
 ```objective_c
 [[AMBNManager sharedInstance] enrollFaceImages:images completion:^(AMBNEnrollFaceResult *result,  NSError *error) {
-    ...
+...
 }];
 ```
 
 ```objective_c
 [[AMBNManager sharedInstance] enrollFaceVideo:video completion:^(AMBNEnrollFaceResult *result, NSError *error) {
-    ...
+...
 }];
 ```
 
@@ -295,52 +297,59 @@ AMBNSerializedRequest *request = [[AMBNManager sharedInstance] getSerializedComp
 
 
 ## Retrieving voice token
-In order to enroll or authenticate via voice module you have to record user voice and submit it to the API. Voice recording must contain user voice reading text retrieved with `getVoiceTokenWithType` method. Text retrieved with `getVoiceTokenWithType` is called `voice token` in the SDK.
+In order to enroll or authenticate via voice module you have to record user voice and submit it to the API. Voice recording 
+must contain user voice reading text retrieved with `getVoiceTokenWithType` method. Text retrieved with `getVoiceTokenWithType` is 
+called `voice token` in the SDK.
 
 ```objective_c
 AMBNVoiceTokenType type = AMBNVoiceTokenTypeAuth;
 [[AMBNManager sharedInstance] getVoiceTokenWithType:type completionHandler:^(AMBNVoiceTextResult *result, NSError *error) {
-    // ... result.tokenText contains voice token
+   // ... result.tokenText contains voice token
 }];
 ```
 
 ## Voice token types
 Voice token retrieval method `getVoiceTokenWithType` takes mandatory `type` parameter.
-
+  
 All possible type values are defined in the enum `AMBNVoiceTokenType`:
 * Tokens with type `AMBNVoiceTokenTypeAuth` are used for authentication calls.
-* Tokens with types `AMBNVoiceTokenTypeEnroll1`, `AMBNVoiceTokenTypeEnroll2`, `AMBNVoiceTokenTypeEnroll3`, `AMBNVoiceTokenTypeEnroll4`, `AMBNVoiceTokenTypeEnroll5` are used for enrollment.
+* Tokens with types `AMBNVoiceTokenTypeEnroll1`, `AMBNVoiceTokenTypeEnroll2`, `AMBNVoiceTokenTypeEnroll3`, `AMBNVoiceTokenTypeEnroll4`, `AMBNVoiceTokenTypeEnroll5` are used for enrollment. 
 
 To complete enrollment voice tokens must be retrieved with each enroll type used for enrollment (`AMBNVoiceTokenTypeEnrollN`). Each voice token must be presented to the user, recorded and enrolled successfully.
-
+ 
 ## Serialising voice token call
 To get serialised voice token request use
-
+ 
 ```objective_c
 AMBNSerializedRequest *request = [[AMBNManager sharedInstance] getSerializedGetVoiceTokenWithType:type metadata:matadata];
 ```
 
 ## Recording user voice
-In order to record user voice the `instantiateVoiceRecordingViewControllerWithTopHint` method has to be called from the `AMBNManager`. The voice recording view controller is returned and needs to be presented. The voice recording view controller has property `delegate` of type `AMBNVoiceRecordingViewControllerDelegate`. It has to be set in order to receive audio recording. After recording is finished `voiceRecordingViewController:recordingResult:error:` method is called on the delegate. Audio file is removed after this method returns.
+In order to record user voice the `instantiateVoiceRecordingViewControllerWithTopHint` method has to be called from the `AMBNManager`. 
+The voice recording view controller is returned and needs to be presented. The voice recording view controller has property `delegate` 
+of type `AMBNVoiceRecordingViewControllerDelegate`. It has to be set in order to receive audio recording. After recording 
+is finished `voiceRecordingViewController:recordingResult:error:` method is called on the delegate. Audio file is 
+removed after this method returns.
 
-Voice token retrieved with `getVoiceTokenWithType` or `getSerializedGetVoiceTokenWithType:metadata:` must be passed as `recordingHint` parameter. This text will be presented to the user with voice recording instructions.
+Voice token retrieved with `getVoiceTokenWithType` or `getSerializedGetVoiceTokenWithType:metadata:` must be passed as `recordingHint` parameter. This text will be presented 
+ to the user with voice recording instructions.
 
 ```objective_c
 AMBNVoiceRecordingViewController *vc = [[AMBNManager sharedInstance] instantiateVoiceRecordingViewControllerWithTopHint:hint bottomHint:bottomHint recordingHint:text audioLength:5];
 vc.delegate = self;
-[self.viewController presentViewController:vc animated:YES completion:nil];
+[self.viewController presentViewController:vc animated:YES completion:nil]; 
 ```
 
 ```objective_c
 - (void)voiceRecordingViewController:(AMBNVoiceRecordingViewController *)voiceRecordingViewController recordingResult:(NSURL *)audio error:(NSError *)error {
-    [voiceRecordingViewController dismissViewControllerAnimated:YES completion:^{}];
+    [voiceRecordingViewController dismissViewControllerAnimated:YES completion:^{}]; 
     // ... use audio
 }
 ```
 
 ## Authenticating with the voice module
 In order to authenticate with voice module, the `authenticateVoice` method has to be called from the `AMBNManager`. An url of recorded audio file with user voice has to be passed as parameter. The completion block is called with the score returned by the server, the score being between 0.0 and 1.0 and a liveliness rating, indicating if the voice recorded was of a live person.
-
+ 
 ```objective_c
 [[AMBNManager sharedInstance] authenticateVoice:voice completion:^(AMBNAuthenticateResult *result, NSError *error) {
     ...
@@ -349,7 +358,7 @@ In order to authenticate with voice module, the `authenticateVoice` method has t
 
 ## Serialising voice module authentication calls
 To get serialised authentication request use:
-
+ 
 ```objective_c
 AMBNSerializedRequest *request = [[AMBNManager sharedInstance] getSerializedAuthenticateVoice:voice metadata:matadata];
 ```
@@ -359,10 +368,10 @@ Enrolling with the voice module is done by calling the `enrollVoice` method from
 
 ```objective_c
 [[AMBNManager sharedInstance] enrollVoice:audioUrl completionHandler:^(AMBNEnrollVoiceResult *result,  NSError *error) {
-    ...
+...
 }];
 ```
-
+ 
 ## Serialising voice module enroll calls
 To get serialised voice enroll request use:
 

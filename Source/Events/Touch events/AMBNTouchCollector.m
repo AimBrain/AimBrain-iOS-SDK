@@ -1,10 +1,14 @@
 #import "AMBNTouchCollector.h"
 #import "AMBNTouch.h"
 #import "AMBNHashGenerator.h"
+#import "AMBNEventBuffer.h"
 
-@interface AMBNTouchCollector ()
+@interface AMBNTouchCollector () {
+    
+    EventCollectorBlock _eventCollectedBlock;
+}
 
-@property NSMutableArray * buffer;
+@property AMBNEventBuffer * buffer;
 @property int touchIdCounter;
 @property NSMapTable* touches;
 @property AMBNViewIdChainExtractor* idExtractor;
@@ -12,7 +16,7 @@
 
 @implementation AMBNTouchCollector
 
--(instancetype)initWithBuffer: (NSMutableArray *) buffer capturingApplication: (AMBNCapturingApplication *) capturingApplication idExtractor:(AMBNViewIdChainExtractor *) idExtractor{
+-(instancetype)initWithBuffer:(AMBNEventBuffer *)buffer capturingApplication:(AMBNCapturingApplication *)capturingApplication idExtractor:(AMBNViewIdChainExtractor *)idExtractor eventCollected:(EventCollectorBlock)eventCollectedBlock {
     self = [super init];
     
     self.buffer = buffer;
@@ -20,6 +24,7 @@
     self.touches = [[NSMapTable alloc] init];
     self.idExtractor = idExtractor;
     capturingApplication.capturingDelegate = self;
+    _eventCollectedBlock = eventCollectedBlock;
     return self;
 }
 
@@ -35,6 +40,9 @@
                     }
                     [self.buffer addObject:createdTouch];
                     [self.delegate touchCollector:self didCollectedTouch:createdTouch];
+                    if (_eventCollectedBlock) {
+                        _eventCollectedBlock();
+                    }
                 }
             }
         }

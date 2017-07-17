@@ -1,10 +1,11 @@
 #import "AMBNAccelerometerCollector.h"
 #import <CoreMotion/CoreMotion.h>
 #import "AMBNAcceleration.h"
+#import "AMBNEventBuffer.h"
 
 @interface AMBNAccelerometerCollector ()
 
-@property NSMutableArray *buffer;
+@property AMBNEventBuffer *buffer;
 @property NSTimer *stopTimer;
 @property CMMotionManager *motionManager;
 @property (nonatomic, strong) CMAccelerometerHandler accelerometerHandler;
@@ -15,7 +16,7 @@
 
 @implementation AMBNAccelerometerCollector
 
-- (instancetype)initWithBuffer: (NSMutableArray *) buffer collectionPeriod:(NSTimeInterval) collectionPeriod updateInterval: (NSTimeInterval) updateInterval {
+- (instancetype)initWithBuffer:(AMBNEventBuffer *)buffer collectionPeriod:(NSTimeInterval)collectionPeriod updateInterval:(NSTimeInterval)updateInterval eventCollected:(EventCollectorBlock)eventCollectedBlock {
     self = [self init];
     self.collectionPeriod = collectionPeriod;
     self.buffer = buffer;
@@ -32,6 +33,9 @@
             AMBNAcceleration * acc = [AMBNAcceleration accelerationWithAccelerationData:accelerometerData];
             @synchronized(weakSelf.buffer) {
                 [weakSelf.buffer addObject:acc];
+            }
+            if (eventCollectedBlock) {
+                eventCollectedBlock();
             }
             
         }
@@ -52,7 +56,5 @@
 - (void) stopCapturing {
     [self.motionManager stopAccelerometerUpdates];
 }
-
-
 
 @end

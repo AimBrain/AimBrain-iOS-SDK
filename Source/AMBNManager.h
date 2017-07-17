@@ -31,6 +31,11 @@ typedef NS_ENUM(NSInteger, AMBNVoiceTokenType) {
     AMBNVoiceTokenTypeAuth = 100
 };
 
+/**
+ Value for unlimited memory usage.
+ */
+static const NSInteger kAMBNMemoryUsageUnlimited = 0;
+
 /*!
  @class AMBNManager
  @discussion AMBNManager provides centralized interface for collecting behavioural data and communicating with AimBrain API
@@ -46,6 +51,11 @@ typedef NS_ENUM(NSInteger, AMBNVoiceTokenType) {
  @discussion Session must be set before submitting behavioural data. Instead of setting this propery you can also obtain session using @link configureWithApiKey:secret: @/link
  */
 @property NSString *session;
+
+/*!
+ @discussion Maximum allowed memory in kilobytes for event collection. Default value is `kAMBNMemoryUsageUnlimited`
+ */
+@property (nonatomic, assign) NSInteger memoryUsageLimitKB;
 
 /*!
  @description Use this method to get AMBNManager singleton.

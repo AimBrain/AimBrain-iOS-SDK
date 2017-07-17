@@ -1,13 +1,12 @@
-#import <Foundation/Foundation.h>
+#import "AMBNBaseEvent.h"
 #import <CoreMotion/CoreMotion.h>
 #import <UIKit/UIKit.h>
 
-@interface AMBNAcceleration : NSObject
+@interface AMBNAcceleration : AMBNBaseEvent
 
 @property CGFloat x;
 @property CGFloat y;
 @property CGFloat z;
-@property int timestamp;
 
 + (instancetype) accelerationWithAccelerationData:(CMAccelerometerData *) data;
 

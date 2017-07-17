@@ -9,7 +9,7 @@
 
 @implementation AMBNImagePickerController
 
-- (NSUInteger)supportedInterfaceOrientations {
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     
     return UIInterfaceOrientationMaskPortrait;
 }

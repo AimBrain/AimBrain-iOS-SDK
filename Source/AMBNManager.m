@@ -17,10 +17,19 @@
 #import "AMBNVoiceRecordingManager.h"
 #import "Result/AMBNEnrollVoiceResult.h"
 #import "Result/AMBNVoiceTextResult.h"
+#import "AMBNEventBuffer.h"
+#import "AMBNTextEventBuffer.h"
 
 #import "AMBNGlobal.h"
 
 #define AMBNManagerSensitiveSaltLength 128
+
+static const CGFloat kAMBNMemoryFreeUpPercents = 30.0;
+
+// Aproximately counted event sizes in bytes
+static const NSInteger kAppoximateAccelerometerEventSizeInBytes = 48;
+static const NSInteger kAppoximateTouchEventSizeInBytes = 80;
+static const NSInteger kAppoximateTextEventSizeInBytes = 32;
 
 // Logging info
 // Default to ON and WARNINGS
@@ -33,16 +42,26 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 @property AMBNTouchCollector * touchCollector;
 @property AMBNTextInputCollector * textInputCollector;
 @property NSHashTable *privacyGuards;
-@property NSMutableArray *touches;
-@property NSMutableArray *accelerations;
-@property NSMutableArray *textEvents;
+@property AMBNEventBuffer *touches;
+@property AMBNEventBuffer *accelerations;
+@property AMBNTextEventBuffer *textEvents;
 @property AMBNServer *server;
 @property NSMapTable *registeredViews;
 @property NSHashTable *sensitiveViews;
 @property AMBNFaceCaptureManager* faceCaptureManager;
 @property AMBNImageAdapter *imageAdapter;
 @property AMBNVoiceRecordingManager *voiceRecordingManager;
+@property BOOL measurementIsInProgress;
+
+// memory measurement
+- (void)reduceMemoryUsageIfNeeded;
+- (NSInteger)sizeOfEventsToDeleteWithTotalUsedSizeInBytes:(NSInteger)totalSizeInBytes;
+- (void)deleteOldestEventsOfTotalSizeInBytes:(NSInteger)sizeToReduceInBytes;
+- (NSTimeInterval)getTimestampOfOldestEvent;
+
 @end
+
+
 @implementation AMBNManager
 
 #pragma mark - singleton
@@ -70,6 +89,114 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     return ambnLogLevel;
 }
 
+#pragma mark - memory measurement
+
+- (void)reduceMemoryUsageIfNeeded {
+    
+    if (_memoryUsageLimitKB == kAMBNMemoryUsageUnlimited) {
+        // Memory usage is unlimited
+        return;
+    }
+    
+    if (_measurementIsInProgress == YES) {
+        // Measurement already in progress
+        return;
+    }
+    
+    _measurementIsInProgress = YES;
+    
+    //
+    // 1. Count total size
+    //
+    
+    NSInteger totalSizeInBytes = 0;
+    
+    @synchronized (self.accelerations) {
+        totalSizeInBytes += self.accelerations.bufferSizeInBytes;
+    }
+    
+    @synchronized (self.touches) {
+        totalSizeInBytes += self.touches.bufferSizeInBytes;
+    }
+    @synchronized (self.textEvents) {
+        totalSizeInBytes += self.textEvents.bufferSizeInBytes;
+    }
+    
+    NSInteger totalSizeInKilobytes = (totalSizeInBytes / 1024);
+    
+    if (totalSizeInKilobytes < _memoryUsageLimitKB) {
+        // Not reached limit yet
+        _measurementIsInProgress = NO;
+        return;
+    }
+    
+    //
+    // 2. Delete oldest events
+    //
+    
+    AMBN_LVERBOSE(@"Memory usage limit is reached. Total memory used: %.2ld KB", (long)totalSizeInKilobytes);
+    
+    [self deleteOldestEventsOfTotalSizeInBytes:[self sizeOfEventsToDeleteWithTotalUsedSizeInBytes:totalSizeInBytes]];
+    
+    _measurementIsInProgress = NO;
+}
+
+- (NSInteger)sizeOfEventsToDeleteWithTotalUsedSizeInBytes:(NSInteger)totalSizeInBytes {
+    
+    // Returns size of events in bytes to delete
+    return totalSizeInBytes - round((double)_memoryUsageLimitKB * ((100.0 - kAMBNMemoryFreeUpPercents) / 100.0)) * 1024;
+}
+
+- (void)deleteOldestEventsOfTotalSizeInBytes:(NSInteger)sizeToReduceInBytes {
+    
+    NSInteger reducedSizeInBytes = 0;
+    
+    while (reducedSizeInBytes < sizeToReduceInBytes) {
+        
+        // Get oldest timestamp and add delta to reduce iterations count
+        NSTimeInterval kTimestampDelta = 500; // 1/2 sec.
+        NSTimeInterval oldestTimestamp = [self getTimestampOfOldestEvent] + kTimestampDelta;
+        
+        NSInteger clearedAccelerationEventsSizeInBytes = 0;
+        NSInteger clearedTouchEventsSizeInBytes = 0;
+        NSInteger clearedTextEventsSizeInBytes = 0;
+        
+        @synchronized (self.accelerations) {
+            clearedAccelerationEventsSizeInBytes = [self.accelerations clearObjectsOlderThanTimestamp:oldestTimestamp];
+        }
+        @synchronized (self.touches) {
+            clearedTouchEventsSizeInBytes = [self.touches clearObjectsOlderThanTimestamp:oldestTimestamp];
+        }
+        @synchronized (self.textEvents) {
+            clearedTextEventsSizeInBytes = [self.textEvents clearObjectsOlderThanTimestamp:oldestTimestamp];
+        }
+        
+        reducedSizeInBytes += (clearedAccelerationEventsSizeInBytes + clearedTextEventsSizeInBytes + clearedTouchEventsSizeInBytes);
+        AMBN_LVERBOSE(@"Deleting total %ld KB", reducedSizeInBytes / 1024);
+    }
+}
+
+- (NSTimeInterval)getTimestampOfOldestEvent {
+    
+    NSTimeInterval accelerationTimestamp;
+    NSTimeInterval touchTimestamp;
+    NSTimeInterval textTimestamp;
+    
+    @synchronized (self.accelerations) {
+        accelerationTimestamp =  [self.accelerations oldestObjectTimestamp];
+    }
+    
+    @synchronized (self.touches) {
+        touchTimestamp =  [self.touches oldestObjectTimestamp];
+    }
+    
+    @synchronized (self.textEvents) {
+        textTimestamp =  [self.textEvents oldestObjectTimestamp];
+    }
+    
+    return MIN(MIN(accelerationTimestamp, touchTimestamp), textTimestamp);
+}
+
 #pragma mark - live cycle
 
 - (instancetype) init {
@@ -77,11 +204,15 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     self.imageAdapter = [[AMBNImageAdapter alloc] initWithQuality:0.7 maxHeight:300];
     self.privacyGuards = [NSHashTable weakObjectsHashTable];
     self.sensitiveViews = [NSHashTable weakObjectsHashTable];
-    self.touches = [NSMutableArray array];
-    self.accelerations = [NSMutableArray array];
-    self.textEvents = [NSMutableArray array];
+    self.touches = [[AMBNEventBuffer alloc] initWithEventSize:kAppoximateTouchEventSizeInBytes];
+    self.accelerations = [[AMBNEventBuffer alloc] initWithEventSize:kAppoximateAccelerometerEventSizeInBytes];
+    self.textEvents = [[AMBNTextEventBuffer alloc] initWithEventSize:kAppoximateTextEventSizeInBytes];
 
-    self.accelerometerCollector = [[AMBNAccelerometerCollector alloc] initWithBuffer:self.accelerations collectionPeriod:0.5f updateInterval:0.01f];
+    __weak typeof(self) weakSelf = self;
+    
+    self.accelerometerCollector = [[AMBNAccelerometerCollector alloc] initWithBuffer:self.accelerations collectionPeriod:0.5f updateInterval:0.01f eventCollected:^{
+        [weakSelf reduceMemoryUsageIfNeeded];
+    }];
     
     NSAssert([self isApplicationKindOfAMBNCapturingApplicationClass:[UIApplication sharedApplication]], @"application must be of class AMBNCapturingApplication");
     AMBNCapturingApplication * application = (AMBNCapturingApplication *)[UIApplication sharedApplication];
@@ -89,14 +220,22 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     self.registeredViews = [NSMapTable weakToStrongObjectsMapTable];
     AMBNViewIdChainExtractor * idExtractor = [[AMBNViewIdChainExtractor alloc] initWithRegisteredViews:self.registeredViews];
     
-    self.touchCollector = [[AMBNTouchCollector alloc] initWithBuffer:self.touches capturingApplication:application idExtractor:idExtractor];
+    self.touchCollector = [[AMBNTouchCollector alloc] initWithBuffer:self.touches capturingApplication:application idExtractor:idExtractor eventCollected:^{
+        [weakSelf reduceMemoryUsageIfNeeded];
+    }];
     self.touchCollector.delegate = self;
     
-    self.textInputCollector = [[AMBNTextInputCollector alloc] initWithBuffer:self.textEvents idExtractor:idExtractor];
+    self.textInputCollector = [[AMBNTextInputCollector alloc] initWithBuffer:self.textEvents idExtractor:idExtractor eventCollected:^{
+        [weakSelf reduceMemoryUsageIfNeeded];
+    }];
     self.textInputCollector.delegate = self;
     
     self.faceCaptureManager = [[AMBNFaceCaptureManager alloc] init];
     self.voiceRecordingManager = [[AMBNVoiceRecordingManager alloc] init];
+    
+    self.memoryUsageLimitKB = kAMBNMemoryUsageUnlimited;
+    _measurementIsInProgress = NO;
+    
     return self;
 }
 
@@ -146,9 +285,10 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
         if (result != nil) {
             self.session = result.session;
             AMBN_LVERBOSE(@"Session did created (session: %@)", result.session);
+        } else {
+            AMBN_LERR(@"Session creating error: %@", error.localizedDescription);
         }
         dispatch_async(dispatch_get_main_queue(), ^{
-            AMBN_LERR(@"Session creating error: %@", error.localizedDescription);
             completion(result, error);
         });
     }];
@@ -180,17 +320,17 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     AMBN_LVERBOSE(@"Submitting behavioural data");
     NSArray *touchesToSubmit;
     @synchronized (self.touches) {
-        touchesToSubmit = [NSArray arrayWithArray:self.touches];
+        touchesToSubmit = [self.touches bufferCopy];
         [self.touches removeAllObjects];
     }
     NSArray *accelerationsToSubmit;
     @synchronized (self.accelerations) {
-        accelerationsToSubmit = [NSArray arrayWithArray:self.accelerations];
+        accelerationsToSubmit = [self.accelerations bufferCopy];
         [self.accelerations removeAllObjects];
     }
     NSArray *textEventsToSubmit;
     @synchronized (self.textEvents) {
-        textEventsToSubmit = [NSArray arrayWithArray:self.textEvents];
+        textEventsToSubmit = [self.textEvents bufferCopy];
         [self.textEvents removeAllObjects];
     }
 
@@ -201,6 +341,9 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
             }
             @synchronized (self.accelerations) {
                 [self.accelerations addObjectsFromArray:accelerationsToSubmit];
+            }
+            @synchronized (self.textEvents) {
+                [self.textEvents addObjectsFromArray:textEventsToSubmit];
             }
         } else {
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -220,17 +363,17 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     NSAssert(self.session != nil, @"Session is not obtained");
     NSArray *touchesToSubmit;
     @synchronized (self.touches) {
-        touchesToSubmit = [NSArray arrayWithArray:self.touches];
+        touchesToSubmit = [self.touches bufferCopy];
         [self.touches removeAllObjects];
     }
     NSArray *accelerationsToSubmit;
     @synchronized (self.accelerations) {
-        accelerationsToSubmit = [NSArray arrayWithArray:self.accelerations];
+        accelerationsToSubmit = [self.accelerations bufferCopy];
         [self.accelerations removeAllObjects];
     }
     NSArray *textEventsToSubmit;
     @synchronized (self.textEvents) {
-        textEventsToSubmit = [NSArray arrayWithArray:self.textEvents];
+        textEventsToSubmit = [self.textEvents bufferCopy];
         [self.textEvents removeAllObjects];
     }
 
@@ -288,7 +431,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     for (UIView *view in views) {
         [self.sensitiveViews addObject:view];
     }
-    AMBN_LVERBOSE(@"Sensitive views added (count: %li)", views.count);
+    AMBN_LVERBOSE(@"Sensitive views added (count: %li)", (unsigned long)views.count);
 }
 
 - (void)setSensitiveSalt:(NSData *)salt {
@@ -316,7 +459,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 - (AMBNPrivacyGuard *)disableCapturingForViews:(NSArray *)views {
     AMBNPrivacyGuard *guard = [[AMBNPrivacyGuard alloc] initWithViews:views];
     [self.privacyGuards addObject:guard];
-    AMBN_LVERBOSE(@"Capturing disabled for %li views", views.count);
+    AMBN_LVERBOSE(@"Capturing disabled for %li views", (unsigned long)views.count);
     return guard;
 }
 
@@ -381,7 +524,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 - (void)enrollFaceImages:(NSArray *)images metadata:(NSData *)metadata completionHandler:(void (^)(AMBNEnrollFaceResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
-    AMBN_LVERBOSE(@"Face images enroll started (count: %li)", images.count);
+    AMBN_LVERBOSE(@"Face images enroll started (count: %li)", (unsigned long)images.count);
 
     [self.server enrollFace:[self adaptImages:images] session:self.session metadata:metadata completion:^(AMBNEnrollFaceResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -414,7 +557,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 - (void)authenticateFaceImages:(NSArray *)images metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
     NSAssert(self.session != nil, @"Session is not obtained");
-    AMBN_LVERBOSE(@"Face images authenticate started (count: %li)", images.count);
+    AMBN_LVERBOSE(@"Face images authenticate started (count: %li)", (unsigned long)images.count);
 
     [self.server authFace:[self adaptImages:images] session:self.session metadata:metadata completion:^(AMBNAuthenticateResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -446,7 +589,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)compareFaceImages:(NSArray *)firstFaceImages toFaceImages:(NSArray *)secondFaceImages metadata:(NSData *)metadata completionHandler:(void (^)(AMBNCompareFaceResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
-    AMBN_LVERBOSE(@"Face images compare started (first count: %li, second count: %li)", firstFaceImages.count, secondFaceImages.count);
+    AMBN_LVERBOSE(@"Face images compare started (first count: %li, second count: %li)", (unsigned long)firstFaceImages.count, (unsigned long)secondFaceImages.count);
 
     [self.server compareFaceImages:[self adaptImages:firstFaceImages] withFaceImages:[self adaptImages:secondFaceImages] metadata:metadata completion:^(AMBNCompareFaceResult *result, NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -665,6 +808,18 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     else {
         return [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
     }
+}
+
+#pragma mark - Setters
+
+- (void)setMemoryUsageLimitKB:(NSInteger)memoryUsageLimitKB {
+
+    if (memoryUsageLimitKB < 0) {
+        AMBN_LWARN(@"Memory usage limit can not be negative");
+        [self setMemoryUsageLimitKB:kAMBNMemoryUsageUnlimited];
+        return;
+    }
+    _memoryUsageLimitKB = memoryUsageLimitKB;
 }
 
 @end

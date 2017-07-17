@@ -1,22 +1,28 @@
 #import "AMBNTextInputCollector.h"
 #import "AMBNTextEvent.h"
 #import "AMBNHashGenerator.h"
+#import "AMBNEventBuffer.h"
 
 #import "AMBNGlobal.h"
 
 
-@interface AMBNTextInputCollector ()
+@interface AMBNTextInputCollector () {
+    
+    EventCollectorBlock _eventCollectedBlock;
+}
 
-@property NSMutableArray * buffer;
+@property AMBNEventBuffer * buffer;
 @property AMBNViewIdChainExtractor * idExtractor;
 @end
 
+
 @implementation AMBNTextInputCollector
 
--(instancetype)initWithBuffer: (NSMutableArray *) buffer idExtractor: (AMBNViewIdChainExtractor *) idExtractor{
+-(instancetype)initWithBuffer:(AMBNEventBuffer *)buffer idExtractor:(AMBNViewIdChainExtractor *)idExtractor eventCollected:(EventCollectorBlock)eventCollectedBlock {
     self = [super init];
     self.buffer = buffer;
     self.idExtractor = idExtractor;
+    _eventCollectedBlock = eventCollectedBlock;
     return self;
 }
 
@@ -46,6 +52,9 @@
         [self.buffer addObject:event];
         [self.delegate textInputCollector:self didCollectTextInput:event];
     }
+    if (_eventCollectedBlock) {
+        _eventCollectedBlock();
+    }
 }
 
 -(void)textViewDidChange:(NSNotification*) notification{
@@ -64,6 +73,9 @@
         }
         [self.buffer addObject: event];
         [self.delegate textInputCollector:self didCollectTextInput:event];
+    }
+    if (_eventCollectedBlock) {
+        _eventCollectedBlock();
     }
 }
 
