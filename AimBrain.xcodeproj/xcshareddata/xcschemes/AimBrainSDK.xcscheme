@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0830"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "0C776A551C5FDAF6009BFDFD"
-               BuildableName = "libAimBrainSDK.a"
+               BlueprintIdentifier = "A2CE73DD1F5E9BD4002C8B79"
+               BuildableName = "AimBrainSDK.framework"
                BlueprintName = "AimBrainSDK"
                ReferencedContainer = "container:AimBrain.xcodeproj">
             </BuildableReference>
@@ -45,8 +45,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0C776A551C5FDAF6009BFDFD"
-            BuildableName = "libAimBrainSDK.a"
+            BlueprintIdentifier = "A2CE73DD1F5E9BD4002C8B79"
+            BuildableName = "AimBrainSDK.framework"
             BlueprintName = "AimBrainSDK"
             ReferencedContainer = "container:AimBrain.xcodeproj">
          </BuildableReference>
@@ -63,8 +63,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "0C776A551C5FDAF6009BFDFD"
-            BuildableName = "libAimBrainSDK.a"
+            BlueprintIdentifier = "A2CE73DD1F5E9BD4002C8B79"
+            BuildableName = "AimBrainSDK.framework"
             BlueprintName = "AimBrainSDK"
             ReferencedContainer = "container:AimBrain.xcodeproj">
          </BuildableReference>

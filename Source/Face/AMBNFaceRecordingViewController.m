@@ -113,7 +113,7 @@
     if (bundle) {
         self.overlayView = [[[NSBundle bundleWithPath:faceBundlePath] loadNibNamed:@"AMBNRecordingOverlayView" owner:self.overlayView options:nil] firstObject];
     } else {
-        self.overlayView = [[[NSBundle mainBundle] loadNibNamed:@"AMBNRecordingOverlayView" owner:self.overlayView options:nil] firstObject];
+        self.overlayView = [[[NSBundle bundleForClass:self.classForCoder] loadNibNamed:@"AMBNRecordingOverlayView" owner:self.overlayView options:nil] firstObject];
     }
     self.overlayView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.overlayView.topHintLabel setText:self.topHint];

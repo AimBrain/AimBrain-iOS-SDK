@@ -2,7 +2,6 @@
 #import "AMBNAccelerometerCollector.h"
 #import "AMBNServer.h"
 #import "AMBNTextInputCollector.h"
-#import "AMBNCapturingApplication.h"
 #import "AMBNTouchCollector.h"
 #import "AMBNFaceCaptureManager.h"
 #import "AMBNImageAdapter.h"
@@ -214,13 +213,10 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
         [weakSelf reduceMemoryUsageIfNeeded];
     }];
     
-    NSAssert([self isApplicationKindOfAMBNCapturingApplicationClass:[UIApplication sharedApplication]], @"application must be of class AMBNCapturingApplication");
-    AMBNCapturingApplication * application = (AMBNCapturingApplication *)[UIApplication sharedApplication];
-    
     self.registeredViews = [NSMapTable weakToStrongObjectsMapTable];
     AMBNViewIdChainExtractor * idExtractor = [[AMBNViewIdChainExtractor alloc] initWithRegisteredViews:self.registeredViews];
     
-    self.touchCollector = [[AMBNTouchCollector alloc] initWithBuffer:self.touches capturingApplication:application idExtractor:idExtractor eventCollected:^{
+    self.touchCollector = [[AMBNTouchCollector alloc] initWithBuffer:self.touches idExtractor:idExtractor eventCollected:^{
         [weakSelf reduceMemoryUsageIfNeeded];
     }];
     self.touchCollector.delegate = self;
@@ -239,17 +235,9 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     return self;
 }
 
-- (BOOL)isApplicationKindOfAMBNCapturingApplicationClass:(UIApplication *)application {
-    
-    return [application isKindOfClass:[AMBNCapturingApplication class]];
-}
-
 - (void) start{
     _started = true;
     [self.textInputCollector start];
-    
-    id application = [UIApplication sharedApplication];
-    NSAssert([self isApplicationKindOfAMBNCapturingApplicationClass:application], @"sharedApplication must be of type: AMBNCapturingApplication");
     AMBN_LVERBOSE(@"Behavioural data collection did start");
 }
 

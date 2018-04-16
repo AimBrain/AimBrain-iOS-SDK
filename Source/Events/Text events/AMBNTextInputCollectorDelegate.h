@@ -1,6 +1,7 @@
-@import Foundation;
 @import UIKit;
-#import "AMBNTextEvent.h"
+
+
+@class AMBNTextEvent;
 
 @protocol AMBNTextInputCollectorDelegate <NSObject>
 

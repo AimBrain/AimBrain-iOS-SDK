@@ -1,5 +1,6 @@
-@import Foundation;
-#import "AMBNTouch.h"
+@import UIKit;
+
+@class AMBNTouch;
 
 @protocol AMBNTouchCollectorDelegate <NSObject>
 

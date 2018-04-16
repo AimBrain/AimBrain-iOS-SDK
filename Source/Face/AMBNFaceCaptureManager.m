@@ -66,7 +66,8 @@
 
 - (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithTopHint:(NSString*)topHint bottomHint:(NSString *)bottomHint recordingHint:(NSString *)recordingHint videoLength:(NSTimeInterval)videoLength {
     NSString * faceBundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"face.bundle"];
-    AMBNFaceRecordingViewController *faceRecordingViewController = [[AMBNFaceRecordingViewController alloc] initWithNibName:@"AMBNFaceRecordingViewController" bundle:[NSBundle bundleWithPath:faceBundlePath]];
+    BOOL bundleExists = [[NSFileManager defaultManager] fileExistsAtPath:faceBundlePath];
+    AMBNFaceRecordingViewController *faceRecordingViewController = [[AMBNFaceRecordingViewController alloc] initWithNibName:@"AMBNFaceRecordingViewController" bundle:bundleExists ? [NSBundle bundleWithPath:faceBundlePath] : [NSBundle bundleForClass:self.classForCoder]];
     faceRecordingViewController.topHint = topHint;
     faceRecordingViewController.bottomHint = bottomHint;
     faceRecordingViewController.videoLength = videoLength;
@@ -76,7 +77,8 @@
 
 - (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithVideoLength:(NSTimeInterval)videoLength {
     NSString * faceBundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"face.bundle"];
-    AMBNFaceRecordingViewController *faceRecordingViewController = [[AMBNFaceRecordingViewController alloc] initWithNibName:@"AMBNFaceRecordingViewController" bundle:[NSBundle bundleWithPath:faceBundlePath]];
+    BOOL bundleExists = [[NSFileManager defaultManager] fileExistsAtPath:faceBundlePath];
+    AMBNFaceRecordingViewController *faceRecordingViewController = [[AMBNFaceRecordingViewController alloc] initWithNibName:@"AMBNFaceRecordingViewController" bundle:bundleExists ? [NSBundle bundleWithPath:faceBundlePath] : [NSBundle bundleForClass:self.classForCoder]];
     faceRecordingViewController.videoLength = videoLength;
     return faceRecordingViewController;
 }

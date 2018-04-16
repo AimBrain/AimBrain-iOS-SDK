@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0730"
+   LastUpgradeVersion = "0830"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F6CE49BE1CFC8506008D8DBE"
-               BuildableName = "voice.bundle"
-               BlueprintName = "voice"
+               BlueprintIdentifier = "A21E44FC1F5EC42E004139BB"
+               BuildableName = "Build framework"
+               BlueprintName = "Build framework"
                ReferencedContainer = "container:AimBrain.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -45,9 +45,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F6CE49BE1CFC8506008D8DBE"
-            BuildableName = "voice.bundle"
-            BlueprintName = "voice"
+            BlueprintIdentifier = "A21E44FC1F5EC42E004139BB"
+            BuildableName = "Build framework"
+            BlueprintName = "Build framework"
             ReferencedContainer = "container:AimBrain.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -63,9 +63,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F6CE49BE1CFC8506008D8DBE"
-            BuildableName = "voice.bundle"
-            BlueprintName = "voice"
+            BlueprintIdentifier = "A21E44FC1F5EC42E004139BB"
+            BuildableName = "Build framework"
+            BlueprintName = "Build framework"
             ReferencedContainer = "container:AimBrain.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

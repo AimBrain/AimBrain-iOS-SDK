@@ -2,6 +2,7 @@
 #import "AMBNTouch.h"
 #import "AMBNHashGenerator.h"
 #import "AMBNEventBuffer.h"
+#import "UIApplication+Swizzle.h"
 
 @interface AMBNTouchCollector () {
     
@@ -16,15 +17,18 @@
 
 @implementation AMBNTouchCollector
 
--(instancetype)initWithBuffer:(AMBNEventBuffer *)buffer capturingApplication:(AMBNCapturingApplication *)capturingApplication idExtractor:(AMBNViewIdChainExtractor *)idExtractor eventCollected:(EventCollectorBlock)eventCollectedBlock {
+-(instancetype)initWithBuffer:(AMBNEventBuffer *)buffer idExtractor:(AMBNViewIdChainExtractor *)idExtractor eventCollected:(EventCollectorBlock)eventCollectedBlock {
     self = [super init];
     
     self.buffer = buffer;
     self.touchIdCounter = 0;
     self.touches = [[NSMapTable alloc] init];
     self.idExtractor = idExtractor;
-    capturingApplication.capturingDelegate = self;
     _eventCollectedBlock = eventCollectedBlock;
+    __weak AMBNTouchCollector *weakSelf = self;
+    [[UIApplication sharedApplication] swizzle:^(id application, UIEvent *event) {
+        [weakSelf capturingApplication:application event:event];
+    }];
     return self;
 }
 

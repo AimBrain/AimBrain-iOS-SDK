@@ -4,6 +4,7 @@
 #import "AMBNTextInputCollectorDelegate.h"
 #import "AMBNTouchCollectorDelegate.h"
 #import "AMBNFaceRecordingViewController.h"
+#import "AMBNVoiceRecordingViewController.h"
 #import "AMBNResult.h"
 #import "AMBNLogConstants.h"
 
@@ -13,7 +14,6 @@
 @class AMBNAuthenticateResult;
 @class AMBNCompareFaceResult;
 @class AMBNSerializedRequest;
-@class AMBNVoiceRecordingViewController;
 @class AMBNEnrollVoiceResult;
 @class AMBNVoiceTextResult;
 
