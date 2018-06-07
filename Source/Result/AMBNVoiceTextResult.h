@@ -4,12 +4,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AMBNCallResult.h"
+#import "AMBNTextResult.h"
 
-@interface AMBNVoiceTextResult : AMBNCallResult
-
-@property(nonatomic, readonly) NSString *tokenText;
-
-- (instancetype)initWithTokenText:(NSString *)text metadata:(NSData *)metadata;
+@interface AMBNVoiceTextResult : AMBNTextResult
 
 @end

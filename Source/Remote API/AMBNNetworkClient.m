@@ -24,6 +24,8 @@ NSString *const AMBNVoiceAuthEndpoint = @"voice/auth";
 NSString *const AMBNVoiceAuthWithoutSessionEndpoint = @"voice/auth/nosession";
 NSString *const AMBNVoiceTokenEndpoint = @"voice/token";
 NSString *const AMBNVoiceTokenWithoutSessionEndpoint = @"voice/token/nosession";
+NSString *const AMBNFaceTokenEndpoint = @"face/token";
+NSString *const AMBNFaceTokenWithoutSessionEndpoint = @"face/token/nosession";
 
 @interface AMBNNetworkClient()
 @property(nonatomic, strong) NSURL *baseURL;

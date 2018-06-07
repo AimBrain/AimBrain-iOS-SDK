@@ -61,10 +61,9 @@
             }
         }];
     }
-    
 }
 
-- (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithTopHint:(NSString*)topHint bottomHint:(NSString *)bottomHint recordingHint:(NSString *)recordingHint videoLength:(NSTimeInterval)videoLength {
+- (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithTopHint:(NSString*)topHint bottomHint:(NSString *)bottomHint recordingHint:(NSString *)recordingHint videoLength:(NSTimeInterval)videoLength withAudio:(bool)recordAudio {
     NSString * faceBundlePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"face.bundle"];
     BOOL bundleExists = [[NSFileManager defaultManager] fileExistsAtPath:faceBundlePath];
     AMBNFaceRecordingViewController *faceRecordingViewController = [[AMBNFaceRecordingViewController alloc] initWithNibName:@"AMBNFaceRecordingViewController" bundle:bundleExists ? [NSBundle bundleWithPath:faceBundlePath] : [NSBundle bundleForClass:self.classForCoder]];
@@ -72,6 +71,7 @@
     faceRecordingViewController.bottomHint = bottomHint;
     faceRecordingViewController.videoLength = videoLength;
     faceRecordingViewController.recordingHint = recordingHint;
+    faceRecordingViewController.recordAudio = recordAudio;
     return faceRecordingViewController;
 }
 

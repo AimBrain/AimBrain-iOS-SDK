@@ -1,5 +1,10 @@
 #AimBrain SDK integration
 
+## Prerequisites
+
+* XCode 8.3.3 or higher
+* Target of iOS 8 or higher
+
 ## Adding framework to Xcode project
 In order to integrate the AimBrain iOS SDK it is necessary to follow next steps:
 
@@ -346,6 +351,15 @@ override func viewDidLoad() {
 
 # Facial module
 
+## Requesting privacy permissions
+In order to use device camera, you have to ask for privacy permissions. Keys `NSCameraUsageDescription` and `NSPhotoLibraryUsageDescription` are needed for camera usage and must be added to Info.plist file of your project.
+```
+<key>NSCameraUsageDescription</key>
+<string>$(PRODUCT_NAME) would like to use the Camera to record your face.</string>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>$(PRODUCT_NAME) would like to get photos with your face.</string>
+```
+
 ## Taking pictures of the user's face
 In order to take a picture of the user's face the `openFaceImagesCaptureWithTopHint` method has to be called from the `AMBNManager`. The camera view controller is then opened and completion block is called after user takes the picture and the view is dismissed.
 
@@ -368,7 +382,7 @@ AMBNManager.sharedInstance().openFaceImagesCapture(
 }
 ```
 
-## Recording video of the user's face
+## Recording video of the user face
 In order to record video of the user's face the `instantiateFaceRecordingViewControllerWithVideoLength` method has to be called from the `AMBNManager`. The face recording view controller is return and needs to be presented. The face recording view controller has property `delegate` of type `AMBNFaceRecordingViewControllerDelegate`. It has to be set in order to receive video recording. After recording is finished `faceRecordingViewController:recordingResult:error:` method is called on the delegate. Video file is removed after this method returns.
 
 Objective-C
@@ -388,8 +402,8 @@ controller.delegate = self;
 Swift
 ```Swift
 let controller: AMBNFaceRecordingViewController = AMBNManager.sharedInstance().instantiateFaceRecordingViewController(withTopHint: "Position your face fully within the outline with eyes between the lines.",
-                                                                                                                      bottomHint: "Position your face fully within the outline with eyes between the linessss.",
-                                                                                                                      recordingHint: "",
+                                                                                                                       bottomHint: "Position your face fully within the outline with eyes between the linessss.",
+                                                                                                                    recordingHint: "",
                                                                                                                       videoLength: 2)
 controller.delegate = self
 present(controller, animated: true, completion: nil)
@@ -401,6 +415,72 @@ func faceRecordingViewController(_ faceRecordingViewController: AMBNFaceRecordin
     // ... use video
 }
 ```
+
+## Retrieving and using face token
+In order to enroll or authenticate using face token you have include user voice recording in user face video and submit it to the API. Face recording must contain user reading text retrieved with `getFaceTokenWithType` method. Text retrieved with `getFaceTokenWithType` is
+called `face token` in the SDK.
+
+Objective-C
+```objective_c
+AMBNFaceTokenType type = AMBNFaceTokenTypeAuth;
+[[AMBNManager sharedInstance] getFaceTokenWithType:type completionHandler:^(AMBNVoiceTextResult *result, NSError *error) {
+    // ... result.tokenText contains face token
+}];
+```
+
+Swift
+```Swift
+let type = AMBNFaceTokenType.auth
+AMBNManager.sharedInstance().getFaceToken(with: type) { (result, error) in
+    // ... result.tokenText contains face token
+}
+```
+
+## Face token types
+Face token retrieval method `getFaceTokenWithType` takes mandatory `type` parameter.
+
+All possible type values are defined in the enum `AMBNFaceTokenType`:
+* Tokens with type `AMBNFaceTokenTypeAuth` are used for authentication calls.
+* Tokens with types `AMBNFaceTokenTypeEnroll1`, `AMBNFaceTokenTypeEnroll2`, `AMBNFaceTokenTypeEnroll3`, `AMBNFaceTokenTypeEnroll4`, `AMBNFaceTokenTypeEnroll5` are used for enrollment.
+
+To complete enrollment face tokens must be retrieved with each value used for enrollment (`AMBNFaceTokenTypeEnrollN`). Each face token must be presented to the user, recorded and enrolled successfully.
+
+## Serialising face token call
+To get serialised face token request use
+
+Objective-C
+```objective_c
+AMBNSerializedRequest *request = [[AMBNManager sharedInstance] getSerializedGetFaceTokenWithType:type metadata:matadata];
+```
+
+Swift
+```Swift
+let request = AMBNManager.sharedInstance().getSerializedGetFaceToken(with: type, metadata: metadata)
+```
+
+## Recording and using video with face token
+Create `AMBNFaceRecordingViewController` with token text to record video with face token audio.
+
+Objective-C
+```objective_c
+NSString *tokenText = ...;
+AMBNFaceRecordingViewController *controller = [[AMBNManager sharedInstance] 
+                instantiateFaceRecordingViewControllerWithTopHint:@"Position your face fully within the outline with eyes between the lines." 
+                                                       bottomHint:@"Position your face fully within the outline with eyes between the linessss."
+                                                        tokenText:[@"Please read:\n" stringByAppendingString:tokenText]
+                                                      videoLength:2];
+```
+
+Swift
+```Swift
+let tokenText = ...
+let controller: AMBNFaceRecordingViewController = AMBNManager.sharedInstance().instantiateFaceRecordingViewController(withTopHint: "Position your face fully within the outline with eyes between the lines.",
+                                                                                                                       bottomHint: "Position your face fully within the outline with eyes between the linessss.",
+                                                                                                                        tokenText: "Please read:\n\(tokenText)",
+                                                                                                                      videoLength: 2)
+```
+
+Recording controller delegate setup, authentication API calls and enrollment API calls are the same for recordings with and without face token.
 
 ## Authenticating with the facial module
 In order to authenticate with facial module, the `authenticateFaceImages` or `authenticateFaceVideo` method has to be called from the `AMBNManager`. When using `authenticateFaceImages` an array with the images of the face has to passed as a parameter. When using `authenticateFaceVideo` an url of a video of the face has to be passed as parameter. The completion block is called with the score returned by the server, the score being between 0.0 and 1.0 and a liveliness rating, indicating if the photos or video taken were of a live person.
@@ -533,6 +613,13 @@ let result = AMBNManager.sharedInstance().getSerializedCompareFaceImages(firstFa
 
 # Voice module
 
+## Requesting privacy permissions
+In order to use device microphone, you have to ask for privacy permission. Keys `NSMicrophoneUsageDescription`  is needed for microphone usage and must be added in to Info.plist file of your project.
+```
+<key>NSMicrophoneUsageDescription</key>
+<string>$(PRODUCT_NAME) would like to use the Microphone to record your voice.</string>
+```
+
 ## Retrieving voice token
 In order to enroll or authenticate via voice module you have to record user voice and submit it to the API. Voice recording
 must contain user voice reading text retrieved with `getVoiceTokenWithType` method. Text retrieved with `getVoiceTokenWithType` is
@@ -542,7 +629,7 @@ Objective-C
 ```objective_c
 AMBNVoiceTokenType type = AMBNVoiceTokenTypeAuth;
 [[AMBNManager sharedInstance] getVoiceTokenWithType:type completionHandler:^(AMBNVoiceTextResult *result, NSError *error) {
-// ... result.tokenText contains voice token
+    // ... result.tokenText contains voice token
 }];
 ```
 

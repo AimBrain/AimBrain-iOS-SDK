@@ -74,7 +74,9 @@ static CGFloat kScreen35Inch_RecHintMinScale = 0.4;
     
     if ([self.audioRecorder isRecording]) {
         [self.audioRecorder stop];
-        [[NSFileManager defaultManager] removeItemAtURL:self.audioRecorder.url error:nil];
+        if ([[NSFileManager defaultManager] fileExistsAtPath:self.audioRecorder.url.absoluteString]) {
+            [[NSFileManager defaultManager] removeItemAtURL:self.audioRecorder.url error:nil];
+        }
     }
     [self stopTimer];
 }

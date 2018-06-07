@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AMBNFaceRecordingViewController">
             <connections>
+                <outlet property="buttonContainerTopSpaceConstraint" destination="P3T-QF-FNV" id="ZjO-DH-gwg"/>
                 <outlet property="cameraButton" destination="vad-e7-CBz" id="em2-dX-Aqq"/>
+                <outlet property="cameraButtonContainer" destination="o1F-Dh-l0u" id="2mD-bm-Zhe"/>
                 <outlet property="cameraPreview" destination="xLT-A2-KC2" id="2Ga-th-5Rs"/>
                 <outlet property="recordingIndicator" destination="mRd-kp-My8" id="vw1-tM-icK"/>
                 <outlet property="view" destination="iN0-l3-epB" id="9JJ-cz-cOh"/>
@@ -19,11 +22,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xLT-A2-KC2" customClass="AMBNCameraPreview">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="458"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="391"/>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -31,31 +34,45 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0uW-MB-sTF">
-                    <rect key="frame" x="0.0" y="458" width="375" height="209"/>
+                    <rect key="frame" x="0.0" y="391" width="320" height="177"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vad-e7-CBz">
-                            <rect key="frame" x="163.5" y="81" width="48" height="48"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o1F-Dh-l0u">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="177"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vad-e7-CBz">
+                                    <rect key="frame" x="136" y="64.5" width="48" height="48"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="48" id="Srk-aa-7a7"/>
+                                        <constraint firstAttribute="height" constant="48" id="fg2-rB-w2O"/>
+                                    </constraints>
+                                    <state key="normal" image="camera">
+                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="recordButtonPressed:" destination="-1" eventType="touchUpInside" id="Lgt-la-Mkl"/>
+                                    </connections>
+                                </button>
+                                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="mRd-kp-My8">
+                                    <rect key="frame" x="150" y="78.5" width="20" height="20"/>
+                                </activityIndicatorView>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="48" id="Srk-aa-7a7"/>
-                                <constraint firstAttribute="height" constant="48" id="fg2-rB-w2O"/>
+                                <constraint firstItem="vad-e7-CBz" firstAttribute="centerY" secondItem="o1F-Dh-l0u" secondAttribute="centerY" id="Con-xA-opW"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vad-e7-CBz" secondAttribute="bottom" id="EMK-lZ-fuc"/>
+                                <constraint firstItem="vad-e7-CBz" firstAttribute="top" relation="greaterThanOrEqual" secondItem="o1F-Dh-l0u" secondAttribute="top" id="P3T-QF-FNV"/>
+                                <constraint firstItem="mRd-kp-My8" firstAttribute="centerY" secondItem="vad-e7-CBz" secondAttribute="centerY" id="QSn-ld-L5f"/>
+                                <constraint firstItem="mRd-kp-My8" firstAttribute="centerX" secondItem="vad-e7-CBz" secondAttribute="centerX" id="jtY-Ab-nSc"/>
+                                <constraint firstItem="vad-e7-CBz" firstAttribute="centerX" secondItem="o1F-Dh-l0u" secondAttribute="centerX" id="vcg-Xq-wg2"/>
                             </constraints>
-                            <state key="normal" image="camera">
-                                <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="recordButtonPressed:" destination="-1" eventType="touchUpInside" id="Lgt-la-Mkl"/>
-                            </connections>
-                        </button>
-                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="mRd-kp-My8">
-                            <rect key="frame" x="177.5" y="95" width="20" height="20"/>
-                        </activityIndicatorView>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="vad-e7-CBz" firstAttribute="centerX" secondItem="0uW-MB-sTF" secondAttribute="centerX" id="6Kn-Ic-TLd"/>
-                        <constraint firstItem="vad-e7-CBz" firstAttribute="centerY" secondItem="0uW-MB-sTF" secondAttribute="centerY" id="FgX-LR-93j"/>
-                        <constraint firstItem="mRd-kp-My8" firstAttribute="centerX" secondItem="vad-e7-CBz" secondAttribute="centerX" id="cG4-yG-Ry5"/>
-                        <constraint firstItem="mRd-kp-My8" firstAttribute="centerY" secondItem="vad-e7-CBz" secondAttribute="centerY" id="kjO-5A-2Zt"/>
+                        <constraint firstAttribute="trailing" secondItem="o1F-Dh-l0u" secondAttribute="trailing" id="3Pr-YP-C5J"/>
+                        <constraint firstItem="o1F-Dh-l0u" firstAttribute="top" secondItem="0uW-MB-sTF" secondAttribute="top" priority="400" id="XEr-h5-ymP"/>
+                        <constraint firstAttribute="bottom" secondItem="o1F-Dh-l0u" secondAttribute="bottom" id="hF7-Dj-Kvt"/>
+                        <constraint firstItem="o1F-Dh-l0u" firstAttribute="leading" secondItem="0uW-MB-sTF" secondAttribute="leading" id="joj-lh-8WS"/>
                     </constraints>
                 </view>
             </subviews>

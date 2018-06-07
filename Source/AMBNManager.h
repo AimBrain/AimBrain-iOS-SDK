@@ -1,5 +1,4 @@
-@import Foundation;
-
+#import <Foundation/Foundation.h>
 #import "AMBNPrivacyGuard.h"
 #import "AMBNTextInputCollectorDelegate.h"
 #import "AMBNTouchCollectorDelegate.h"
@@ -16,6 +15,7 @@
 @class AMBNSerializedRequest;
 @class AMBNEnrollVoiceResult;
 @class AMBNVoiceTextResult;
+@class AMBNTextResult;
 
 /*!
  @define AMBNManagerBehaviouralDataSubmittedNotification behavioural data subsmission notification
@@ -29,6 +29,15 @@ typedef NS_ENUM(NSInteger, AMBNVoiceTokenType) {
     AMBNVoiceTokenTypeEnroll4 = 4,
     AMBNVoiceTokenTypeEnroll5 = 5,
     AMBNVoiceTokenTypeAuth = 100
+};
+
+typedef NS_ENUM(NSInteger, AMBNFaceTokenType) {
+    AMBNFaceTokenTypeEnroll1 = 1,
+    AMBNFaceTokenTypeEnroll2 = 2,
+    AMBNFaceTokenTypeEnroll3 = 3,
+    AMBNFaceTokenTypeEnroll4 = 4,
+    AMBNFaceTokenTypeEnroll5 = 5,
+    AMBNFaceTokenTypeAuth = 100
 };
 
 /**
@@ -354,6 +363,17 @@ static const NSInteger kAMBNMemoryUsageUnlimited = 0;
                                                                            videoLength:(NSTimeInterval)videoLength;
 
 /*!
+ @description Returns view controller used to capture face video an token voice audio
+ @param topHint top hint displayed on video capture view
+ @param bottomHint bottom hint displayed on video capture view
+ @param tokenText token displayed displayed while recording
+ @param videoLength length of recorded video
+ */
+- (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithTopHint:(NSString *)topHint
+                                                                            bottomHint:(NSString *)bottomHint
+                                                                             tokenText:(NSString *)tokenText
+                                                                           videoLength:(NSTimeInterval)videoLength;
+/*!
  @description Enrolls face videos.
  @param video url of face video to enroll
  @param completion called when enrollement is completed. <b> Success </b> is true when enrollment was successful.
@@ -498,5 +518,28 @@ static const NSInteger kAMBNMemoryUsageUnlimited = 0;
  @return serialized data.
  */
 - (AMBNSerializedRequest *)getSerializedGetVoiceTokenWithType:(AMBNVoiceTokenType)type metadata:(NSData *)metadata;
+
+/*!
+ @description Retrieves text to read in case of face auth/enroll.
+ @param type token type
+ @param completion called when request is completed. <b> result.text </b> is text to be displayed in recording UI
+ */
+- (void)getFaceTokenWithType:(AMBNFaceTokenType)type completionHandler:(void (^)(AMBNTextResult *, NSError *))completion;
+
+/*!
+ @description Retrieves text to read in case of face auth/enroll.
+ @param type token type
+ @param metadata metadata to be sent with request
+ @param completion called when request is completed. <b> result.text </b> is text to be displayed in recording UI
+ */
+- (void)getFaceTokenWithType:(AMBNFaceTokenType)type metadata:(NSData *)metadata completionHandler:(void (^)(AMBNTextResult *result, NSError * error))completion;
+
+/*!
+ @description Serializes request to retrieve text to read in case of face auth/enroll
+ @param type token type
+ @param metadata metadata to be sent with request
+ @return serialized data.
+ */
+- (AMBNSerializedRequest *)getSerializedGetFaceTokenWithType:(AMBNFaceTokenType)type metadata:(NSData *)metadata;
 
 @end

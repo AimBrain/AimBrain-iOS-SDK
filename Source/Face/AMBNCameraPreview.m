@@ -1,4 +1,5 @@
 #import "AMBNCameraPreview.h"
+#import "AMBNFaceRecordingViewController.h"
 
 @interface AMBNCameraPreview()
 
@@ -14,9 +15,14 @@
     self.captureVideoPreviewLayer.frame = self.bounds;
 }
 
-- (void)setupPreviewLayer:(AVCaptureVideoPreviewLayer *)layer {
+- (void)setupPreviewLayer:(AVCaptureVideoPreviewLayer *)layer withSizing:(AMBNRecordingPreviewSizing)sizing {
     self.captureVideoPreviewLayer = layer;
-    self.captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    if (sizing == AMBNRecordingPreviewSizingFit) {
+        self.captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspect;
+    }
+    if (sizing == AMBNRecordingPreviewSizingCover) {
+        self.captureVideoPreviewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    }
     self.captureVideoPreviewLayer.masksToBounds = YES;
     self.captureVideoPreviewLayer.frame = self.bounds;
     [self.layer addSublayer:self.captureVideoPreviewLayer];

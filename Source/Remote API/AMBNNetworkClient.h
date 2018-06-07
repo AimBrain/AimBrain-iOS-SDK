@@ -21,6 +21,8 @@ FOUNDATION_EXPORT NSString *const AMBNVoiceAuthEndpoint;
 FOUNDATION_EXPORT NSString *const AMBNVoiceAuthWithoutSessionEndpoint;
 FOUNDATION_EXPORT NSString *const AMBNVoiceTokenEndpoint;
 FOUNDATION_EXPORT NSString *const AMBNVoiceTokenWithoutSessionEndpoint;
+FOUNDATION_EXPORT NSString *const AMBNFaceTokenEndpoint;
+FOUNDATION_EXPORT NSString *const AMBNFaceTokenWithoutSessionEndpoint;
 
 @interface AMBNNetworkClient : NSObject
 - (instancetype)initWithApiKey:(NSString *)apiKey secret:(NSString *)secret;

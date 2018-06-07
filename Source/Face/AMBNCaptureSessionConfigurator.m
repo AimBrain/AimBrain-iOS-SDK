@@ -6,18 +6,21 @@ static int32_t const MaxFrameRate = 24;
 
 @property (strong, nonatomic) NSString *outputFilePath;
 @property (strong, nonatomic) AVCaptureMovieFileOutput *videoFileOutput;
-
 @end
 
 @implementation AMBNCaptureSessionConfigurator
 
-- (AVCaptureSession *)getConfiguredSessionWithMaxVideoLength:(NSTimeInterval)videoLength andCameraPreview:(AMBNCameraPreview *)cameraPreview{
+- (AVCaptureSession *)getConfiguredSessionWithMaxVideoLength:(NSTimeInterval)videoLength sizing:(AMBNRecordingPreviewSizing)sizing andCameraPreview:(AMBNCameraPreview *)cameraPreview shouldRecordAudio:(BOOL)recordAudio {
     AVCaptureSession *captureSession = [[AVCaptureSession alloc] init];
     [captureSession beginConfiguration];
     if ([self setupInputDeviceForSession:captureSession]) {
+        if (recordAudio && ![self setupAudioInputDeviceForSession:captureSession]) {
+            [captureSession commitConfiguration];
+            return nil;
+        }
         AVCaptureVideoPreviewLayer *layer = [AVCaptureVideoPreviewLayer layerWithSession:captureSession];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [cameraPreview setupPreviewLayer:layer];
+            [cameraPreview setupPreviewLayer:layer withSizing:sizing];
         });
         
         [self setPresetForCaptureSession:captureSession];
@@ -45,6 +48,17 @@ static int32_t const MaxFrameRate = 24;
             [captureSession addInput:input];
             return true;
         }
+    }
+    return false;
+}
+
+- (BOOL)setupAudioInputDeviceForSession:(AVCaptureSession *)captureSession {
+    NSError *error = nil;
+    AVCaptureDevice *audioDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeAudio];
+    AVCaptureDeviceInput *audioInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
+    if (!error) {
+        [captureSession addInput:audioInput];
+        return true;
     }
     return false;
 }
@@ -102,6 +116,10 @@ static int32_t const MaxFrameRate = 24;
 
 - (void)recordVideoFrom:(AMBNFaceRecordingViewController *)recordingViewController {
     [self.videoFileOutput startRecordingToOutputFileURL:[NSURL fileURLWithPath:self.outputFilePath] recordingDelegate:recordingViewController];
+}
+
+- (void)stopVideoRecording {
+    [self.videoFileOutput stopRecording];
 }
 
 @end

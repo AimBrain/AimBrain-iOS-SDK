@@ -5,7 +5,8 @@
 
 @interface AMBNCaptureSessionConfigurator : NSObject
 
-- (AVCaptureSession *)getConfiguredSessionWithMaxVideoLength:(NSTimeInterval)videoLength andCameraPreview:(AMBNCameraPreview *)cameraPreview;
+- (AVCaptureSession *)getConfiguredSessionWithMaxVideoLength:(NSTimeInterval)videoLength sizing:(AMBNRecordingPreviewSizing)sizing andCameraPreview:(AMBNCameraPreview *)cameraPreview  shouldRecordAudio:(BOOL)recordAudio;
 - (void)recordVideoFrom:(AMBNFaceRecordingViewController *)recordingViewController;
+- (void)stopVideoRecording;
 
 @end

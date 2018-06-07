@@ -1,4 +1,4 @@
-@import Foundation;
+#import <Foundation/Foundation.h>
 #import "AMBNFaceRecordingViewController.h"
 @class AMBNFaceRecordingViewController;
 
@@ -11,5 +11,8 @@
  @param error error if occured
  */
 - (void)faceRecordingViewController:(AMBNFaceRecordingViewController *)faceRecordingViewController recordingResult:(NSURL *)video error:(NSError *)error;
+
+@optional
+- (void)faceRecordingViewControllerStoppedByUser:(AMBNFaceRecordingViewController *)faceRecordingViewController;
 
 @end

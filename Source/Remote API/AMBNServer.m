@@ -11,6 +11,7 @@
 #import "AMBNSerializedRequest.h"
 #import "AMBNEnrollVoiceResult.h"
 #import "AMBNVoiceTextResult.h"
+#import "AMBNTextResult.h"
 #import <sys/utsname.h>
 
 #import "AMBNGlobal.h"
@@ -521,6 +522,8 @@
     }];
 }
 
+#pragma mark - GET VOICE TOKEN
+
 - (void)getVoiceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata completion:(void (^)(AMBNVoiceTextResult *result, NSError * error))completion {
     [self.queue addOperationWithBlock:^{
         [self sendGetVoiceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata completion:(void (^)(AMBNVoiceTextResult *result, NSError * error))completion];
@@ -580,6 +583,70 @@
         }
     }];
 }
+
+#pragma mark - GET FACE TOKEN
+
+- (void)getFaceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata completion:(void (^)(AMBNTextResult *result, NSError * error))completion {
+    [self.queue addOperationWithBlock:^{
+        [self sendGetFaceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata completion:(void (^)(AMBNTextResult *result, NSError * error))completion];
+    }];
+}
+
+- (void)sendGetFaceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata completion:(void (^)(AMBNTextResult *result, NSError * error))completion {
+    id data = [self JSONOfGetFaceTokenForSession:session type:type metadata:metadata];
+    NSMutableURLRequest *request = [self.client createJSONPOSTWithData:data endpoint:AMBNFaceTokenEndpoint];
+    [self sendFaceTokenRequest:completion request:request];
+}
+
+- (AMBNSerializedRequest *)serializeGetFaceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata  {
+    id data = [self JSONOfGetFaceTokenForSession:session type:type metadata:metadata];
+    return [self.client serializeRequestData:data];
+}
+
+- (id)JSONOfGetFaceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata {
+    NSMutableDictionary *json = [NSMutableDictionary dictionaryWithDictionary:@{
+                                                                                @"session" : session,
+                                                                                @"tokentype": type
+                                                                                }];
+    
+    if (metadata) {
+        json[@"metadata"] = [metadata base64EncodedStringWithOptions:0];
+    }
+    
+    return json;
+}
+
+- (void)sendFaceTokenRequest:(void (^)(AMBNTextResult *, NSError *))completion request:(NSMutableURLRequest *)request {
+    [self.client sendRequest:request queue:self.queue completionHandler:^(id _Nullable responseJSON, NSError *_Nullable error) {
+        if (error) {
+            completion(nil, error);
+            return;
+        }
+        
+        if (![responseJSON isKindOfClass:[NSDictionary class]]) {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerWrongResponseFormatError userInfo:nil]);
+            return;
+        }
+        
+        NSDictionary *jsonDict = (NSDictionary *) responseJSON;
+        NSString *token = jsonDict[@"token"];
+        NSString *responseMetadataString = jsonDict[@"metadata"];
+        NSData *responseMetadata = nil;
+        if (responseMetadataString) {
+            responseMetadata = [[NSData alloc] initWithBase64EncodedString:responseMetadataString options:0];
+        }
+        
+        if (token) {
+            completion([[AMBNTextResult alloc] initWithTokenText:token metadata:responseMetadata], nil);
+            return;
+        } else {
+            completion(nil, [NSError errorWithDomain:AMBNServerErrorDomain code:AMBNServerMissingJSONKeyError userInfo:nil]);
+            return;
+        }
+    }];
+}
+
+#pragma mark -
 
 -(void)addSessionCreateParameters:(NSMutableDictionary *)params {
     UIDevice *currentDevice = [UIDevice currentDevice];

@@ -601,7 +601,11 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 }
 
 - (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithTopHint:(NSString *)topHint bottomHint:(NSString *)bottomHint recordingHint:(NSString *)recordingHint videoLength:(NSTimeInterval)videoLength {
-    return [self.faceCaptureManager instantiateFaceRecordingViewControllerWithTopHint:topHint bottomHint:bottomHint recordingHint:recordingHint videoLength:videoLength];
+    return [self.faceCaptureManager instantiateFaceRecordingViewControllerWithTopHint:topHint bottomHint:bottomHint recordingHint:recordingHint videoLength:videoLength withAudio:NO];
+}
+
+- (AMBNFaceRecordingViewController *)instantiateFaceRecordingViewControllerWithTopHint:(NSString *)topHint bottomHint:(NSString *)bottomHint tokenText:(NSString *)tokenText videoLength:(NSTimeInterval)videoLength {
+    return [self.faceCaptureManager instantiateFaceRecordingViewControllerWithTopHint:topHint bottomHint:bottomHint recordingHint:tokenText videoLength:videoLength withAudio:YES];
 }
 
 - (void)enrollFaceVideo:(NSURL *)video completion:(void (^)(BOOL success, NSError *error))completion DEPRECATED_MSG_ATTRIBUTE("use enrollFaceVideo:completionHandler:") {
@@ -743,6 +747,16 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     return [self.server serializeAuthVoice:[self voiceRecordToBase64:voiceFileUrl] session:self.session metadata:metadata];
 }
 
+- (NSString *)voiceRecordToBase64:(NSURL *)voiceUrl {
+    NSData *data = [NSData dataWithContentsOfURL:voiceUrl];
+    if ([data respondsToSelector:@selector(base64Encoding)]) {
+        return [data base64Encoding];
+    }
+    else {
+        return [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
+    }
+}
+
 - (void)getVoiceTokenWithType:(AMBNVoiceTokenType)type completionHandler:(void (^)(AMBNVoiceTextResult *, NSError *))completion {
     [self getVoiceTokenWithType:type metadata:nil completionHandler:completion];
 }
@@ -770,7 +784,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     return [self.server serializeGetVoiceTokenForSession:self.session type:tokenType metadata:metadata];
 }
 
--(NSString *)voiceTokenString:(AMBNVoiceTokenType)type {
+- (NSString *)voiceTokenString:(AMBNVoiceTokenType)type {
     switch (type) {
         case AMBNVoiceTokenTypeEnroll1:
             return @"enroll-1";
@@ -788,14 +802,49 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     return nil;
 }
 
-- (NSString *)voiceRecordToBase64:(NSURL *)voiceUrl {
-    NSData *data = [NSData dataWithContentsOfURL:voiceUrl];
-    if ([data respondsToSelector:@selector(base64Encoding)]) {
-        return [data base64Encoding];
+- (void)getFaceTokenWithType:(AMBNFaceTokenType)type completionHandler:(void (^)(AMBNTextResult *, NSError *))completion {
+    [self getFaceTokenWithType:type metadata:nil completionHandler:completion];
+}
+
+- (void)getFaceTokenWithType:(AMBNFaceTokenType)type metadata:(NSData *)metadata completionHandler:(void (^)(AMBNTextResult *, NSError *))completion {
+    NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert(self.session != nil, @"Session is not obtained");
+    
+    NSString *tokenType = [self faceTokenString:type];
+    NSAssert(tokenType != nil, @"Correct token type not supplied");
+    
+    AMBN_LVERBOSE(@"Face token getting started (type: %@)", [self faceTokenString:type]);
+    
+    [self.server getFaceTokenForSession:self.session type:tokenType metadata:metadata completion:^(AMBNTextResult *result, NSError *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completion(result, error);
+        });
+    }];
+}
+
+- (AMBNSerializedRequest *)getSerializedGetFaceTokenWithType:(AMBNFaceTokenType)type metadata:(NSData *)metadata {
+    NSAssert(self.session != nil, @"Session is not obtained");
+    NSString *tokenType = [self faceTokenString:type];
+    NSAssert(tokenType != nil, @"Correct token type not supplied");
+    return [self.server serializeGetFaceTokenForSession:self.session type:tokenType metadata:metadata];
+}
+
+- (NSString *)faceTokenString:(AMBNFaceTokenType)type {
+    switch (type) {
+            case AMBNFaceTokenTypeEnroll1:
+            return @"enroll-1";
+            case AMBNFaceTokenTypeEnroll2:
+            return @"enroll-2";
+            case AMBNFaceTokenTypeEnroll3:
+            return @"enroll-3";
+            case AMBNFaceTokenTypeEnroll4:
+            return @"enroll-4";
+            case AMBNFaceTokenTypeEnroll5:
+            return @"enroll-5";
+            case AMBNFaceTokenTypeAuth:
+            return @"auth";
     }
-    else {
-        return [data base64EncodedStringWithOptions:NSDataBase64EncodingEndLineWithLineFeed];
-    }
+    return nil;
 }
 
 #pragma mark - Setters

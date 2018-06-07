@@ -1,5 +1,6 @@
-@import Foundation;
-@import UIKit;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
 
 /*!
  @discussion Class used to keep and free non-capturing guards on selected views. Instances of this class must be created using instance of @link AMBNManager @/link class. Typical usecase is to store reference to this object as long as there is need to exclude given views from capturing. Then call @link invalidate @/link method and remove the refernce. 

@@ -17,6 +17,7 @@
 @class AMBNSerializedRequest;
 @class AMBNEnrollVoiceResult;
 @class AMBNVoiceTextResult;
+@class AMBNTextResult;
 
 @interface AMBNServer : NSObject
 - (instancetype)initWithNetworkClient:(AMBNNetworkClient *)client;
@@ -56,5 +57,9 @@
 - (void)getVoiceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata completion:(void (^)(AMBNVoiceTextResult *result, NSError *error))completion;
 
 - (AMBNSerializedRequest *)serializeGetVoiceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata;
+
+- (void)getFaceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata completion:(void (^)(AMBNTextResult *result, NSError *error))completion;
+
+- (AMBNSerializedRequest *)serializeGetFaceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata;
 
 @end

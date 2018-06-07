@@ -23,7 +23,13 @@
 /* Begin PBXBuildFile section */
 		A21E44F31F5EB0DF004139BB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A21E44F21F5EB0DF004139BB /* Info.plist */; };
 		A23AD120203582E400BDA3EA /* strip-frameworks.sh in Resources */ = {isa = PBXBuildFile; fileRef = A23AD11F203582E400BDA3EA /* strip-frameworks.sh */; };
+		A264DE78202313580013D0F4 /* AMBNTextResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A264DE76202313580013D0F4 /* AMBNTextResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A264DE79202313580013D0F4 /* AMBNTextResult.m in Sources */ = {isa = PBXBuildFile; fileRef = A264DE77202313580013D0F4 /* AMBNTextResult.m */; };
 		A27B814A1E80086B009972E9 /* AMBNServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A27B81491E80086B009972E9 /* AMBNServerTests.m */; };
+		A2C04361207F87C700A3F2BA /* AMBNRecordingOverlay.h in Headers */ = {isa = PBXBuildFile; fileRef = A2C04360207F87C700A3F2BA /* AMBNRecordingOverlay.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2C043AF2080E46D00A3F2BA /* AMBNCircleButton.h in Headers */ = {isa = PBXBuildFile; fileRef = A2C043AD2080E46D00A3F2BA /* AMBNCircleButton.h */; };
+		A2C043B02080E46D00A3F2BA /* AMBNCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C043AE2080E46D00A3F2BA /* AMBNCircleButton.m */; };
+		A2C043B12080E46D00A3F2BA /* AMBNCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A2C043AE2080E46D00A3F2BA /* AMBNCircleButton.m */; };
 		A2CE74401F5E9C5F002C8B79 /* AMBNBaseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A074161EBB3A8E00068EFA /* AMBNBaseEvent.h */; };
 		A2CE74411F5E9C5F002C8B79 /* AMBNBaseEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = A2A074171EBB3A8E00068EFA /* AMBNBaseEvent.m */; };
 		A2CE74421F5E9C5F002C8B79 /* AMBNEventBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = A21820591EC05F2500343AF9 /* AMBNEventBuffer.h */; };
@@ -150,6 +156,8 @@
 		A218205E1EC05F5700343AF9 /* AMBNTextEventBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNTextEventBuffer.m; sourceTree = "<group>"; };
 		A21E44F21F5EB0DF004139BB /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = SOURCE_ROOT; };
 		A23AD11F203582E400BDA3EA /* strip-frameworks.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; name = "strip-frameworks.sh"; path = "Scripts/strip-frameworks.sh"; sourceTree = SOURCE_ROOT; };
+		A264DE76202313580013D0F4 /* AMBNTextResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMBNTextResult.h; sourceTree = "<group>"; };
+		A264DE77202313580013D0F4 /* AMBNTextResult.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMBNTextResult.m; sourceTree = "<group>"; };
 		A27B813D1E7FEDD5009972E9 /* AimBrainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AimBrainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A27B81411E7FEDD5009972E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A27B81491E80086B009972E9 /* AMBNServerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AMBNServerTests.m; path = "Remote API/AMBNServerTests.m"; sourceTree = "<group>"; };
@@ -159,6 +167,9 @@
 		A2A074171EBB3A8E00068EFA /* AMBNBaseEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNBaseEvent.m; sourceTree = "<group>"; };
 		A2A0741E1EBB3AE100068EFA /* AMBNTimeTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBNTimeTools.h; sourceTree = "<group>"; };
 		A2A0741F1EBB3AE100068EFA /* AMBNTimeTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBNTimeTools.m; sourceTree = "<group>"; };
+		A2C04360207F87C700A3F2BA /* AMBNRecordingOverlay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMBNRecordingOverlay.h; sourceTree = "<group>"; };
+		A2C043AD2080E46D00A3F2BA /* AMBNCircleButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMBNCircleButton.h; sourceTree = "<group>"; };
+		A2C043AE2080E46D00A3F2BA /* AMBNCircleButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMBNCircleButton.m; sourceTree = "<group>"; };
 		A2CE73DE1F5E9BD4002C8B79 /* AimBrainSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AimBrainSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2FC6DED1F5D41400068FE03 /* UIApplication+Swizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+Swizzle.h"; sourceTree = "<group>"; };
 		A2FC6DEE1F5D41400068FE03 /* UIApplication+Swizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+Swizzle.m"; sourceTree = "<group>"; };
@@ -383,9 +394,27 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
+		A2C043AB2080E44000A3F2BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A2C043AC2080E44D00A3F2BA /* CircleButton */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A2C043AC2080E44D00A3F2BA /* CircleButton */ = {
+			isa = PBXGroup;
+			children = (
+				A2C043AD2080E46D00A3F2BA /* AMBNCircleButton.h */,
+				A2C043AE2080E46D00A3F2BA /* AMBNCircleButton.m */,
+			);
+			path = CircleButton;
+			sourceTree = "<group>";
+		};
 		AC03613BDCFEB0F78BA5A181 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				A2C043AB2080E44000A3F2BA /* Views */,
 				A2A074151EBB3A8E00068EFA /* Events */,
 				D092929D1D64A2640069F21E /* Voice */,
 				AC0363F20E865DC08283CF2E /* Helpers */,
@@ -419,21 +448,22 @@
 				D000ED701EAA5110007C559A /* AMBNImagePickerController.h */,
 				D000ED711EAA5110007C559A /* AMBNImagePickerController.m */,
 				AC036515995D53DEE8571204 /* AMBNFaceCaptureManager.h */,
-				AC0365D3279924F00C7E93D1 /* AMBNCameraPreview.m */,
+				AC03679CEA37D2E4E8ABA04A /* AMBNFaceCaptureManager.m */,
 				AC036EDB7B25CDCAF1096FA6 /* AMBNCameraPreview.h */,
-				AC0363F6441DFF3565703790 /* AMBNFaceRecordingViewControllerDelegate.h */,
+				AC0365D3279924F00C7E93D1 /* AMBNCameraPreview.m */,
 				AC0369C600A6BF0F9080AC72 /* AMBNCameraOverlay.h */,
-				AC03624C7FE254A12B2A3E3A /* AMBNImageAdapter.h */,
-				AC0368F971862583A0650EEA /* AMBNRecordingOverlayView.h */,
 				AC03600885AA4FC44D548E15 /* AMBNCameraOverlay.m */,
-				AC036AED556C3150B73931E4 /* AMBNCameraOverlayDelegate.h */,
-				AC036C5AF3B33CE12DE95DA5 /* AMBNImageAdapter.m */,
+				AC0368F971862583A0650EEA /* AMBNRecordingOverlayView.h */,
 				AC036B6EA0793D270FC02361 /* AMBNRecordingOverlayView.m */,
+				AC03624C7FE254A12B2A3E3A /* AMBNImageAdapter.h */,
+				AC036C5AF3B33CE12DE95DA5 /* AMBNImageAdapter.m */,
 				AC036A681E43CEFA2B8246A6 /* AMBNFaceRecordingViewController.h */,
 				AC0362A0433948EC0CB3A816 /* AMBNFaceRecordingViewController.m */,
-				AC0365D446C8260F5BD4843A /* AMBNCaptureSessionConfigurator.m */,
-				AC03679CEA37D2E4E8ABA04A /* AMBNFaceCaptureManager.m */,
 				AC0361C65B8E546BE7D5EA72 /* AMBNCaptureSessionConfigurator.h */,
+				AC0365D446C8260F5BD4843A /* AMBNCaptureSessionConfigurator.m */,
+				A2C04360207F87C700A3F2BA /* AMBNRecordingOverlay.h */,
+				AC036AED556C3150B73931E4 /* AMBNCameraOverlayDelegate.h */,
+				AC0363F6441DFF3565703790 /* AMBNFaceRecordingViewControllerDelegate.h */,
 			);
 			path = Face;
 			sourceTree = "<group>";
@@ -476,6 +506,8 @@
 				AC036F9F4A4585716062CD27 /* AMBNEnrollVoiceResult.h */,
 				AC03681FF8DD00841DB1EFC7 /* AMBNVoiceTextResult.h */,
 				AC036C1DB5F81D1F1B898FB6 /* AMBNVoiceTextResult.m */,
+				A264DE76202313580013D0F4 /* AMBNTextResult.h */,
+				A264DE77202313580013D0F4 /* AMBNTextResult.m */,
 			);
 			path = Result;
 			sourceTree = "<group>";
@@ -557,13 +589,16 @@
 				A2CE74541F5E9C5F002C8B79 /* AMBNCircularProgressView.h in Headers */,
 				A2CE74951F5E9C5F002C8B79 /* AimBrainSDK.h in Headers */,
 				A2CE74761F5E9C5F002C8B79 /* AMBNCaptureSessionConfigurator.h in Headers */,
+				A264DE78202313580013D0F4 /* AMBNTextResult.h in Headers */,
 				A2CE74941F5E9C5F002C8B79 /* AMBNGlobal.h in Headers */,
+				A2C04361207F87C700A3F2BA /* AMBNRecordingOverlay.h in Headers */,
 				A2CE74611F5E9C5F002C8B79 /* AMBNTimeTools.h in Headers */,
 				A2CE74511F5E9C5F002C8B79 /* AMBNTouchCollector.h in Headers */,
 				A2CE74841F5E9C5F002C8B79 /* AMBNSessionCreateResult.h in Headers */,
 				A2CE747A1F5E9C5F002C8B79 /* AMBNEnrollFaceResult.h in Headers */,
 				A2CE74481F5E9C5F002C8B79 /* AMBNTextEvent.h in Headers */,
 				A2CE746C1F5E9C5F002C8B79 /* AMBNImageAdapter.h in Headers */,
+				A2C043AF2080E46D00A3F2BA /* AMBNCircleButton.h in Headers */,
 				A2CE748D1F5E9C5F002C8B79 /* AMBNNetworkClient.h in Headers */,
 				A2CE744A1F5E9C5F002C8B79 /* AMBNTextEventBuffer.h in Headers */,
 				A2CE744C1F5E9C5F002C8B79 /* AMBNTextInputCollector.h in Headers */,
@@ -594,8 +629,6 @@
 				A27B81391E7FEDD5009972E9 /* Sources */,
 				A27B813A1E7FEDD5009972E9 /* Frameworks */,
 				A27B813B1E7FEDD5009972E9 /* Resources */,
-				EE68DB3ED47B7061B77F7F8A /* [CP] Embed Pods Frameworks */,
-				12C93F5113C167DF11DC83A8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -641,6 +674,7 @@
 					};
 					A27B813C1E7FEDD5009972E9 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 99P84848J9;
 						ProvisioningStyle = Automatic;
 					};
 					A2CE73DD1F5E9BD4002C8B79 = {
@@ -695,34 +729,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		12C93F5113C167DF11DC83A8 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AimBrainTests/Pods-AimBrainTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		5B20332A4C2812E4E5C09FA6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AimBrainTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A21E45001F5EC6C4004139BB /* ShellScript */ = {
@@ -736,22 +758,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"AimBrainSDK\"\n\n# 3\n# If remnants from a previous build exist, delete them.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk \"iphoneos\"\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch x86_64 -arch i386 only_active_arch=no defines_module=yes -sdk \"iphonesimulator\"\n\n# 5\n# Remove .framework file if exists on FrameworkBuild folder from previous run.\nif [ -d \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Create `FrameworkBuild` folder if not exists\nmkdir -p \"${SRCROOT}/FrameworkBuild\"\n\n# 7\n# Copy the device version of framework to FrameworkBuild.\ncp -r \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework\" \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\"\n\n# 8\n# Replace the framework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 9\n# Delete the most recent build.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi";
-		};
-		EE68DB3ED47B7061B77F7F8A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AimBrainTests/Pods-AimBrainTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
+			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"AimBrainSDK\"\n\n# 3\n# If remnants from a previous build exist, delete them.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk \"iphoneos\"\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch x86_64 -arch i386 only_active_arch=no defines_module=yes -sdk \"iphonesimulator\"\n\n# 5\n# Remove .framework file if exists on FrameworkBuild folder from previous run.\nif [ -d \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Create `FrameworkBuild` folder if not exists\nmkdir -p \"${SRCROOT}/FrameworkBuild\"\n\n# 7\n# Copy the device version of framework to FrameworkBuild.\ncp -r \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework\" \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\"\n\n# 8\n# Replace the fram/Work/current/aimbrain/ios-sdk-demo/DemoBank/AimBrainSDK.frameworkework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 9\n# Delete the most recent build.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -761,6 +768,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A27B814A1E80086B009972E9 /* AMBNServerTests.m in Sources */,
+				A2C043B02080E46D00A3F2BA /* AMBNCircleButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -769,10 +777,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A2CE748C1F5E9C5F002C8B79 /* AMBNVoiceTextResult.m in Sources */,
+				A2C043B12080E46D00A3F2BA /* AMBNCircleButton.m in Sources */,
 				A2CE74741F5E9C5F002C8B79 /* AMBNCaptureSessionConfigurator.m in Sources */,
 				A2CE74451F5E9C5F002C8B79 /* AMBNAcceleration.m in Sources */,
 				A2CE745E1F5E9C5F002C8B79 /* AMBNViewIdChainExtractor.m in Sources */,
 				A2CE747B1F5E9C5F002C8B79 /* AMBNAuthenticateResult.m in Sources */,
+				A264DE79202313580013D0F4 /* AMBNTextResult.m in Sources */,
 				A2CE74491F5E9C5F002C8B79 /* AMBNTextEvent.m in Sources */,
 				A2CE74811F5E9C5F002C8B79 /* AMBNCompareFaceResult.m in Sources */,
 				A2CE746E1F5E9C5F002C8B79 /* AMBNCameraOverlay.m in Sources */,
@@ -930,6 +940,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 99P84848J9;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = AimBrainTests/Info.plist;
@@ -952,6 +963,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 99P84848J9;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = AimBrainTests/Info.plist;
@@ -1047,6 +1059,7 @@
 				A21E44FF1F5EC42E004139BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A27B81471E7FEDD5009972E9 /* Build configuration list for PBXNativeTarget "AimBrainTests" */ = {
 			isa = XCConfigurationList;

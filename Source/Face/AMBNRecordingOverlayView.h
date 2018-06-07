@@ -1,9 +1,12 @@
 #import <UIKit/UIKit.h>
+#import "AMBNRecordingOverlay.h"
 
-@interface AMBNRecordingOverlayView : UIView
+@interface AMBNRecordingOverlayView : UIView <AMBNRecordingOverlayDelegate, AMBNRecordingOverlayDatasource>
 
-@property (weak, nonatomic) IBOutlet UILabel *topHintLabel;
-@property (weak, nonatomic) IBOutlet UILabel *bottomHintLabel;
-@property (weak, nonatomic) IBOutlet UILabel *recordingHintLabel;
+@property (nonatomic, assign) id<AMBNRecordingDelegate>delegate;
+
+// Helpers
++ (instancetype)getWithFittedPreview;
++ (instancetype)getWithFilledPreview;
 
 @end
