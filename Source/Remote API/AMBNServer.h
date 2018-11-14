@@ -62,4 +62,6 @@
 
 - (AMBNSerializedRequest *)serializeGetFaceTokenForSession:(NSString *)session type:(NSString *)type metadata:(NSData *)metadata;
 
+- (BOOL)isClientValid;
+
 @end

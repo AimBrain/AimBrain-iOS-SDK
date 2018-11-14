@@ -115,6 +115,10 @@ NSString *const AMBNFaceTokenWithoutSessionEndpoint = @"face/token/nosession";
     return [[AMBNSerializedRequest alloc] initWithData:jsonData];
 }
 
+- (BOOL)canSendRequests {
+    return _baseURL && _apiKey && _secret;
+}
+
 - (NSError *)composeErrorResponse:(NSHTTPURLResponse *)response data:(NSData *)data {
     NSString *errorMessage;
     NSError *jsonParseError;

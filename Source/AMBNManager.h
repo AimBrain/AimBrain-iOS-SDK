@@ -105,6 +105,12 @@ static const NSInteger kAMBNMemoryUsageUnlimited = 0;
 - (void)start;
 
 /*!
+ @description Configures AMBNManager for serialization. This method must be called before calling serialized methods.
+ @param session Provided application session token.
+ */
+- (void)configureWithSession:(NSString *)session;
+
+/*!
  @description Configures AMBNManager. This method must be called before creating user session or submitting behavioural data.
  @param apiKey Provided application identifier.
  @param appSecret Provided application secret.

@@ -34,4 +34,6 @@ FOUNDATION_EXPORT NSString *const AMBNFaceTokenWithoutSessionEndpoint;
 - (NSMutableURLRequest *)createJSONPOSTWithData:(id)data endpoint:(NSString *)path;
 
 - (void)sendRequest:(NSMutableURLRequest *)request queue:(NSOperationQueue *)queue completionHandler:(void (^)(id _Nullable responseJSON, NSError *_Nullable connectionError))completion;
+
+- (BOOL)canSendRequests;
 @end

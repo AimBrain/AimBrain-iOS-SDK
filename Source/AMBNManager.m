@@ -241,6 +241,12 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
     AMBN_LVERBOSE(@"Behavioural data collection did start");
 }
 
+- (void)configureWithSession:(NSString *)session {
+    self.session = session;
+    self.server = [[AMBNServer alloc] initWithNetworkClient:[[AMBNNetworkClient alloc] init]];
+    AMBN_LVERBOSE(@"AMBNManager configured with session token: %@", session);
+}
+
 - (void) configureWithApiKey: (NSString *) apiKey secret: (NSString *) appSecret {
     self.server = [[AMBNServer alloc] initWithNetworkClient:[[AMBNNetworkClient alloc] initWithApiKey:apiKey secret:appSecret]];
     AMBN_LVERBOSE(@"AMBNManager configured with api key: %@, app secret: %@", apiKey, appSecret);
@@ -268,6 +274,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void) createSessionWithUserId: (NSString *) userId metadata:(NSData *) metadata completionHandler: (void (^)(AMBNSessionCreateResult * result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     AMBN_LVERBOSE(@"Creating session with user id: %@, metadata: %@", userId, metadata);
     [self.server createSessionWithUserId:userId metadata:metadata completion:^(AMBNSessionCreateResult * result, NSError *error) {
         if (result != nil) {
@@ -304,6 +311,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)submitBehaviouralDataWithMetadata:(NSData *)metadata completionHandler:(void (^)(AMBNBehaviouralResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     NSAssert(self.session != nil, @"Session is not obtained");
     AMBN_LVERBOSE(@"Submitting behavioural data");
     NSArray *touchesToSubmit;
@@ -386,6 +394,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void) getScoreWithMetadata:(NSData *)metadata completionHandler:(void (^)(AMBNBehaviouralResult * result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     NSAssert(self.session != nil, @"Session is not obtained");
     AMBN_LVERBOSE(@"Getting score");
     [self.server getScoreForSession:self.session metadata:metadata completion:completion];
@@ -511,6 +520,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)enrollFaceImages:(NSArray *)images metadata:(NSData *)metadata completionHandler:(void (^)(AMBNEnrollFaceResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     NSAssert(self.session != nil, @"Session is not obtained");
     AMBN_LVERBOSE(@"Face images enroll started (count: %li)", (unsigned long)images.count);
 
@@ -544,6 +554,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)authenticateFaceImages:(NSArray *)images metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     NSAssert(self.session != nil, @"Session is not obtained");
     AMBN_LVERBOSE(@"Face images authenticate started (count: %li)", (unsigned long)images.count);
 
@@ -577,6 +588,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)compareFaceImages:(NSArray *)firstFaceImages toFaceImages:(NSArray *)secondFaceImages metadata:(NSData *)metadata completionHandler:(void (^)(AMBNCompareFaceResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     AMBN_LVERBOSE(@"Face images compare started (first count: %li, second count: %li)", (unsigned long)firstFaceImages.count, (unsigned long)secondFaceImages.count);
 
     [self.server compareFaceImages:[self adaptImages:firstFaceImages] withFaceImages:[self adaptImages:secondFaceImages] metadata:metadata completion:^(AMBNCompareFaceResult *result, NSError *error) {
@@ -625,6 +637,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)enrollFaceVideo:(NSURL *)video metadata:(NSData *)metadata completionHandler:(void (^)(AMBNEnrollFaceResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     NSAssert(self.session != nil, @"Session is not obtained");
     AMBN_LVERBOSE(@"Face video enroll started (URL: %@", video.absoluteString);
 
@@ -657,6 +670,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)authenticateFaceVideo:(NSURL *)video metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     NSAssert(self.session != nil, @"Session is not obtained");
     AMBN_LVERBOSE(@"Face video authenticate started (URL: %@)", video.absoluteString);
 
@@ -707,6 +721,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)enrollVoice:(NSURL *)voiceFileUrl metadata:(NSData *)metadata completionHandler:(void (^)(AMBNEnrollVoiceResult *result, NSError *))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     NSAssert(self.session != nil, @"Session is not obtained");
     NSAssert(voiceFileUrl != nil, @"Voice record file url is not provided");
     AMBN_LVERBOSE(@"Voice enroll started (URL: %@)", voiceFileUrl.absoluteString);
@@ -730,6 +745,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)authenticateVoice:(NSURL*)voiceUrl metadata:(NSData *)metadata completionHandler:(void (^)(AMBNAuthenticateResult *result, NSError *error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     NSAssert(self.session != nil, @"Session is not obtained");
     NSAssert(voiceUrl != nil, @"Voice record file url is not provided");
     AMBN_LVERBOSE(@"Voice authenticate started (URL: %@)", voiceUrl.absoluteString);
@@ -763,6 +779,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)getVoiceTokenWithType:(AMBNVoiceTokenType)type metadata:(NSData *)metadata completionHandler:(void (^)(AMBNVoiceTextResult *result, NSError * error))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     NSAssert(self.session != nil, @"Session is not obtained");
 
     NSString *tokenType = [self voiceTokenString:type];
@@ -808,6 +825,7 @@ AMBNLogLevel ambnLogLevel = AMBNLogLevelVerbose;
 
 - (void)getFaceTokenWithType:(AMBNFaceTokenType)type metadata:(NSData *)metadata completionHandler:(void (^)(AMBNTextResult *, NSError *))completion {
     NSAssert(self.server != nil, @"AMBNManager must be configured");
+    NSAssert([self.server isClientValid], @"AMBNManager must be configured with api key and secret");
     NSAssert(self.session != nil, @"Session is not obtained");
     
     NSString *tokenType = [self faceTokenString:type];

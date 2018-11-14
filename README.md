@@ -59,12 +59,12 @@ To serialise requests requiring active session `AMBNManager` has to be configure
 
 Objective-C
 ```objective_c
-[AMBNManager sharedInstance].session = <session value>
+[[AMBNManager sharedInstance] configureWithSession:@"<session value>"]
 ```
 
 Swift
 ```Swift
-AMBNManager.sharedInstance().session = <Session value>
+AMBNManager.sharedInstance().configure(withSession:<Session value>)
 ```
 
 Once session is set methods with prefix ```getSerialized...``` can be called to retrieve serialized request data.

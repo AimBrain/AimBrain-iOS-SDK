@@ -646,6 +646,10 @@
     }];
 }
 
+- (BOOL)isClientValid {
+    return [self.client canSendRequests];
+}
+
 #pragma mark -
 
 -(void)addSessionCreateParameters:(NSMutableDictionary *)params {
