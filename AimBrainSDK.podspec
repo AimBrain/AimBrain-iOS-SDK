@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                = "AimBrainSDK"
-  s.version             = "0.6.4"
+  s.version             = "0.6.5"
   s.summary             = "AimBrainSDK security library"
   s.homepage            = "https://aimbrain.github.io/aimbrain-api/"
 

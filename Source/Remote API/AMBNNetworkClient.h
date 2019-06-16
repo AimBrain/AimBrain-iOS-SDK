@@ -1,8 +1,3 @@
-//
-// Created by Arunas on 18/07/16.
-// Copyright (c) 2016 Paweł Kupiec. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
 
 @class AMBNSerializedRequest;

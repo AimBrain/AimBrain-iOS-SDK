@@ -1,20 +1,43 @@
-#AimBrain SDK integration
+# AimBrain SDK integration
 
 ## Prerequisites
 
 * XCode 8.3.3 or higher
 * Target of iOS 8 or higher
 
-## Adding framework to Xcode project
-In order to integrate the AimBrain iOS SDK it is necessary to follow next steps:
+## Adding SDK binary framework to Xcode project
 
-1. Download the latest release of AimBrain SDK.
+1. Download the latest release of `AimBrainSDK.framework`.
 2. Go to your Xcode project’s “General” settings. Drag AimBrainSDK.framework from the appropriate directory to the “Embedded Binaries” section. Make sure **Copy items if needed** is selected and click **Finish**.
 3. Create a new “Run Script Phase” in your app’s target’s “Build Phases” and paste the following snippet in the script text field:
 ```sh
 bash "${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/AimBrainSDK.framework/strip-frameworks.sh"
 ```
 This step is required to work around an [App Store submission bug](http://www.openradar.me/radar?id=6409498411401216) when archiving universal binaries.
+
+
+## Adding SDK project to Xcode project
+
+You can link SDK source directly to your project.
+
+1. Download the latest release of AimBrain SDK.
+2. Drag `AimBrain.xcodeproj` to your project. 
+3. Go to your Xcode project’s “General” settings. Add `AimBrainSDK.framework`   to “Embedded Binaries” and make sure it is added to “Linked Frameworks and Libraries” section as well. 
+
+## Building  `AimBrainSDK.framework` from source
+
+You build SDK framework from source directly.
+
+1. Download the latest release of AimBrain SDK.
+2. Open `AimBrain.xcodeproj`.
+3. Build `Build framework` target.
+4. The SDK framework will be placed to  `FrameworkBuild` folder.
+
+Alternatively run command line in the SDK folder
+```
+xcodebuild clean -project AimBrain.xcodeproj
+xcodebuild build -project AimBrain.xcodeproj -scheme "Build framework"
+```
 
 # Starting and using SDK
 

@@ -11,7 +11,7 @@
 			isa = PBXAggregateTarget;
 			buildConfigurationList = A21E44FD1F5EC42E004139BB /* Build configuration list for PBXAggregateTarget "Build framework" */;
 			buildPhases = (
-				A21E45001F5EC6C4004139BB /* ShellScript */,
+				A21E45001F5EC6C4004139BB /* Run Script */,
 			);
 			dependencies = (
 			);
@@ -21,7 +21,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		A21E44F31F5EB0DF004139BB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A21E44F21F5EB0DF004139BB /* Info.plist */; };
 		A23AD120203582E400BDA3EA /* strip-frameworks.sh in Resources */ = {isa = PBXBuildFile; fileRef = A23AD11F203582E400BDA3EA /* strip-frameworks.sh */; };
 		A264DE78202313580013D0F4 /* AMBNTextResult.h in Headers */ = {isa = PBXBuildFile; fileRef = A264DE76202313580013D0F4 /* AMBNTextResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A264DE79202313580013D0F4 /* AMBNTextResult.m in Sources */ = {isa = PBXBuildFile; fileRef = A264DE77202313580013D0F4 /* AMBNTextResult.m */; };
@@ -665,7 +664,7 @@
 			attributes = {
 				CLASSPREFIX = AMBN;
 				LastUpgradeCheck = 0510;
-				ORGANIZATIONNAME = "Paweł Kupiec";
+				ORGANIZATIONNAME = AimBrain;
 				TargetAttributes = {
 					A21E44FC1F5EC42E004139BB = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -689,6 +688,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -719,7 +719,6 @@
 				A23AD120203582E400BDA3EA /* strip-frameworks.sh in Resources */,
 				A2CE74961F5E9C6A002C8B79 /* AMBNVoiceRecordingViewController.xib in Resources */,
 				A2CE74991F5E9C6A002C8B79 /* AMBNRecordingOverlayView.xib in Resources */,
-				A21E44F31F5EB0DF004139BB /* Info.plist in Resources */,
 				A2CE74971F5E9C6A002C8B79 /* AMBNFaceRecordingViewController.xib in Resources */,
 				A2CE74981F5E9C6A002C8B79 /* AMBNCameraOverlay.xib in Resources */,
 				A2CE749A1F5E9C6A002C8B79 /* icons.xcassets in Resources */,
@@ -747,18 +746,19 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A21E45001F5EC6C4004139BB /* ShellScript */ = {
+		A21E45001F5EC6C4004139BB /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"AimBrainSDK\"\n\n# 3\n# If remnants from a previous build exist, delete them.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk \"iphoneos\"\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch x86_64 -arch i386 only_active_arch=no defines_module=yes -sdk \"iphonesimulator\"\n\n# 5\n# Remove .framework file if exists on FrameworkBuild folder from previous run.\nif [ -d \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Create `FrameworkBuild` folder if not exists\nmkdir -p \"${SRCROOT}/FrameworkBuild\"\n\n# 7\n# Copy the device version of framework to FrameworkBuild.\ncp -r \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework\" \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\"\n\n# 8\n# Replace the fram/Work/current/aimbrain/ios-sdk-demo/DemoBank/AimBrainSDK.frameworkework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 9\n# Delete the most recent build.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi";
+			shellScript = "# Merge Script\n\n# 1\n# Set bash script to exit immediately if any commands fail.\nset -e\n\n# 2\n# Setup some constants for use later on.\nFRAMEWORK_NAME=\"AimBrainSDK\"\n\n# 3\n# If remnants from a previous build exist, delete them.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n\n# 4\n# Build the framework for device and for simulator (using\n# all needed architectures).\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch arm64 -arch armv7 -arch armv7s only_active_arch=no defines_module=yes -sdk \"iphoneos\"\nxcodebuild -target \"${FRAMEWORK_NAME}\" -configuration Release -arch x86_64 -arch i386 only_active_arch=no defines_module=yes -sdk \"iphonesimulator\"\n\n# 5\n# Remove .framework file if exists on FrameworkBuild folder from previous run.\nif [ -d \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\" ]; then\nrm -rf \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\"\nfi\n\n# 6\n# Create `FrameworkBuild` folder if not exists\nmkdir -p \"${SRCROOT}/FrameworkBuild\"\n\n# 7\n# Copy the device version of framework to FrameworkBuild.\ncp -r \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework\" \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework\"\n\n# 8\n# Replace the fram/Work/current/aimbrain/ios-sdk-demo/DemoBank/AimBrainSDK.frameworkework executable within the framework with\n# a new version created by merging the device and simulator\n# frameworks' executables with lipo.\nlipo -create -output \"${SRCROOT}/FrameworkBuild/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphoneos/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\" \"${SRCROOT}/build/Release-iphonesimulator/${FRAMEWORK_NAME}.framework/${FRAMEWORK_NAME}\"\n\n# 9\n# Delete the most recent build.\nif [ -d \"${SRCROOT}/build\" ]; then\nrm -rf \"${SRCROOT}/build\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

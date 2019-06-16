@@ -1,0 +1,6 @@
+framework module AimBrainSDK {
+  umbrella header "AimBrainSDK.h"
+
+  export *
+  module * { export * }
+}
